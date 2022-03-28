@@ -1,0 +1,14 @@
+
+.container{
+    margin-top:4em;
+    padding-right: 0!important;
+    padding-left: 0!important;
+    max-width: none!important;
+}
+.control{
+    background-color: rgba(88, 88, 88, 0.425);
+    width: 10%;
+}
+.control:hover{
+    background-color: rgba(0, 0, 0, 0.473);
+}

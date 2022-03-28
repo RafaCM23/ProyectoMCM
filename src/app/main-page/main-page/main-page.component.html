@@ -1,0 +1,38 @@
+<div class="row" style="height: 100vh;">
+    
+<!--Portada Carousel Con Imagenes-->
+<div class="col-12 carousel" id="top">
+    <app-carousel></app-carousel>
+</div>
+<!--Apartado de Nutricion-->
+<div class="col-12 nutricion" id="nutricion">
+    <app-nutricion></app-nutricion>
+</div>
+<!--Apartado de Servicios-->
+<div class="col-12 servicios" id="servicios">
+    <app-servicios></app-servicios>
+</div>
+<!--Apartado de Blog-->
+<div class="col-12 blog" id="blog">
+    <app-blog></app-blog>
+</div>
+<!--Apartado de Comentarios-->
+<div class="col-12 ">
+    <h3>-- Comentarios --</h3>
+</div>
+<a href="#top" class="btn-flotante" [ngClass]="(botonflotante === true) ? 'aparece' : 'desaparece'" >
+<i class="fa fa-arrow-up"></i></a>
+
+<h3>-- Enlace Pedir Cita --</h3>
+
+<div class="col-12 footer-div">
+    <footer class="text-center footer" style="background-color:#000000;">
+
+        <div class="p-3">
+          <p class="text-white">© 2022 Copyright: RCM</p>
+        </div>
+      </footer>
+</div>
+   
+</div>
+

@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light  fixed-top">
+    <div class="container-fluid">
+    <div class="col-3 ">
+            <a class="navbar-brand" [routerLink]="['/']" > 
+            <img src="/assets/Logo/logo3.png" alt="Logo" class="logo"></a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+     data-bs-target="#contenido" aria-controls="contenido" aria-expanded="false"
+      aria-label="Expandir Menu"
+    style="margin-right: 2em;">
+        <span class="navbar-toggler-icon"></span>
+        
+    </button>
+    <div class=" col-3 col-md-7 offset-lg-3 offset-xl-4 collapse navbar-collapse " id="contenido">
+     
+        <ul class="navbar-nav mr-auto navbar-right">
+            <li class="nav-item enlaceHover">
+                 <a class="nav-link" href="#">Inicio</a>
+            </li>
+
+            <li class="nav-item enlaceHover">
+                <a class="nav-link" href="#nutricion">Nutrición</a>
+            </li>
+
+            <li class="nav-item enlaceHover">
+                <a class="nav-link" href="#servicios">Servicios</a>
+            </li>
+
+            <li class="nav-item enlaceHover">
+                <a class="nav-link" href="#">Blog</a>
+            </li>
+
+            <li class="nav-item enlaceHover">
+                <a class="nav-link" [routerLink]="['/cita']">Cita Previa</a>
+            </li>
+            
+            
+        </ul>
+        
+    </div>
+ 
+    
+    
+    </div>
+  </nav>

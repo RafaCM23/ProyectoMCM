@@ -1,0 +1,37 @@
+.container{
+    margin-top: 7em;
+}
+img{
+    width: 150px;
+    height: 150px;
+    border: 3px solid rgba(15, 102, 124, 0.781);
+    border-radius: 100%;
+    transition: all .15s ease-in-out;
+}
+img:hover{
+    transform: scale(1.1);
+}
+
+.profInfo{
+    margin-top: 1em;
+    font-weight: 200;
+}
+.form-select{
+    margin-top: 1em;
+    width: 80%;
+    
+}
+p{
+    font-size: 17px!important;
+    font-weight:bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: justify;
+    color: rgb(59, 59, 59);
+}
+span{
+    color: rgba(15, 102, 124, 0.781);
+    text-align: left!important;
+    font-weight:bold;
+
+
+}
