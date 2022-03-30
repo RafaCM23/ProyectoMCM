@@ -7,7 +7,6 @@ import { NutricionComponent } from './nutricion/nutricion.component';
 import { ServiciosComponent } from './servicios/servicios.component';
 import { ComentariosComponent } from './comentarios/comentarios.component';
 import { BlogComponent } from './blog/blog.component';
-import { HacerComentarioComponent } from './hacer-comentario/hacer-comentario.component';
 
 const routes: Routes = [
 
@@ -22,8 +21,7 @@ const routes: Routes = [
     NutricionComponent,
     ServiciosComponent,
     ComentariosComponent,
-    BlogComponent,
-    HacerComentarioComponent
+    BlogComponent
   ],
   imports: [
     CommonModule,

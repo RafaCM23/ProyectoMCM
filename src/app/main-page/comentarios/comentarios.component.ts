@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap'
 @Component({
   selector: 'app-comentarios',
   templateUrl: './comentarios.component.html',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComentariosComponent implements OnInit {
 
-  constructor() { }
+
+  cerrarModal:string='';
+    constructor() {}
 
   ngOnInit(): void {
   }
