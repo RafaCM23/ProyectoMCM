@@ -18,7 +18,7 @@
                         Cada plan alimenticio es único e individualizado, adaptado a tus gustos y limitaciones.
                         Es posible cambiar tu vida a través de la alimentación. Te invito a descubrirlo con nosotros.</p>
                     <span class="enlace">¿Quieres realizar tu comentario? </span>
-                        <button type="button" class="boton" (click)="open()">
+                        <button type="button" class="boton" (click)="open(content)">
                             <div>Realizar Comentario</div>
                             <i class="fa fa-angle-right"></i>
                           </button>
@@ -52,3 +52,31 @@
 
 
 </div>
+<!--Modal para hacer comentario-->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Nuevo comentario</h4>
+      <button type="button" class="btn btn-danger" aria-label="cerrar" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="nombre">Nombre y Apellidos</label>
+          <div class="input-group">
+            <input id="firstname" class="form-control" >
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Comentario</label>
+            <div class="input-group">
+              <textarea id="firstname" class="form-control" ></textarea>
+            </div>
+          </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Enviar</button>
+    </div>
+  </ng-template>

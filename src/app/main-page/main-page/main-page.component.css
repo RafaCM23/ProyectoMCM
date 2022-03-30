@@ -28,6 +28,10 @@
     background-color: rgba(248, 250, 148, 0.493);
 	z-index: 1;
 }
+.pedirCita{
+    background-color: rgba(241, 148, 250, 0.493);
+	z-index: 1;
+}
 .blog{
     background-color: rgba(158, 148, 250, 0.459);
 	z-index: 1;

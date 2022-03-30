@@ -1,12 +1,4 @@
-@media (max-width:900){
-    .slide{
-        margin-top: 7%;
-        margin-left: 25%;
-    }
-    .row{
-        padding:0;
-    }
-}
+
 .titulo{
     text-align: left;
     font-family: "Prata",Arial,Helvetica,sans-serif;
@@ -32,15 +24,9 @@ hr{
 .contenido{
     margin-top: 2em;
     text-align: justify;
-    color: #3f3f3f;
-    font-size: 17px;
-    font-weight: 200!important;
-}
-span{
-    font-family: fantasy;
-    color: rgb(53, 53, 53);
-    font-weight: bold;
-    font-size: 20px;
+    color: #585858;
+    font-weight: 500!important;
+    margin-bottom: 3em;
 }
 .slide {
     font-size: 15px;
@@ -53,11 +39,9 @@ span{
     position: relative;
     background-color: rgba(0, 0, 0, 0);
     margin-top: 7%;
+    margin-left: 30%;
 }
-.container{
-    margin-bottom: 3em;
-    margin-left: 5%;
-}
+
 .slide i {
     opacity: 0;
     font-size: 20px;
@@ -75,7 +59,7 @@ span{
 
 .slide::after {
     content: "";
-    background-color: #7cf1da;
+    background-color: #f88efce0;
     width: 100%;
     z-index: -3;
     position: absolute;
@@ -88,10 +72,4 @@ span{
     opacity: 1;
     color: rgba(34, 34, 34, 0.788);
     transform: translateX(-6px);
-}
-.imagen{
-    max-width: 400px;
-    width: 100%;
-    height: auto;
-    margin-left: 4%;
 }

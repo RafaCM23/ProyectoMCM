@@ -35,10 +35,10 @@ hr{
 }
 .row{
     width: 95%;
-    margin-left: 2%;
+    margin-left: 5%;
 }
 .card{
-    margin-right: 2%;
+    margin-right: 20%;
     margin-top: 1em;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;

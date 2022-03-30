@@ -9,7 +9,7 @@ export class ComentariosComponent implements OnInit {
 
 
   cerrarModal:string='';
-    constructor() {}
+  constructor(private modalService:NgbModal) {}
 
   ngOnInit(): void {
   }
@@ -20,7 +20,21 @@ export class ComentariosComponent implements OnInit {
     this.comentarios.push(comentario);
   }
 
-  open(){
-    
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.cerrarModal = `Closed with: ${result}`;
+    }, (reason) => {
+      this.cerrarModal = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }
