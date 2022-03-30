@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkFront_PI=self.webpackChunkFront_PI||[]).push([[754],{536:(r,n,l)=>{l.r(n),l.d(n,{BlogModule:()=>a});var t=l(19),u=l(556);let a=(()=>{class o{}return o.\u0275fac=function(e){return new(e||o)},o.\u0275mod=u.oAB({type:o}),o.\u0275inj=u.cJS({imports:[[t.ez]]}),o})()}}]);
