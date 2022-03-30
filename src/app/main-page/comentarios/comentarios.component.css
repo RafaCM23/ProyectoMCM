@@ -1,0 +1,83 @@
+.titulo{
+    text-align: left;
+    font-family: "Prata",Arial,Helvetica,sans-serif;
+    font-weight: 600;
+    font-size: 3em;
+    color: #424242;
+    margin-top: 2em;
+}
+.subtitulo{
+    font-size: 20px;
+    margin-top: 2em;
+    text-align: left;
+    color: #df824c;
+}
+.contenido{
+    margin-top: 2em;
+    text-align: left;
+    color: #3f3f3f;
+    font-size: 17px;
+    font-weight: 200!important;
+}
+hr{
+    margin-top:0;
+    min-width: 20%;
+    max-width: 80%;
+}
+.comentarios{
+    margin-top: 3%;
+    text-align: justify!important;
+}
+.autor{
+   font-style: oblique;
+   color: #df824c;
+}
+.enlace{
+    color: #df824c;
+}
+.boton {
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 13px 30px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 7%;
+    margin-left: 30%;
+    margin-bottom: 10%;
+}
+
+.boton i {
+    opacity: 0;
+    font-size: 20px;
+    transition: 0.5s;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    transition: transform 1;
+    color: white;
+    
+}
+
+.boton div {transition: transform 0.8s;}
+.boton:hover div {transform: translateX(-6px);}
+
+.boton::after {
+    content: "";
+    background-color: #f88efce0;
+    width: 100%;
+    z-index: -3;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+}
+
+.boton:hover i {
+    opacity: 1;
+    color: rgba(34, 34, 34, 0.788);
+    transform: translateX(-6px);
+}

@@ -24,6 +24,10 @@
     background-color: rgba(168, 250, 148, 0.459);
 	z-index: 1;
 }
+.comentarios{
+    background-color: rgba(248, 250, 148, 0.493);
+	z-index: 1;
+}
 .blog{
     background-color: rgba(158, 148, 250, 0.459);
 	z-index: 1;

@@ -12,4 +12,13 @@ export class ComentariosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  comentarios:String[]=[];
+
+  addComentario(comentario:String){
+    this.comentarios.push(comentario);
+  }
+
+  open(){
+    
+  }
 }

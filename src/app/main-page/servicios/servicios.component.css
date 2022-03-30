@@ -34,12 +34,11 @@ hr{
     margin-bottom: 3em;
 }
 .row{
-    width: 100%;
-    padding: 0 !important;
+    width: 95%;
+    margin-left: 2%;
 }
 .card{
-    margin-left: 0;
-    margin-right: 0;
+    margin-right: 2%;
     margin-top: 1em;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;

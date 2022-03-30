@@ -4,12 +4,13 @@
 img{
     width: 150px;
     height: 150px;
-    border: 3px solid rgba(15, 102, 124, 0.781);
+    border: 5px solid rgba(15, 102, 124, 0.781);
     border-radius: 100%;
-    transition: all .15s ease-in-out;
+    transition: all .20s ease-in-out;
 }
 img:hover{
-    transform: scale(1.1);
+    transform: scale(1.2);
+    border: 3px solid rgb(13, 133, 163);;
 }
 
 .profInfo{
