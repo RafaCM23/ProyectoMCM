@@ -15,25 +15,30 @@
     /*background-color: #cfcfce98;
 	 background-color: #b1dbcd;
 
+	 656176
+	B0DACC 
+	FEFEFE
+	E8B5A2
+	FF934F
 	*/
-	background-color: #e5b29eb7;
+	background-color: #656176b2;
 	z-index: 1;
 	
 }
 .servicios{
-    background-color: rgba(168, 250, 148, 0.459);
+    background-color: #B0DACC;
 	z-index: 1;
 }
 .comentarios{
-    background-color: rgba(248, 250, 148, 0.493);
+    background-color: #fefefebd;
 	z-index: 1;
 }
 .pedirCita{
-    background-color: rgba(241, 148, 250, 0.493);
+    background-color: #e8b5a2af;
 	z-index: 1;
 }
 .blog{
-    background-color: rgba(158, 148, 250, 0.459);
+    background-color: #ff924f9a;
 	z-index: 1;
 }
 .btn-flotante {
