@@ -53,7 +53,7 @@
 
 </div>
 <!--Modal para hacer comentario-->
-<ng-template #content let-modal>
+<ng-template #content let-modal class="mt-5">
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Nuevo comentario</h4>
       <button type="button" class="btn btn-danger" aria-label="cerrar" (click)="modal.dismiss('Cross click')">
@@ -73,10 +73,9 @@
             <div class="input-group">
               <textarea id="firstname" class="form-control" ></textarea>
             </div>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Enviar</button>
           </div>
       </form>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Enviar</button>
-    </div>
+    
   </ng-template>

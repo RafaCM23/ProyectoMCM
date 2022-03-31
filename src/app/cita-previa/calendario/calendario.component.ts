@@ -7,7 +7,7 @@ import * as moment from 'moment'
 })
 export class CalendarioComponent implements OnInit {
 
-  week: any = [
+  week: string[] = [
     "Lunes",
     "Martes",
     "Miercoles",
@@ -17,7 +17,7 @@ export class CalendarioComponent implements OnInit {
     "Domingo"
   ];
 
-
+  //cambiar esto
   monthSelect: any[]=[];
   dateSelect: any;
   dateValue: any;
@@ -28,7 +28,7 @@ export class CalendarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getDaysFromDate(11, 2020)
+    this.getDaysFromDate(1, 2022)
   }
 
   getDaysFromDate(month:any, year:any) {

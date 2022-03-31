@@ -1,23 +1,34 @@
 <div class="wrapper-calendar">
 	<div class="header-calendar">
 		<div>
-			<button (click)="changeMonth(-1)" class="btn-prev">Antes</button>
+			<button (click)="changeMonth(-1)" class="btn-prev"><</button>
 		</div>
-		<h1>{{dateSelect | date:'MMMM, yyyy'}}</h1>
+		<h1>{{dateSelect | date:'MMMM  yyyy'}}</h1>
 		<div>
-			<button (click)="changeMonth(1)" class="btn-next">Siguiente</button>
+			<button (click)="changeMonth(1)" class="btn-next">></button>
 		</div>
 	</div>
 	<ol>
 		<li *ngFor="let day of week" class="day-name">{{day | slice:0:3}}</li>
 
         <li (click)="clickDay(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
-         *ngFor="let day of monthSelect;let first = first">
+         *ngFor="let day of monthSelect;let first = first" class="libre">
 			<span>{{day?.value}}</span>
 		</li>
 	</ol>
 </div>
-
+<hr>
+<div class="row ejemplos">
+	<span class="ejemplo-libre ejemplo col-3">
+		Libre
+	</span>
+	<span class="ejemplo-ocupado ejemplo col-3">
+		Ocupado
+	</span>
+	<span class="ejemplo-vacaciones ejemplo ejemplo3 col-3">
+		Vacaciones
+	</span>
+</div>
 <hr>
 <div>
 	Fecha: {{dateValue | date}}
