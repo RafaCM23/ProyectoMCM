@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrincipalComponent } from './principal/principal.component';
+import { SobreMiComponent } from './sobre-mi/sobre-mi.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {path:'**',component:PrincipalComponent}
+  {path:'**',component:SobreMiComponent}
 ];
 
 @NgModule({
   declarations: [
-    PrincipalComponent
+    SobreMiComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
   ]
 })
-export class BlogModule { }
+export class SobreMiModule { }
