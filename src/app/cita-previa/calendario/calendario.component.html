@@ -11,8 +11,8 @@
 	<ol>
 		<li *ngFor="let day of week" class="day-name">{{day | slice:0:3}}</li>
 
-        <li (click)="clickDay(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
-         *ngFor="let day of monthSelect;let first = first" class="libre">
+        <li  (click)="open(content); clickDay(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+         *ngFor="let day of monthSelect;let first = first" class="libre dia">
 			<span>{{day?.value}}</span>
 		</li>
 	</ol>
@@ -30,6 +30,54 @@
 	</span>
 </div>
 <hr>
-<div>
-	Fecha: {{dateValue | date}}
-</div>
+
+<!--Modal para reservar Cita-->
+<ng-template #content let-modal class="mt-5">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Reservar Cita para {{fechaSimple(dateValue)}}</h4>
+      <button type="button" class="btn btn-danger" aria-label="cerrar" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form >
+        <div class="form-group">
+          <label for="nombre" >Nombre</label>
+          <div class="input-group">
+            <input id="nombre" class="form-control" [(ngModel)]="cita.persona.nombre" name="nombre">
+          </div>
+        </div>
+
+		<div class="form-group">
+			<label for="apellidos">Apellidos</label>
+			<div class="input-group">
+			  <input id="apellidos" class="form-control" [(ngModel)]="cita.persona.apellidos" name="apellidos">
+			</div>
+		  </div>
+
+		  <div class="form-group">
+			<label for="tlfn">Telefono:</label>
+			<div class="input-group">
+			  <input id="tlfn" class="form-control" [(ngModel)]="cita.persona.tlfn" name="tlfn">
+			</div>
+		  </div>
+
+		  <div class="form-group">
+			<label for="email">Email:</label>
+			<div class="input-group">
+			  <input id="email" class="form-control" [(ngModel)]="cita.persona.email" name="email">
+			</div>
+		  </div>
+		
+        <div class="form-group mb-2">
+            <label for="nombre">Comentario</label>
+            <div class="input-group">
+              <textarea id="comentario" class="form-control" [(ngModel)]="cita.comentario" name="comentario"></textarea>
+            </div>
+          </div>
+		  <button type="button" class="btn btn-outline-dark boton" (click)="guardarDatos()">Enviar</button>
+      </form>
+    </div>
+    
+  </ng-template>
+

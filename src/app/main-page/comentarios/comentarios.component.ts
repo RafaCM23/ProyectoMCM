@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal ,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap'
+import Swal from 'sweetalert2';
+import { comentario } from '../comentario.interface';
+import { ComentarioService } from '../comentario.service';
+
 @Component({
   selector: 'app-comentarios',
   templateUrl: './comentarios.component.html',
@@ -9,12 +13,64 @@ export class ComentariosComponent implements OnInit {
 
 
   cerrarModal:string='';
-  constructor(private modalService:NgbModal) {}
+  constructor(private modalService:NgbModal, private comentService:ComentarioService) {}
 
   ngOnInit(): void {
   }
+  comentario:comentario={
+    autor:'',
+    contenido:''
+  }
 
   comentarios:String[]=[];
+
+
+  guardarComentario(){
+    if(this.comentario.autor.length>4 && this.comentario.contenido.length>20){
+      this.comentService.postComentario(this.comentario).subscribe({
+        next:resp=>{
+          Swal.fire({
+            title:'Comentario Creado!',
+            icon: 'success',
+            text:'Muchas gracias por compartir tu experiencia. Solo falta que un administrador lo revise',
+            confirmButtonText:'ok'
+          }
+        ).then((result) =>{
+          this.modalService.dismissAll('Exitoso');
+        })        
+        },
+        error:error=>{
+          Swal.fire({
+            title:'Compruebe los campos',
+            icon: 'error',
+            text:error.error,
+            confirmButtonText:'ok'
+          }
+        );
+        }
+      })
+
+
+    }
+    else{
+      Swal.fire({
+        title:'Compruebe los campos',
+        icon: 'error',
+        text:'Autor: mínimo 5 carácteres, Comentario: mínimo 20 carácteres',
+        confirmButtonText:'ok'
+      }
+    );
+    }
+  }
+
+
+
+
+
+
+
+
+
 
   addComentario(comentario:String){
     this.comentarios.push(comentario);

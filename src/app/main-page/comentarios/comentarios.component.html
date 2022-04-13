@@ -64,15 +64,15 @@
         <div class="form-group">
           <label for="nombre">Nombre y Apellidos</label>
           <div class="input-group">
-            <input id="firstname" class="form-control" >
+            <input id="firstname" class="form-control" [(ngModel)]="comentario.autor" name="autor">
           </div>
         </div>
         <div class="form-group">
             <label for="nombre">Comentario</label>
             <div class="input-group">
-              <textarea id="firstname" class="form-control" ></textarea>
+              <textarea id="firstname" class="form-control" [(ngModel)]="comentario.contenido" name="contenido"></textarea>
             </div>
-            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Enviar</button>
+            <button type="button" class="btn btn-outline-dark" (click)="guardarComentario()">Enviar</button>
           </div>
       </form>
     </div>

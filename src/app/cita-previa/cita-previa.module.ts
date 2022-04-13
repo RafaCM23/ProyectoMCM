@@ -4,6 +4,7 @@ import { AgendasComponent } from './agendas/agendas.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarioComponent } from './calendario/calendario.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path:'**',component:AgendasComponent}
@@ -17,7 +18,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   exports:[AgendasComponent]
 })

@@ -13,6 +13,9 @@ export class MainPageComponent implements OnInit {
   }
   botonflotante:boolean=false;
 
+  
+
+
   //Para mostrar el boton de scroll-up cuando baje un poco
   @HostListener('window:scroll', ['$event']) onScroll(event: { path: any[]; }) {
     const window = event.path[1];
@@ -21,6 +24,8 @@ export class MainPageComponent implements OnInit {
     if(currentScrollHeight>450){this.botonflotante=true;}
     else{this.botonflotante=false; }
 
+
+    
    
   }
 

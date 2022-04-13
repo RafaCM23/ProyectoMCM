@@ -8,6 +8,7 @@ import { ServiciosComponent } from './servicios/servicios.component';
 import { ComentariosComponent } from './comentarios/comentarios.component';
 import { BlogComponent } from './blog/blog.component';
 import { PedirCitaComponent } from './pedir-cita/pedir-cita.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
 
@@ -27,6 +28,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ]
 })
