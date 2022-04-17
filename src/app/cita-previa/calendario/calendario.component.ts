@@ -1,5 +1,6 @@
 import { DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'
 import Swal from 'sweetalert2';
@@ -55,7 +56,7 @@ export class CalendarioComponent implements OnInit {
     hora:0
   }
 
-  constructor(private agendaService: AgendaService,private modalService:NgbModal) {}
+  constructor(private agendaService: AgendaService,private modalService:NgbModal, private router:Router) {}
 
   //Carga el mes en el que estamos
   ngOnInit(): void {
@@ -73,7 +74,15 @@ export class CalendarioComponent implements OnInit {
         this.tachaOcupados(numero);
       },
       error:error=>{
-        //console.log(error)
+        Swal.fire({
+          title:'Ooops',
+          icon: 'error',
+          text:'Parece que este apartado no esta funcionando correctamente, intentelo más tarde',
+          confirmButtonText:'ok'
+        }
+      ).then(()=>{
+          this.router.navigateByUrl("/");
+        })
       }
     })
   }
