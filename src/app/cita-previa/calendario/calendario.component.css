@@ -3,9 +3,15 @@
   .wrapper-calendar{
     margin-left: 0!important;
   }
-  .ejemplo3{
-    margin-left: 10%;
+  .ejemplo{
+    margin-top: 1em;
   }
+  .ejemplo-libre::after{  
+    background-color: rgba(99, 216, 22, 0.404);
+    margin-left: 45px!important;}
+  .ejemplo-pendiente::after
+  {  background-color: rgba(255, 208, 0, 0.596);
+  margin-left: 22px!important;}
 }
 
 *{
@@ -51,19 +57,27 @@ li {
   text-align: center;
 
 }
-.ocupado{
-  background-color: rgba(255, 0, 0, 0.404);
-}
+
 .libre{
   background-color: rgba(99, 216, 22, 0.404);
   border: 2px  rgba(99, 216, 22, 0.404);
 }
+.sinConfirmar{
+  background-color: rgba(255, 208, 0, 0.596);
+}
+.ocupado{
+  background-color: rgba(255, 0, 0, 0.404);
+  pointer-events: none;
+}
 .vacaciones{
-  background-color: rgba(77, 77, 77, 0.404);
+  background-color: rgba(77, 77, 77, 0.281);
+  color: rgba(39, 39, 39, 0.281);
+  pointer-events: none;
 }
 .ejemplos{
   margin-top: 5%;
   margin-bottom: 5%;
+  text-align: center;
 }
 
 .ejemplo::after{
@@ -75,11 +89,11 @@ li {
 .ejemplo-libre::after{  background-color: rgba(99, 216, 22, 0.404);}
 .ejemplo-ocupado::after{  background-color: rgba(255, 0, 0, 0.404);}
 .ejemplo-vacaciones::after{  background-color: rgba(77, 77, 77, 0.404);}
-
+.ejemplo-pendiente::after{  background-color: rgba(255, 208, 0, 0.596);}
 
 li:hover{
   font-weight: 600;
-  background-color: rgba(61, 134, 12, 0.562);
+  background-color: rgba(255, 255, 255, 0.562);
 }
 h2 {
   margin-bottom: 4px;
@@ -108,12 +122,22 @@ h2 {
 
 .header-calendar h1 {
   width: 100%;
-  font-size: 13px;
+  font-size: 18px;
+  text-align: center;
 }
 
 .header-calendar button {
-  cursor: pointer;
   background-color: transparent;
   border: 0;
+  font-size: 18px;
+}
+.header-calendar button:hover {
+  cursor: pointer;
+  font-weight: bolder;
 }
     
+::ng-deep .modal{
+  margin-top: 1em;
+  font-size: 20px;
+  font-weight: 400;
+}

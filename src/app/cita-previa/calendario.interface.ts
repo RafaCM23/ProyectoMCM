@@ -14,20 +14,22 @@ export interface Dia{
     citasSinConfirmar:Cita[]
     citasConfirmadas:Cita[]
     vacaciones:Boolean
-    dia:number
+    numero:number
    
 }
 export interface Cita{
 
     persona:Persona,
-    comentario:String,
-    fecha:Date
+    motivo:string,
+    fecha:Date,
+    presencial:boolean,
+    hora:number
     //Persona contacto (Nombre, Apellidos, texto sobre consulta, tlfn, email
 }
 
 export interface Persona{
-    nombre:String,
-    apellidos:String,
-    tlfn:String,
-    email:String
+    nombre:string,
+    apellidos:string,
+    tlfn:string,
+    email:string
 }

@@ -3,31 +3,35 @@
 		<div>
 			<button (click)="changeMonth(-1)" class="btn-prev"><</button>
 		</div>
-		<h1>{{dateSelect | date:'MMMM  yyyy'}}</h1>
+		<h1>{{mesAct}}  {{anio}}</h1>
 		<div>
 			<button (click)="changeMonth(1)" class="btn-next">></button>
 		</div>
 	</div>
 	<ol>
-		<li *ngFor="let day of week" class="day-name">{{day | slice:0:3}}</li>
+		<li *ngFor="let day of semana" class="day-name">{{day | slice:0:3}}</li>
 
-        <li  (click)="open(content); clickDay(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
-         *ngFor="let day of monthSelect;let first = first" class="libre dia">
+        <li  (click)="espera1s(content); clickDay(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+         *ngFor="let day of monthSelect;let first = first" class="libre dia" >
 			<span>{{day?.value}}</span>
 		</li>
 	</ol>
 </div>
 <hr>
 <div class="row ejemplos">
-	<span class="ejemplo-libre ejemplo col-3">
+	<span class="ejemplo-libre ejemplo col-6 col-lg-3">
 		Libre
 	</span>
-	<span class="ejemplo-ocupado ejemplo col-3">
+	<span class="ejemplo-pendiente ejemplo col-6 col-lg-3">
+		Pendiente
+	</span>
+	<span class="ejemplo-ocupado ejemplo col-6 col-lg-3">
 		Ocupado
 	</span>
-	<span class="ejemplo-vacaciones ejemplo ejemplo3 col-3">
+	<span class="ejemplo-vacaciones ejemplo  col-6 col-lg-3">
 		Vacaciones
 	</span>
+	
 </div>
 <hr>
 
@@ -44,37 +48,73 @@
         <div class="form-group">
           <label for="nombre" >Nombre</label>
           <div class="input-group">
-            <input id="nombre" class="form-control" [(ngModel)]="cita.persona.nombre" name="nombre">
+            <input id="nombre" class="form-control" placeholder="Introduzca su nombre" minlength="3" requiered [(ngModel)]="cita.persona.nombre" name="nombre">
           </div>
+		  <span class="form-text text-danger"
+                    *ngIf="!nombreValido()">
+                  * Mínimo 3 carácteres
+              </span>
         </div>
 
 		<div class="form-group">
 			<label for="apellidos">Apellidos</label>
 			<div class="input-group">
-			  <input id="apellidos" class="form-control" [(ngModel)]="cita.persona.apellidos" name="apellidos">
+			  <input id="apellidos" class="form-control"placeholder="Introduzca sus apellidos" minlength="8" requiered  [(ngModel)]="cita.persona.apellidos" name="apellidos">
 			</div>
+			<span class="form-text text-danger"
+                    *ngIf="!apellidoValido()">
+                  * Mínimo 8 carácteres
+              </span>
 		  </div>
 
 		  <div class="form-group">
 			<label for="tlfn">Telefono:</label>
 			<div class="input-group">
-			  <input id="tlfn" class="form-control" [(ngModel)]="cita.persona.tlfn" name="tlfn">
+			  <input id="tlfn" class="form-control" placeholder="Ej: 612345678 o +34 612345678 " minlength="9" requiered [(ngModel)]="cita.persona.tlfn" name="tlfn">
 			</div>
+			<span class="form-text text-danger"
+                    *ngIf="!telefonoValido()">
+                  * No cumple el formato Ej: 600 00 00 00 o +34 612345678
+              </span>
 		  </div>
 
 		  <div class="form-group">
 			<label for="email">Email:</label>
 			<div class="input-group">
-			  <input id="email" class="form-control" [(ngModel)]="cita.persona.email" name="email">
+			  <input id="email" class="form-control" placeholder="Ej: correo@gmail.com " minlength="8" requiered  [(ngModel)]="cita.persona.email" name="email">
 			</div>
+			<span class="form-text text-danger"
+                    *ngIf="!correoValido()">
+                  * No cumple el formato Ej: correo@gmail.com 
+              </span>
 		  </div>
 		
-        <div class="form-group mb-2">
-            <label for="nombre">Comentario</label>
+        <div class="form-group">
+            <label for="nombre">motivo</label>
             <div class="input-group">
-              <textarea id="comentario" class="form-control" [(ngModel)]="cita.comentario" name="comentario"></textarea>
+              <textarea id="motivo" class="form-control" placeholder="Introduzca el motivo de su consulta" minlength="2" requiered  [(ngModel)]="cita.motivo" name="motivo"></textarea>
             </div>
+			<span class="form-text text-danger"
+                    *ngIf="!motivoValido()">
+                  * Mínimo 5 carácteres
+              </span>
           </div>
+		  <div class="form-group">
+			<label for="tipoCita">Tipo de cita</label>
+			<select name="tipoCita" id="tipoCita" class="form-select" [(ngModel)]="this.cita.presencial">
+                <option value="true">Presencial</option>
+                <option value="false">Online</option>
+            </select>
+		  </div>
+		  <div class="form-group">
+			<label for="huecos">Citas disponibles</label>
+			<select name="huecos" id="huecos" class="form-select" [(ngModel)]="this.cita.hora">
+                <option value="4">4-5</option>
+                <option value="5">5-6</option>
+				<option value="6">6-7</option>
+				<option value="7">7-8</option>
+            </select>
+		  </div>
 		  <button type="button" class="btn btn-outline-dark boton" (click)="guardarDatos()">Enviar</button>
       </form>
     </div>

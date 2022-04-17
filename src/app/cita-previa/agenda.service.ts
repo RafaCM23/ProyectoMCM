@@ -10,8 +10,8 @@ export class AgendaService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getEnero(){
-    const url="http://localhost:8080/diasEnero";
+  getMes(numero:number){
+    const url="http://localhost:8080/mes/"+numero;//profesional-agenda-mes-anio
     return this.httpClient.get<Mes>(url);
   }
 
