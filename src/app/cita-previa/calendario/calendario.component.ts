@@ -1,5 +1,6 @@
 import { DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'
 import Swal from 'sweetalert2';
@@ -55,7 +56,7 @@ export class CalendarioComponent implements OnInit {
     hora:0
   }
 
-  constructor(private agendaService: AgendaService,private modalService:NgbModal) {}
+  constructor(private agendaService: AgendaService,private modalService:NgbModal, private router: Router) {}
 
   //Carga el mes en el que estamos
   ngOnInit(): void {
@@ -74,7 +75,13 @@ export class CalendarioComponent implements OnInit {
         
       },
       error:error=>{
-        console.log(error)
+        Swal.fire({
+          title:'Ooops',
+          icon: 'error',
+          text:'Parece que ha habido un error, vuelve a intentarlo más tarde',
+          confirmButtonText:'Volver al inicio'
+        }
+      )
       }
     })
   }
@@ -82,7 +89,7 @@ export class CalendarioComponent implements OnInit {
   tachaOcupados(numero:number){
     let diasCalendario=document.getElementsByClassName("dia");
     for(const dia of this.monthSelect){
-      if(dia.indexWeek!=1 && dia.indexWeek!=3){diasCalendario[parseInt(dia.value.toString())].classList.replace("libre","vacaciones")}
+      if(dia.indexWeek!=2 && dia.indexWeek!=4){diasCalendario[parseInt(dia.value.toString())-1].classList.replace("libre","vacaciones")}
     }
     if (this.meses[numero]==null) return;
     for (const dia of this.meses[numero].dias) {
@@ -90,7 +97,6 @@ export class CalendarioComponent implements OnInit {
         diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","vacaciones")
       }
       else if(dia.citasSinConfirmar.length>0 && dia.citasSinConfirmar.length<4){
-        console.log("pinta sin confirmar numero: "+numero);
         diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","sinConfirmar")
       }
       else if(dia.citasSinConfirmar.length>3){
@@ -212,7 +218,6 @@ export class CalendarioComponent implements OnInit {
       );
       },
       error:error=>{
-        console.log(error);
         Swal.fire({
           title:'Error al pedir la cita',
           icon: 'error',
@@ -288,7 +293,6 @@ export class CalendarioComponent implements OnInit {
   apellidoValido(){
     var regex = new RegExp('^[a-zA-Z]{8,}$')
     var resultado=regex.test(this.cita.persona.apellidos);
-    console.log(this.cita.presencial)
       if(resultado==true){
         return true;
       }
