@@ -71,9 +71,10 @@ export class CalendarioComponent implements OnInit {
       next:resp=>{
         this.meses[numero]=resp;
         this.tachaOcupados(numero);
+        
       },
       error:error=>{
-        //console.log(error)
+        console.log(error)
       }
     })
   }
@@ -81,18 +82,19 @@ export class CalendarioComponent implements OnInit {
   tachaOcupados(numero:number){
     let diasCalendario=document.getElementsByClassName("dia");
     for(const dia of this.monthSelect){
-      if(dia.indexWeek!=2 && dia.indexWeek!=4){diasCalendario[parseInt(dia.value.toString())-1].classList.replace("libre","vacaciones")}
+      if(dia.indexWeek!=1 && dia.indexWeek!=3){diasCalendario[parseInt(dia.value.toString())].classList.replace("libre","vacaciones")}
     }
     if (this.meses[numero]==null) return;
     for (const dia of this.meses[numero].dias) {
       if(dia.vacaciones==true ){
-        diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","vacaciones")
+        diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","vacaciones")
       }
       else if(dia.citasSinConfirmar.length>0 && dia.citasSinConfirmar.length<4){
-        diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","sinConfirmar")
+        console.log("pinta sin confirmar numero: "+numero);
+        diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","sinConfirmar")
       }
       else if(dia.citasSinConfirmar.length>3){
-        diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","ocupado")
+        diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","ocupado")
       }
     }
   }
