@@ -221,6 +221,7 @@ export class CalendarioComponent implements OnInit {
           confirmButtonText:'ok'
         }
       );
+      this.reseteaFormulario();
       },
       error:error=>{
         Swal.fire({
@@ -288,11 +289,38 @@ export class CalendarioComponent implements OnInit {
   }
   //----------------------------------- FORMULARIO Y VERIFICACIONES DE CAMPOS ----------------------------------------//
 
-
+  formularioValido(){
+    if(this.nombreValido() && this.apellidosValido() && this.telefonoValido() && this.correoValido() && this.motivoValido()){
+      console.log(this.nombreValido()+" nombre")
+      this.guardarDatos()
+    }else{
+      Swal.fire({
+        title:'El formulario presenta errores',
+        icon: 'error',
+        text:'Por favor, revise los campos',
+        confirmButtonText:'ok'
+      }
+    );
+    }
+  }
+  reseteaFormulario(){
+    this.cita={
+      persona:{
+        nombre:'',
+        apellidos:'',
+        tlfn:'',
+        email:''
+      },
+      motivo:'',
+      fecha:new Date(),
+      presencial:true,
+      hora:0
+    }
+  }
   nombreValido():boolean{
     var regex = new RegExp('^[a-zA-Z]{3,}$')
     var resultado=regex.test(this.cita.persona.nombre);
-    if(resultado!=true) return true;
+    if(resultado==true) return true;
     else return false
 
   
@@ -300,25 +328,25 @@ export class CalendarioComponent implements OnInit {
   apellidosValido():boolean{
     var regex = new RegExp('^(([a-zA-Z]{3,})|\\s){4,5}$')
     var resultado=regex.test(this.cita.persona.apellidos);
-    if(resultado!=true ) return true;
+    if(resultado==true ) return true;
     else return false
   }
   telefonoValido():boolean{
     var regex = new RegExp('^(\\+[0-9]{2})?(\\s{0,1})?([0-9]{9})$')
     var resultado=regex.test(this.cita.persona.tlfn);
-    if(resultado!=true ) return true;
+    if(resultado==true ) return true;
     else return false
   }
   motivoValido():boolean{
     var regex = new RegExp('^[a-zA-Z\\s]{5,}$')
     var resultado=regex.test(this.cita.motivo);
-    if(resultado!=true ) return true;
+    if(resultado==true ) return true;
     else return false
   }
   correoValido():boolean{
     var regex = new RegExp('^[a-zA-Z0-9_\-\_\.]{3,}@[a-zA-Z0-9_\-\_]{3,}(\\.[a-zA-Z\.]{2,12})$')
     var resultado=regex.test(this.cita.persona.email);
-    if(resultado!=true ) return true;
+    if(resultado==true ) return true;
     else return false
   }
 }
