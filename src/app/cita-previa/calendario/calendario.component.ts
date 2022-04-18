@@ -92,8 +92,8 @@ export class CalendarioComponent implements OnInit {
       text:'Parece que este apartado no esta funcionando correctamente, intentelo más tarde',
       confirmButtonText:'ok'
     }
-  ).then(()=>{
-      this.router.navigateByUrl("/");})
+  )//.then(()=>{
+    //  this.router.navigateByUrl("/");})
   }
 
   tachaOcupados(numero:number){

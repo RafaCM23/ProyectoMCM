@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlapi:"https://localhost:8080"
+  urlapi:"http://localhost:8080"
 };
 
 /*
