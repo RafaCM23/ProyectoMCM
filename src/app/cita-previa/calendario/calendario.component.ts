@@ -72,23 +72,28 @@ export class CalendarioComponent implements OnInit {
   getMes(numero:number){
     this.agendaService.getMes(numero).subscribe({
       next:resp=>{
+        if(resp==null){
+          this.errorAlCargar();
+          return
+        }
         this.meses[numero]=resp;
         this.tachaOcupados(numero);
         
       },
       error:error=>{
-        Swal.fire({
-          title:'Ooops',
-          icon: 'error',
-          text:'Parece que este apartado no esta funcionando correctamente, intentelo más tarde',
-          confirmButtonText:'ok'
-        }
-      )//.then(()=>{
-        //  this.router.navigateByUrl("/");})
-        
-        
+        this.errorAlCargar();        
       }
     })
+  }
+  errorAlCargar(){
+    Swal.fire({
+      title:'Ooops',
+      icon: 'error',
+      text:'Parece que este apartado no esta funcionando correctamente, intentelo más tarde',
+      confirmButtonText:'ok'
+    }
+  ).then(()=>{
+      this.router.navigateByUrl("/");})
   }
 
   tachaOcupados(numero:number){
@@ -298,7 +303,7 @@ export class CalendarioComponent implements OnInit {
   
   }
   apellidosValido():boolean{
-    var regex = new RegExp('^(([a-zA-Z]){3,}[\\s]?){3,5}$')
+    var regex = new RegExp('^(([a-zA-Z]{3,})|\\s){4,5}$')
     var resultado=regex.test(this.cita.persona.apellidos);
     if(resultado!=true ) return true;
     else return false
