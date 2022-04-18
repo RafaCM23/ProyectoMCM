@@ -1,5 +1,5 @@
-import { DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'
@@ -13,6 +13,7 @@ import { Mes, Cita } from '../calendario.interface';
 })
 export class CalendarioComponent implements OnInit {
 
+ 
 
   mes:string[]=[
     "Enero","Febrero","Marzo","Abril","Mayo","Junio",
@@ -56,7 +57,8 @@ export class CalendarioComponent implements OnInit {
     hora:0
   }
 
-  constructor(private agendaService: AgendaService,private modalService:NgbModal, private router: Router) {}
+  
+  constructor(private agendaService: AgendaService,private modalService:NgbModal, private router:Router) {}
 
   //Carga el mes en el que estamos
   ngOnInit(): void {
@@ -78,10 +80,13 @@ export class CalendarioComponent implements OnInit {
         Swal.fire({
           title:'Ooops',
           icon: 'error',
-          text:'Parece que ha habido un error, vuelve a intentarlo más tarde',
-          confirmButtonText:'Volver al inicio'
+          text:'Parece que este apartado no esta funcionando correctamente, intentelo más tarde',
+          confirmButtonText:'ok'
         }
-      )
+      )//.then(()=>{
+        //  this.router.navigateByUrl("/");})
+        
+        
       }
     })
   }
@@ -282,44 +287,38 @@ export class CalendarioComponent implements OnInit {
     }
   }
   //----------------------------------- FORMULARIO Y VERIFICACIONES DE CAMPOS ----------------------------------------//
-  nombreValido(){
-      var regex = new RegExp('^[a-zA-Z]{3,}$')
-      var resultado=regex.test(this.cita.persona.nombre);
-       if(resultado==true){
-         return true;
-       }
-       else{return false;}
+
+
+  nombreValido():boolean{
+    var regex = new RegExp('^[a-zA-Z]{3,}$')
+    var resultado=regex.test(this.cita.persona.nombre);
+    if(resultado!=true) return true;
+    else return false
+
+  
   }
-  apellidoValido(){
-    var regex = new RegExp('^[a-zA-Z]{8,}$')
+  apellidosValido():boolean{
+    var regex = new RegExp('^(([a-zA-Z]){3,}[\\s]?){3,5}$')
     var resultado=regex.test(this.cita.persona.apellidos);
-      if(resultado==true){
-        return true;
-      }
-      else{return false;}
+    if(resultado!=true ) return true;
+    else return false
   }
-  telefonoValido(){
+  telefonoValido():boolean{
     var regex = new RegExp('^(\\+[0-9]{2})?(\\s{0,1})?([0-9]{9})$')
     var resultado=regex.test(this.cita.persona.tlfn);
-      if(resultado==true){
-        return true;
-      }
-      else{return false;}
+    if(resultado!=true ) return true;
+    else return false
   }
-  motivoValido(){
+  motivoValido():boolean{
     var regex = new RegExp('^[a-zA-Z\\s]{5,}$')
     var resultado=regex.test(this.cita.motivo);
-      if(resultado==true /*&& touched*/){
-        return true;
-      }
-      else{return false;}
+    if(resultado!=true ) return true;
+    else return false
   }
-  correoValido(){
+  correoValido():boolean{
     var regex = new RegExp('^[a-zA-Z0-9_\-\_\.]{3,}@[a-zA-Z0-9_\-\_]{3,}(\\.[a-zA-Z\.]{2,12})$')
     var resultado=regex.test(this.cita.persona.email);
-    if(resultado==true){
-      return true;
-    }
-    else{return false;}
+    if(resultado!=true ) return true;
+    else return false
   }
 }
