@@ -56,7 +56,8 @@ span{
 }
 .container{
     margin-bottom: 3em;
-    margin-left: 5%;
+    margin-left: 0;
+    
 }
 .slide i {
     opacity: 0;

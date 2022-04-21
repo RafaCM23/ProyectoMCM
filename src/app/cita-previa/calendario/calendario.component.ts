@@ -44,6 +44,8 @@ export class CalendarioComponent implements OnInit {
   
   cerrarModal:string='';
 
+  profesionalid=1;
+
   cita:Cita={
     persona:{
       nombre:'',
@@ -70,7 +72,8 @@ export class CalendarioComponent implements OnInit {
 
   //Obtiene el mes al cambiar de mes
   getMes(numero:number){
-    this.agendaService.getMes(numero).subscribe({
+    let mes=this.mesActual+this.hoy.getMonth();
+    this.agendaService.getMes(this.profesionalid,this.anio,mes).subscribe({
       next:resp=>{
         this.meses[numero]=resp;
         this.tachaOcupados(numero);        
@@ -145,7 +148,7 @@ export class CalendarioComponent implements OnInit {
       }
     );
     }
-    else if(this.mesActual==6 && flag>0){
+    else if(this.mesActual==5 && flag>0){
       Swal.fire({
         title:'Eso no es buena idea',
         icon: 'error',
@@ -212,7 +215,8 @@ export class CalendarioComponent implements OnInit {
   }
       //Guarda el formulario y reserva la cita
   guardarDatos(){    
-    this.agendaService.guardarCita(this.cita).subscribe({
+    let mes=this.mesActual+this.hoy.getMonth();
+    this.agendaService.guardarCita(this.profesionalid,this.anio,mes,this.cita).subscribe({
       next:resp=>{
         Swal.fire({
           title:'Cita pedida con éxito',
@@ -227,7 +231,7 @@ export class CalendarioComponent implements OnInit {
         Swal.fire({
           title:'Error al pedir la cita',
           icon: 'error',
-          text:error.error.msg,
+          text:'Intentelo más tarde',
           confirmButtonText:'ok'
         }
       );
@@ -291,7 +295,6 @@ export class CalendarioComponent implements OnInit {
 
   formularioValido(){
     if(this.nombreValido() && this.apellidosValido() && this.telefonoValido() && this.correoValido() && this.motivoValido()){
-      console.log(this.nombreValido()+" nombre")
       this.guardarDatos()
     }else{
       Swal.fire({
@@ -326,7 +329,7 @@ export class CalendarioComponent implements OnInit {
   
   }
   apellidosValido():boolean{
-    var regex = new RegExp('^(([a-zA-Z]{3,})|\\s){4,5}$')
+    var regex = new RegExp('^(([a-zA-Z]{3,})|\\s){3,7}$')
     var resultado=regex.test(this.cita.persona.apellidos);
     if(resultado==true ) return true;
     else return false

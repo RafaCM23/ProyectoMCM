@@ -42,3 +42,17 @@ span{
 
 
 }
+.selector{
+    margin: 0.5em;
+    font-size: 1.4em;
+    font-weight: bolder;
+    background-color: rgb(171, 213, 250);
+    color: rgba(15, 102, 124, 0.781);
+    border-radius: 25px;
+    transition: all .20s ease-in-out;
+}
+.selector:hover{
+    color: aliceblue;
+    background-color: rgba(15, 102, 124, 0.781);
+   
+}

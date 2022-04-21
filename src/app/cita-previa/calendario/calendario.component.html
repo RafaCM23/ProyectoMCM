@@ -51,10 +51,13 @@
           <div class="input-group">
             <input id="nombre" name="nombre" class="form-control" placeholder="Introduzca su nombre" minlength="3" requiered  [(ngModel)]="this.cita.persona.nombre">
           </div>
-		  <span class="form-text text-danger"
-                    *ngIf="!nombreValido() && citaForm.controls['nombre'].touched">
-                  * Mínimo 3 carácteres
-              </span>
+		  <span *ngIf="citaForm.controls['nombre']!=null">
+			<span class="form-text text-danger"
+			*ngIf="!nombreValido() && citaForm.controls['nombre'].touched">
+		  * Mínimo 3 carácteres
+	  </span>
+		</span>
+		  
         </div>
 		
 
@@ -64,10 +67,13 @@
 			<div class="input-group">
 			  <input id="apellidos" name="apellidos" class="form-control" placeholder="Introduzca sus apellidos" minlength="8" requiered   [(ngModel)]="this.cita.persona.apellidos" >
 			</div>
-			<span class="form-text text-danger"
+			<span *ngIf="citaForm.controls['apellidos']!=null">
+				<span class="form-text text-danger"
                     *ngIf="!apellidosValido() && citaForm.controls['apellidos'].touched">
                   * Mínimo dos apellidos de 3 caracteres
               </span>
+            </span>
+			
 		  </div>
 
 		  <div class="form-group">
@@ -76,10 +82,12 @@
 			<div class="input-group">
 			  <input id="tlfn"  name="tlfn" class="form-control" placeholder="Ej: 612345678 o +34 612345678 " minlength="9" requiered [(ngModel)]="this.cita.persona.tlfn" >
 			</div>
-			<span class="form-text text-danger"
-                    *ngIf="!telefonoValido() && citaForm.controls['tlfn'].touched">
-                  * No cumple el formato Ej: 600 00 00 00 o +34 612345678
-              </span>
+			<span *ngIf="citaForm.controls['tlfn']!=null">
+				<span class="form-text text-danger"
+				*ngIf="!telefonoValido() && citaForm.controls['tlfn'].touched">
+			  * No cumple el formato Ej: 60000000 o +34 612345678 
+		  		</span>
+            </span>			
 		  </div>
 
 		  <div class="form-group">
@@ -88,10 +96,21 @@
 			<div class="input-group">
 			  <input id="email" name="email"  class="form-control" placeholder="Ej: correo@gmail.com " minlength="8" requiered  [(ngModel)]="this.cita.persona.email" >
 			</div>
-			<span class="form-text text-danger"
+			<span *ngIf="citaForm.controls['correo']!=null">
+
+					Error
+				<span class="form-text text-danger"
                     *ngIf="!correoValido() && citaForm.controls['email'].touched">
                   * No cumple el formato Ej: correo@gmail.com 
               </span>
+            </span>
+			<span *ngIf="citaForm.controls['email']!=null">
+				<span class="form-text text-danger"
+                    *ngIf="!correoValido() && citaForm.controls['email'].touched">
+                  * Ej: correo@dominio.com
+              </span>
+            </span>
+			
 		  </div>
 		
         <div class="form-group">
@@ -100,10 +119,13 @@
             <div class="input-group">
               <textarea id="motivo" name="motivo" class="form-control" placeholder="Introduzca el motivo de su consulta" minlength="5" requiered [(ngModel)]="this.cita.motivo" ></textarea>
             </div>
-			<span class="form-text text-danger"
+			<span *ngIf="citaForm.controls['motivo']!=null">
+				<span class="form-text text-danger"
                     *ngIf="!motivoValido() && citaForm.controls['motivo'].touched">
                   * Mínimo 5 carácteres
               </span>
+            </span>
+			
           </div>
 		  <div class="form-group">
 			<label for="tipoCita">Tipo de cita</label>
