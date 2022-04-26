@@ -3,6 +3,7 @@
 		<div>
 			<button (click)="changeMonth(-1)" class="btn-prev"><</button>
 		</div>
+		
 		<h1>{{mesAct}}  {{anio}}</h1>
 		<div>
 			<button (click)="changeMonth(1)" class="btn-next">></button>
@@ -11,7 +12,7 @@
 	<ol>
 		<li *ngFor="let day of semana" class="day-name">{{day | slice:0:3}}</li>
 
-        <li  (click)="espera1s(content); clickDay(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+        <li  (click)="esperaModal(content); clickDay(day);esperaHoras(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
          *ngFor="let day of monthSelect;let first = first" class="libre dia" >
 			<span>{{day?.value}}</span>
 		</li>
@@ -30,8 +31,7 @@
 	</span>
 	<span class="ejemplo-vacaciones ejemplo  col-6 col-lg-3">
 		Vacaciones
-	</span>
-	
+	</span>	
 </div>
 <hr>
 
@@ -136,11 +136,12 @@
 		  </div>
 		  <div class="form-group">
 			<label for="huecos">Citas disponibles</label>
-			<select name="huecos" id="huecos" class="form-select" >
-                <option value="4">4-5</option>
-                <option value="5">5-6</option>
-				<option value="6">6-7</option>
-				<option value="7">7-8</option>
+			<select name="huecos" id="huecos" class="form-select" [(ngModel)]="this.cita.hora" >
+				<option value=0 selected disabled hidden>Elige la hora</option>
+                <option value=4 id="hora4">16:00-17:00</option>
+                <option value=5 id="hora5">17:00-18:00</option>
+				<option value=6 id="hora6">18:00-19:00</option>
+				<option value=7 id="hora7">19:00-20:00</option>
             </select>
 		  </div>
 		  <button type="submit" class="btn btn-outline-dark boton">Enviar</button>

@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'
 import Swal from 'sweetalert2';
 import { AgendaService } from '../agenda.service';
-import { Mes, Cita } from '../calendario.interface';
+import { Mes, Cita, Dia } from '../calendario.interface';
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.component.html',
@@ -13,7 +13,11 @@ import { Mes, Cita } from '../calendario.interface';
 })
 export class CalendarioComponent implements OnInit {
 
+  @Input() profActual =1;
  
+  ngOnChanges(changes: SimpleChanges) {
+    this.ngOnInit();
+  }
 
   mes:string[]=[
     "Enero","Febrero","Marzo","Abril","Mayo","Junio",
@@ -44,8 +48,6 @@ export class CalendarioComponent implements OnInit {
   
   cerrarModal:string='';
 
-  profesionalid=1;
-
   cita:Cita={
     persona:{
       nombre:'',
@@ -73,7 +75,7 @@ export class CalendarioComponent implements OnInit {
   //Obtiene el mes al cambiar de mes
   getMes(numero:number){
     let mes=this.mesActual+this.hoy.getMonth();
-    this.agendaService.getMes(this.profesionalid,this.anio,mes).subscribe({
+    this.agendaService.getMes(this.profActual,this.anio,mes).subscribe({
       next:resp=>{
         this.meses[numero]=resp;
         this.tachaOcupados(numero);        
@@ -111,7 +113,9 @@ export class CalendarioComponent implements OnInit {
         diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","ocupado")
       }
     }
+    
   }
+ 
 
   
 
@@ -194,6 +198,18 @@ export class CalendarioComponent implements OnInit {
     this.cita.fecha=objectDate.toDate();
     
   }
+  tachaHoras(day:any){
+    const mes = this.meses[this.mesActual+this.hoy.getMonth()]
+    const dias = mes.dias.values();
+    for (const dia of dias) {
+      if(dia.numero==day.value){
+        for (const cita of dia.citasSinConfirmar) {
+          document.getElementById("hora"+cita.hora)!.hidden=true;
+        }
+      }
+    }
+    
+  }
   //abre el modal para realizar la cita (si no es antes de hoy)
   open(content: any) {
     if(this.cita.fecha<new Date()) {
@@ -216,7 +232,7 @@ export class CalendarioComponent implements OnInit {
       //Guarda el formulario y reserva la cita
   guardarDatos(){    
     let mes=this.mesActual+this.hoy.getMonth();
-    this.agendaService.guardarCita(this.profesionalid,this.anio,mes,this.cita).subscribe({
+    this.agendaService.guardarCita(this.profActual,this.anio,mes,this.cita).subscribe({
       next:resp=>{
         Swal.fire({
           title:'Cita pedida con éxito',
@@ -238,20 +254,27 @@ export class CalendarioComponent implements OnInit {
       }
     })
     this.modalService.dismissAll('Exitoso'); //se cierra el modal
-    this.espera2s();//espera 2 segundos y recarga el mes
+    this.esperaMes();//espera 2 segundos y recarga el mes
   }
 
   //----------------------------------- HERRAMIENTAS ----------------------------------------//
 
-  espera1s(content:any) {
+  esperaModal(content:any) {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(this.open(content));
       }, 100);
     });
   }
+  esperaHoras(day:any) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(this.tachaHoras(day));
+      }, 1000);
+    });
+  }
   
-  espera2s() {
+  esperaMes() {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(this.recargarMes());
@@ -294,13 +317,13 @@ export class CalendarioComponent implements OnInit {
   //----------------------------------- FORMULARIO Y VERIFICACIONES DE CAMPOS ----------------------------------------//
 
   formularioValido(){
-    if(this.nombreValido() && this.apellidosValido() && this.telefonoValido() && this.correoValido() && this.motivoValido()){
+    if(this.nombreValido() && this.apellidosValido() && this.telefonoValido() && this.correoValido() && this.motivoValido() && this.horaValida()){
       this.guardarDatos()
     }else{
       Swal.fire({
         title:'El formulario presenta errores',
         icon: 'error',
-        text:'Por favor, revise los campos',
+        text:'Por favor, revise que todos los campos estan rellenos correctamente',
         confirmButtonText:'ok'
       }
     );
@@ -351,5 +374,8 @@ export class CalendarioComponent implements OnInit {
     var resultado=regex.test(this.cita.persona.email);
     if(resultado==true ) return true;
     else return false
+  }
+  horaValida():boolean{
+    return this.cita.hora!=0 ?  true : false;
   }
 }

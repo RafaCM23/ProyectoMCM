@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Cita, Mes } from './calendario.interface';
+import { Cita, Mes, Profesional } from './calendario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,6 @@ export class AgendaService {
   }
   getProfesionales(){
     const url=this.api+'/profesionales'
-    return this.httpClient.get(url);
+    return this.httpClient.get<Profesional[]>(url);
   }
 }

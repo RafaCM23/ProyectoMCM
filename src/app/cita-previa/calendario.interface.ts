@@ -40,6 +40,9 @@ export interface Profesional{
 
     id:number,
     nombre:string,
-    apellidos:string
+    apellidos:string,
+    img:string,
+    especialidad:string,
+    descripcion:string
 
 }

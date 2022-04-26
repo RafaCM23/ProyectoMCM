@@ -8,7 +8,7 @@
 
             <h1 class="text-center">Profesional</h1>
             <div class="text-center">
-            <img src="./assets/imagenes/Marta.jpeg" alt="imagen_profesional">
+            <img src={{profesionalActual().img}} alt="imagen_profesional">
             </div>
             <div class="text-center">
                 <button class="btn selector" (click)="cambiaProfesional(-1)"><<</button>
@@ -17,12 +17,11 @@
 
             <div class="profInfo">
             <span class="info">Nombre</span>
-            <p>Marta Cuberos</p>
+            <p>{{profesionalActual().nombre}}</p>
             <span class="info">Especialidad</span>
-            <p>Nutrición Materno-Infantil</p>
+            <p>{{profesionalActual().especialidad}}</p>
             <span class="info">Descripción</span>
-            <p>Además de interesarme la Nutrición infantil tengo experiencia en consultas tanto para personas
-                que quieren disminuir su peso y mejorar su relación con la comida, como para intolerantes a la fructosa, lactosa o gluten
+            <p>{{profesionalActual().descripcion}}
             </p>
 
             
@@ -36,7 +35,7 @@
 
         <div class="col-12 col-md-7 agenda ">
             <h1 class="text-center">Agenda</h1>
-            <app-calendario></app-calendario>
+            <app-calendario [profActual]="profesionales[idprof].id"></app-calendario>
         </div>
         
         
