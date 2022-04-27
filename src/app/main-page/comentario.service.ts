@@ -12,7 +12,7 @@ export class ComentarioService {
   api=environment.urlapi;
   
   getComentarios(){
-
+    //ToDo
   }
 
   postComentario(comentario:comentario){

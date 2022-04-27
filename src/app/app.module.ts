@@ -16,11 +16,11 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MainPageModule,
     SharedModule,
     CitaPreviaModule,
-    ReactiveFormsModule,
     NgbModalModule,
     HttpClientModule
   ],

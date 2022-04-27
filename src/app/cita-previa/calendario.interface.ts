@@ -41,6 +41,9 @@ export interface Profesional{
     id:number,
     nombre:string,
     apellidos:string,
+    contrasenia:string,
+    email:string,
+    tlfn:string,
     img:string,
     especialidad:string,
     descripcion:string
