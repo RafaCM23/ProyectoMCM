@@ -202,13 +202,9 @@ export class CalendarioComponent implements OnInit {
     
     const mes = this.meses[this.mesActual+this.hoy.getMonth()]
     const dias = mes.dias.values();
-    console.log(mes);
-    console.log(dias);
     for (const dia of dias) {
-      if(dia.numero==day.value){
-        console.log(dia.numero+" "+day.value);
+      if((dia.numero+1)==day.value){
         for (const cita of dia.citasSinConfirmar) {
-          console.log(cita.hora);
           document.getElementById("hora"+cita.hora)!.hidden=true;
         }
       }

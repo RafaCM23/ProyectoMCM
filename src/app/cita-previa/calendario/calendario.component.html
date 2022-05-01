@@ -12,7 +12,7 @@
 	<ol>
 		<li *ngFor="let day of semana" class="day-name">{{day | slice:0:3}}</li>
 
-        <li  (click)="esperaModal(content); clickDay(day);esperaHoras(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+        <li  (click)="esperaModal(content); clickDay(day); esperaHoras(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
          *ngFor="let day of monthSelect;let first = first" class="libre dia" >
 			<span>{{day?.value}}</span>
 		</li>
