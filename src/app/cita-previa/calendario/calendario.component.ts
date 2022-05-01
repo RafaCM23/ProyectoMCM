@@ -142,7 +142,6 @@ export class CalendarioComponent implements OnInit {
   }
   //botones de < > cambiar el mes
   changeMonth(flag:any) {
-
     if(this.mesActual==0 && flag<0) {
       Swal.fire({
         title:'Eso no es buena idea',
@@ -201,9 +200,12 @@ export class CalendarioComponent implements OnInit {
   tachaHoras(day:any){
     const mes = this.meses[this.mesActual+this.hoy.getMonth()]
     const dias = mes.dias.values();
+    
     for (const dia of dias) {
       if(dia.numero==day.value){
+        console.log(dia.numero+" "+day.value);
         for (const cita of dia.citasSinConfirmar) {
+          console.log(cita.hora);
           document.getElementById("hora"+cita.hora)!.hidden=true;
         }
       }
