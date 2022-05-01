@@ -1,25 +1,26 @@
 
-
-    
 .containerOwnApp	{
 	box-shadow: 0 0 27px 0 rgba(84, 84, 84, 0.62);
 	padding-top: 15px;
 }
-
+.container{
+    max-width: none;
+    margin: 0!important;
+    width: 100%;
+    background-color: #56638A;
+}
 
 .login-page {
-  padding: 8% 0 0;
-  margin: 0 auto 100px;
-  max-width: 500px;
-  height: 10%;
-  position: relative;
+    padding: 2% 0 0;
+    margin: 0 auto 10em;
+    max-width: 500px;
+    position: relative;
+
 }
 
 .login-form {
-	box-shadow: 8px 8px 15px 10px rgba(41, 41, 41, 0.738);
-	background-color: white;
-    
-    
+    box-shadow: 8px 8px 15px 10px rgba(41, 41, 41, 0.738);
+    background-color: white;
 }
 
 .login-form-header{

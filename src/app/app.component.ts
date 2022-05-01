@@ -9,5 +9,5 @@ import { ActivatedRoute } from '@angular/router';
 export class AppComponent {
   title = 'Front-PI';
 
-  constructor(private ruta:ActivatedRoute){}
+  constructor(){}
 }

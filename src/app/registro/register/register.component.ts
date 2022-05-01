@@ -155,8 +155,8 @@ export class RegisterComponent implements OnInit {
       return
     }
     else{
-      let p = this.prof;
-      let r = this.registroForm
+      let p = this.prof;      let r = this.registroForm
+      
       p.nombre=r.get('nombre')?.value;p.apellidos=r.get('apellidos')?.value;
       p.contrasenia=r.get('contrasenia')?.value;p.email=r.get('email')?.value;
       p.tlfn=r.get('tlfn')?.value;p.especialidad=r.get('especialidad')?.value;

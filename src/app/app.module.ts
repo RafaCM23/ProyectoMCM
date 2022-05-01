@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { CitaPreviaModule } from './cita-previa/cita-previa.module';
 import { MainPageModule } from './main-page/main-page.module';
 import { SharedModule } from './shared/shared.module';
+import { StaffModule } from './staff/staff.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -22,7 +23,8 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     CitaPreviaModule,
     NgbModalModule,
-    HttpClientModule
+    HttpClientModule,
+    StaffModule
   ],
   providers: [],
   bootstrap: [AppComponent]

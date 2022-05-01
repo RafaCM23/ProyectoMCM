@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   }
 
   llevaNavbar(){
-    if(this.router.url.toString().startsWith("/admin")){
+    if(this.router.url.toString().startsWith("/admin") || this.router.url.toString().startsWith("/staff")){
       return false;
     }
     else{return true;}

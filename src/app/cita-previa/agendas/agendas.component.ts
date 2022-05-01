@@ -21,21 +21,14 @@ export class AgendasComponent implements OnInit {
 
   profesionales:Profesional[]=[];
 
-  numeros:number[]=[1,2,3];
   cambiaProfesional(cambio:number){
-    if(cambio>0 ){
-      if(this.profesionales.length-2<this.idprof){
-        this.idprof=0;
-
-      }else{ this.idprof+=1;}
-
+    if(cambio>0 ){console.log(this.idprof +" "+(this.profesionales.length-1))
+      if(this.idprof==this.profesionales.length-1){this.idprof=0}
+      else{ this.idprof+=1;}
     }
-    else{
-      if(this.idprof==0){
-        this.idprof=this.profesionales.length-1;
-      }else{
-        this.idprof-=1;
-      }
+    else{console.log(this.idprof +" "+(this.profesionales.length-1))
+      if(this.idprof==0){this.idprof=this.profesionales.length-1}
+      else{ this.idprof-=1;}
     }
      let resp = this.profesionales[this.idprof];
     
@@ -48,6 +41,7 @@ export class AgendasComponent implements OnInit {
     this.agendaService.getProfesionales().subscribe({
       next:resp=>{
         this.profesionales=resp;
+        console.log(resp);
       },
       error:error=>{
        this.errorAlCargar();

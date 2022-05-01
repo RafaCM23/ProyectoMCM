@@ -1,1 +1,64 @@
-<p>login works!</p>
+
+    <div class="container" style="height: 100vh;">
+	    <div class="row text-center login-page">
+			<div class="col-md-12 login-form rounded">
+				<form autocomplete="off" [formGroup]="loginForm" > 
+
+					<div class="row">
+						<div class="col-md-12 login-form-header">
+							<p class="login-form-font-header">Acceso</p><p>
+						</p></div>
+					</div>
+
+                    <!--Nombre-->
+                    <div class="input-group mb-3 login-form-row">
+                      <span class="input-group-text"><i class="fa fa-user"></i></span>
+                      <input type="text" class="form-control"  placeholder="Email"
+                        required formControlName="email" maxlength="30">   
+                                           
+                    </div>
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('email')">
+                    * El correo debe tener mínimo 10 caracteres *
+                    </span>
+
+                    <div class="input-group mb-3 login-form-row">
+                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control"  placeholder="Contraseña"
+                          required formControlName="contrasenia" maxlength="30">   
+                                             
+                      </div>
+                      <span class="form-text text-danger"
+                      *ngIf="campoEsValido('contrasenia')">
+                      * La contraseña debe tener mínimo 8 caracteres *
+                      </span> 
+
+                    
+
+                    
+
+                      
+                      
+                     
+                    	<div class="col-md-12 login-form-row mt-2 mb-3">
+                        <button class="btn-lg btn-info" type="submit" (click)="enviar()">Acceder</button>
+                        
+                      </div>
+
+
+                      <div class="row mb-4">
+                          <a [routerLink]="['/admin/registro']">No tengo Cuenta</a>
+                      </div>
+					
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+ 
