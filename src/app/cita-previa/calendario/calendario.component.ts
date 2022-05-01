@@ -104,13 +104,13 @@ export class CalendarioComponent implements OnInit {
     if (this.meses[numero]==null) return;
     for (const dia of this.meses[numero].dias) {
       if(dia.vacaciones==true ){
-        diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","vacaciones")
+        diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","vacaciones")
       }
       else if(dia.citasSinConfirmar.length>0 && dia.citasSinConfirmar.length<4){
-        diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","sinConfirmar")
+        diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","sinConfirmar")
       }
       else if(dia.citasSinConfirmar.length>3){
-        diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","ocupado")
+        diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","ocupado")
       }
     }
     
