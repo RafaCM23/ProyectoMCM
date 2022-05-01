@@ -199,8 +199,11 @@ export class CalendarioComponent implements OnInit {
     
   }
   tachaHoras(day:any){
+    
     const mes = this.meses[this.mesActual+this.hoy.getMonth()]
     const dias = mes.dias.values();
+    console.log(mes);
+    console.log(dias);
     for (const dia of dias) {
       if(dia.numero==day.value){
         console.log(dia.numero+" "+day.value);
