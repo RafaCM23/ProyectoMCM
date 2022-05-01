@@ -90,13 +90,13 @@ hr{
     padding:1rem;
   }  
 ::ng-deep  .modal-content {
-    background-color: rgba(46, 131, 46, 0.589);
+    color: #656176;
   }
 ::ng-deep  .modal-header {
-    background-color: rgba(164, 255, 89, 0.733);
+    background-color: #E8B5A2;
   }
 ::ng-deep  .modal-body {
-    background-color: rgba(46, 131, 46, 0.589);
+    background-color: #FEFEFE;
 }
 ::ng-deep  .btn-outline-dark {
     margin-top: 5%;

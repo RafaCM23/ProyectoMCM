@@ -1,0 +1,73 @@
+
+.containerOwnApp	{
+	box-shadow: 0 0 27px 0 rgba(84, 84, 84, 0.62);
+	padding-top: 15px;
+}
+.container{
+    max-width: none;
+    margin: 0!important;
+    width: 100%;
+    background-color: #56638A;
+}
+
+.login-page {
+    padding: 2% 0 0;
+    margin: 0 auto 10em;
+    max-width: 500px;
+    position: relative;
+
+}
+
+.login-form {
+    box-shadow: 8px 8px 15px 10px rgba(41, 41, 41, 0.738);
+    background-color: white;
+}
+
+.login-form-header{
+	padding-top: 16px;
+}
+input{
+    height: 50px;
+}
+a{
+    text-decoration: none;
+    font-size: large;
+    margin-top: 1%;
+}
+a:hover{
+    text-decoration:underline;
+}
+#texto{
+    font-weight: bolder;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-left: 2%;
+    margin-top: 2%;
+    font-size: 1.2em;
+}
+.input-group{
+    margin-bottom: 0!important;
+}
+
+.mayor{
+    height: 2em;
+    padding: 1em;
+}
+.login-form-row {
+	padding-top: 5px;
+	padding-bottom: 5px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.login-form-font-header {
+	font-size:50px; 
+	font-weight: bold;
+    color: #007C9B;
+}
+
+.container{
+    max-width: none;
+    margin: 0!important;
+    width: 100%;
+    background-color: #56638A;
+}

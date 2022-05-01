@@ -1,0 +1,16 @@
+.btn{
+    border-radius: 40px;
+}
+svg{
+    width: 30px;
+    height: 30px;
+}
+.btn:hover{
+    transform: scale(1.2);
+}
+.card{
+    text-align: left;
+    margin-bottom: 1em;
+    border-color: rgb(29, 29, 29);
+    padding:0;
+}

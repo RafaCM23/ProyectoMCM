@@ -24,12 +24,28 @@ export interface Cita{
     fecha:Date,
     presencial:boolean,
     hora:number
-    //Persona contacto (Nombre, Apellidos, texto sobre consulta, tlfn, email
+
 }
 
 export interface Persona{
+
     nombre:string,
     apellidos:string,
     tlfn:string,
     email:string
+
+}
+
+export interface Profesional{
+
+    id:number,
+    nombre:string,
+    apellidos:string,
+    contrasenia:string,
+    email:string,
+    tlfn:string,
+    img:string,
+    especialidad:string,
+    descripcion:string
+
 }

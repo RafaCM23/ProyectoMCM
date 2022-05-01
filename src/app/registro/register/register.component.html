@@ -1,0 +1,129 @@
+
+    <div class="container" style="height: 120vh;">
+	    <div class="row text-center login-page">
+			<div class="col-md-12 login-form rounded">
+				<form autocomplete="off" [formGroup]="registroForm" > 
+
+					<div class="row">
+						<div class="col-md-12 login-form-header">
+							<p class="login-form-font-header">Registro</p><p>
+						</p></div>
+					</div>
+
+                    <!--Nombre-->
+                    <div class="input-group mb-3 login-form-row">
+                      <span class="input-group-text"><i class="fa fa-user"></i></span>
+                      <input type="text" class="form-control"  placeholder="Nombre"
+                        required formControlName="nombre" maxlength="30">   
+                                           
+                    </div>
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('nombre')">
+                    * El Nombre debe tener 3 caracteres como mínimo *
+                    </span>
+
+                    <!--Apellidos-->
+                    <div class="input-group mb-3 login-form-row">
+                        <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                        <input type="text" class="form-control"  placeholder="Apellidos"
+                         required formControlName="apellidos" maxlength="30" >
+                    </div>
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('apellidos')">
+                    {{ apellidosErrorMsg }}
+                    </span>
+
+                    <!--contra-->
+                    <div class="input-group mb-3 login-form-row">
+                        <span class="input-group-text" ><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" placeholder="Contraseña" 
+                        required formControlName="contrasenia">
+                    </div>
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('contrasenia')">
+                    {{ contraErrorMsg }}
+                    </span>
+
+                    <!--confirma contra-->
+                    <div class="input-group mb-3 login-form-row">
+                        <span class="input-group-text" ><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" placeholder="Repite la contraseña"
+                        required formControlName="recontrasenia">
+                    </div>
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('recontrasenia')">
+                    * La Contraseña y su Confirmación son diferentes *
+                    </span>
+
+                    <!--email-->
+                    <div class="input-group mb-3 login-form-row">
+                        <span class="input-group-text bold" ><i class="fas fa-at"></i></span>
+                        <input type="email" class="form-control" placeholder="Email"
+                        required formControlName="email">
+                      </div>
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('email')">
+                    {{ emailErrorMsg }}
+                    </span>
+
+                    <!--tlfn-->
+                    <div class="input-group mb-3 login-form-row">
+                        <span class="input-group-text bold" ><i class="fa fa-mobile"></i></span>
+                        <input type="text" class="form-control" placeholder="Teléfono"
+                        required formControlName="tlfn">
+                      </div>
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('tlfn')">
+                    * El formato no es correcto. Ej: 600000000 o  +34 600000000*
+                    </span>
+
+                    <!--especialidad-->
+                    <div class="input-group mb-3 login-form-row">
+                        <span class="input-group-text bold" ><i class="fa  fa-exclamation"></i></span>
+                        <input type="text" class="form-control" placeholder="Especialidad"
+                        required formControlName="especialidad">
+                      </div>
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('especialidad')">
+                    * Mínimo 5 caracteres*
+                    </span>
+
+                    <!--descripcion-->
+                    <div class="input-group mb-3 login-form-row">
+                        <span class="input-group-text bold" ><i class="fa fa-pen"></i></span>
+                        <textarea class="form-control" placeholder="Descripción"
+                      required formControlName="descripcion"></textarea>
+                      </div>                   
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('descripcion')">
+                    * Mínimo 40 caracteres*
+                    </span>
+                    
+
+                    
+
+                      
+                      
+                     
+                    	<div class="col-md-12 login-form-row mt-2 mb-3">
+                        <button class="btn-lg btn-info" type="submit" (click)="validar()">Registrarse</button>
+                        
+                      </div>
+
+
+                      <div class="row mb-4">
+                          <a [routerLink]="['/admin/login']">Ya tengo una cuenta</a>
+                      </div>
+					
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+ 

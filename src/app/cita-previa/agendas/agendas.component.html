@@ -8,17 +8,21 @@
 
             <h1 class="text-center">Profesional</h1>
             <div class="text-center">
-            <img src="./assets/imagenes/Marta.jpeg" alt="imagen_profesional">
+            <img src={{profesionalActual().img}} alt="imagen_profesional">
+            </div>
+            <div class="text-center">
+                <button class="btn selector" (click)="cambiaProfesional(-1)"><<</button>
+                <button class="btn selector" (click)="cambiaProfesional(1)">>></button>
             </div>
 
             <div class="profInfo">
             <span class="info">Nombre</span>
-            <p>Marta Cuberos</p>
+            <p>{{profesionalActual().nombre}}</p>
             <span class="info">Especialidad</span>
-            <p>Nutrición en niños</p>
+            <p>{{profesionalActual().especialidad}}</p>
             <span class="info">Descripción</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                apien in ullamcorper. Nullam eu imperdiet orci.</p>
+            <p>{{profesionalActual().descripcion}}
+            </p>
 
             
         </div>
@@ -31,7 +35,7 @@
 
         <div class="col-12 col-md-7 agenda ">
             <h1 class="text-center">Agenda</h1>
-            <app-calendario></app-calendario>
+            <app-calendario [profActual]="profesionales[idprof].id"></app-calendario>
         </div>
         
         
