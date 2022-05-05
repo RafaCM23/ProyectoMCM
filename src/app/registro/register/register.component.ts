@@ -174,7 +174,7 @@ export class RegisterComponent implements OnInit {
         },
         error:error=>{
           Swal.fire({
-            title:'Erro al registrar profesional',
+            title:'Error al registrar profesional',
             text:'Intentelo de nuevo más tarde',
             icon: 'error',
             confirmButtonText:'Ok'

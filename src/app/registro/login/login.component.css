@@ -64,6 +64,12 @@ a:hover{
     color: #007C9B;
 }
 
+.volver{
+    border-color: black;
+    position: relative;
+    left:-35%;
+    top: 5%;
+ }
 .container{
     max-width: none;
     margin: 0!important;

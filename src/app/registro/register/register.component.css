@@ -29,6 +29,12 @@
 input{
     height: 50px;
 }
+.volver{
+   border-color: black;
+   position: relative;
+   left: -40%;
+   top: 2%;
+}
 a{
     text-decoration: none;
     font-size: large;

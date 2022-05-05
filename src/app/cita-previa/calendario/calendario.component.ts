@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'
 import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js';
 import { AgendaService } from '../agenda.service';
-import { Mes, Cita, Dia } from '../calendario.interface';
+import { Mes, Cita} from '../calendario.interface';
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.component.html',
@@ -14,7 +14,7 @@ import { Mes, Cita, Dia } from '../calendario.interface';
 export class CalendarioComponent implements OnInit {
 
   @Input() profActual =1;
- 
+  hub=false;
   ngOnChanges(changes: SimpleChanges) {
     this.ngOnInit();
   }
@@ -32,7 +32,7 @@ export class CalendarioComponent implements OnInit {
   mesActual:number=0;
   mesAct=this.mes[this.hoy.getMonth()];
   anio:number=this.hoy.getFullYear();
-
+  diaSeleccionado=0;
 
   monthSelect: any[]=[];  dateSelect: any;  dateValue: any; 
  
@@ -62,19 +62,39 @@ export class CalendarioComponent implements OnInit {
   }
 
   
-  constructor(private agendaService: AgendaService,private modalService:NgbModal, private router:Router) {}
+  constructor(private agendaService: AgendaService,private modalService:NgbModal, private router:Router, private rutaActiva:ActivatedRoute) {}
 
   //Carga el mes en el que estamos
   ngOnInit(): void {
+    this.mesActual=0;
+    this.mesAct=this.mes[this.hoy.getMonth()];
     this.getMes(this.hoy.getMonth());
     this.getDaysFromDate(this.hoy.getMonth()+1, 2022);
+    let valor="hola";
+    console.log(this.encriptaId("hola"));
+    valor=this.encriptaId("hola").toString();
+    console.log(this.desencriptaId(valor).toString());
   }
     
   //----------------------------------- MES ----------------------------------------//
 
+  compruebaProf(){
+    let res=this.profActual;
+    let url=this.router.url.toString();
+    if(url.startsWith('/staff/hub/mi-agenda')){
+      this.rutaActiva.queryParams.subscribe({
+        next:resp=>{res=resp['id'];
+      this.hub=true;}
+      });
+    }
+    else{this.hub=false;}
+    this.profActual=res;
+  }
+  
   //Obtiene el mes al cambiar de mes
-  getMes(numero:number){
+    getMes(numero:number){
     let mes=this.mesActual+this.hoy.getMonth();
+    this.compruebaProf();
     this.agendaService.getMes(this.profActual,this.anio,mes).subscribe({
       next:resp=>{
         this.meses[numero]=resp;
@@ -109,7 +129,7 @@ export class CalendarioComponent implements OnInit {
       else if(dia.citasSinConfirmar.length>0 && dia.citasSinConfirmar.length<4){
         diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","sinConfirmar")
       }
-      else if(dia.citasSinConfirmar.length>3){
+      else if(dia.citasSinConfirmar.length>3 || dia.ocupado==true){
         diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","ocupado")
       }
     }
@@ -192,6 +212,7 @@ export class CalendarioComponent implements OnInit {
   clickDay(day:any) {
     const monthYear = this.dateSelect.format('YYYY-MM')
     const parse = `${monthYear}-${day.value}`
+    this.diaSeleccionado=day.value;
     const objectDate = moment(parse)
     this.dateValue = objectDate;
     this.cita.fecha=objectDate.toDate();
@@ -203,10 +224,9 @@ export class CalendarioComponent implements OnInit {
     
     for (const dia of dias) {
       if(dia.numero==day.value){
-        console.log(dia.numero+" "+day.value);
         for (const cita of dia.citasSinConfirmar) {
-          console.log(cita.hora);
-          document.getElementById("hora"+cita.hora)!.hidden=true;
+          let hora=document.getElementById("hora"+cita.hora)!
+          hora.hidden=true;
         }
       }
     }
@@ -379,5 +399,31 @@ export class CalendarioComponent implements OnInit {
   }
   horaValida():boolean{
     return this.cita.hora!=0 ?  true : false;
+  }
+
+
+  encriptaId(id:string){
+    return CryptoJS.AES.encrypt(("hola"),"asdp3NL2js");
+  }
+  desencriptaId(id:string){
+    return CryptoJS.AES.decrypt(id,"asdp3NL2js").toString(CryptoJS.enc.Utf8);
+  }
+  
+  diaOcupado(){
+    //this.agendaService.ocupaDia(this.profActual,this.anio,mes,this.dateSelect)
+    const mes=(this.mesActual+this.hoy.getMonth())
+    const dia=this.diaSeleccionado;
+    this.agendaService.ocupaDia(this.profActual,this.anio,mes,dia).subscribe({
+      next:resp=>{
+        console.log(resp);
+      },
+      error:error=>{
+        console.log(error)
+      }
+    })
+  }
+
+  diaVacaciones(){
+
   }
 }

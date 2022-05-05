@@ -144,3 +144,6 @@ h2 {
 .oculto{
   display: none;
 }
+.btn-warning{
+  margin: 1em;
+}

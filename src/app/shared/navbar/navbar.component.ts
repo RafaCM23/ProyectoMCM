@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
     if(this.router.url.toString().startsWith("/admin") || this.router.url.toString().startsWith("/staff")){
       return false;
     }
-    else{return true;}
+    else{
+      return true;}
   }
 }

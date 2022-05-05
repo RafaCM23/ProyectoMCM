@@ -2,8 +2,10 @@
     <div class="container" style="height: 100vh;">
 	    <div class="row text-center login-page">
 			<div class="col-md-12 login-form rounded">
-				<form autocomplete="off" [formGroup]="loginForm" > 
+        <button class="btn btn-warning volver"
+          [routerLink]="['/']" ><i class="fa fa-arrow-left"></i> Volver</button>
 
+				<form autocomplete="off" [formGroup]="loginForm" > 
 					<div class="row">
 						<div class="col-md-12 login-form-header">
 							<p class="login-form-font-header">Acceso</p><p>

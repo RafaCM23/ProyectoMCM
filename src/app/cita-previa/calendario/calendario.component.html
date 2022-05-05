@@ -44,6 +44,11 @@
       </button>
     </div>
     <div class="modal-body">
+		<div class="botones" *ngIf="this.hub">
+			<button class="btn btn-warning" (click)="diaOcupado()">DIA OCUPADO</button>
+			<button class="btn btn-warning" (click)="diaVacaciones()">DIA VACAIONES</button>
+		</div>
+		
       <form autocomplete="off" #citaForm="ngForm" (ngSubmit)="formularioValido()" >
         <div class="form-group">
           <label for="nombre" >Nombre</label>
@@ -54,7 +59,7 @@
 		  <span *ngIf="citaForm.controls['nombre']!=null">
 			<span class="form-text text-danger"
 			*ngIf="!nombreValido() && citaForm.controls['nombre'].touched">
-		  * Mínimo 3 carácteres
+		  * Mínimo 3 carácteres sin espacios
 	  </span>
 		</span>
 		  

@@ -1,0 +1,74 @@
+<div class="container" style="height: 100vh;">
+    <div class="cuerpo">
+        <form autocomplete="off"> 
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="cabecera ">Mis Datos</p></div>
+            </div>
+
+            <div class="row formulario">
+                <!--nombre-->
+                <div class="col-sm-6 col-12 campo">
+                    <span class="input-group-text "><i class="fa fa-user"></i> Nombre</span>
+                    <input type="text" class="form-control"  placeholder="Nombre"
+                      required [(ngModel)]="prof.nombre" name="nombre">   
+                                         
+                </div>
+                <!--apellidos-->
+                <div class="col-sm-6 col-12 campo">
+                    <span class="input-group-text "><i class="fas fa-user-circle"></i>Apellidos</span>
+                    <input type="text" class="form-control"  placeholder="Apellidos"
+                      required  maxlength="30" [(ngModel)]="prof.apellidos" name="apellidos">   
+                                         
+                </div>
+                <!--email-->
+                <div class="col-sm-6 col-12 campo">
+                    <span class="input-group-text bold " ><i class="fas fa-at"></i> Email</span>
+                    <input type="email" class="form-control" placeholder="Email"
+                    required [(ngModel)]="prof.email" name="email" disabled>
+                  </div>
+                
+
+                <!--tlfn-->
+                <div class="col-sm-6 col-12 campo">
+                    <span class="input-group-text bold " ><i class="fa fa-mobile"></i> Tlfn</span>
+                    <input type="text" class="form-control" placeholder="Teléfono"
+                    required [(ngModel)]="prof.tlfn" name="tlfn">
+                  </div>
+             
+
+                <!--especialidad-->
+                <div class="col-sm-6 col-12 campo">
+                    <span class="input-group-text bold " ><i class="fa  fa-exclamation"></i> Especialidad</span>
+                    <input type="text" class="form-control" placeholder="Especialidad"
+                    required [(ngModel)]="prof.especialidad" name="especialidad">
+                  </div>
+
+                <div class="col-sm-6 col-12 campo">
+                <span class="input-group-text bold " ><i class="fa fa-image"></i> Foto Perfil</span>
+                <button class="btn botonImagen"  onclick="document.getElementById('getFile').click()">Subir Imagen</button>
+                <input type='file' id="getFile" style="display:none" name="img">
+                </div>
+               
+
+                <!--descripcion-->
+                <div class=" col-12 campo">
+                    <span class="input-group-text bold" ><i class="fa fa-pen"></i> Descripción</span>
+                    <textarea class="form-control" placeholder="Descripción"
+                  required [(ngModel)]="prof.descripcion" rows="4" name="descripcion"></textarea>
+                  </div>                   
+               
+            </div>
+            
+
+
+             
+                <div class="col-12 ">
+                <button class="btn-lg btn-warning boton" type="submit" (click)="restablecer()">Restablecer</button>
+                <button class="btn-lg btn-success boton" type="submit" (click)="guardaDatos()">Enviar</button>
+                
+              </div>            
+
+        </form>
+    </div>
+</div>
