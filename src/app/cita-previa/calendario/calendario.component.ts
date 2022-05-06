@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'
+import { AuthService } from 'src/app/auth/auth.service';
+import { StaffService } from 'src/app/staff/staff.service';
 import Swal from 'sweetalert2';
-import * as CryptoJS from 'crypto-js';
 import { AgendaService } from '../agenda.service';
-import { Mes, Cita} from '../calendario.interface';
+import { Mes, Cita, Profesional} from '../calendario.interface';
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.component.html',
@@ -61,8 +62,10 @@ export class CalendarioComponent implements OnInit {
     hora:0
   }
 
+  profesionales:Profesional[]=[];
+  admin=false;
   
-  constructor(private agendaService: AgendaService,private modalService:NgbModal, private router:Router, private rutaActiva:ActivatedRoute) {}
+  constructor(private authService:AuthService, private staffService:StaffService,private agendaService: AgendaService,private modalService:NgbModal, private router:Router, private rutaActiva:ActivatedRoute) {}
 
   //Carga el mes en el que estamos
   ngOnInit(): void {
@@ -70,31 +73,29 @@ export class CalendarioComponent implements OnInit {
     this.mesAct=this.mes[this.hoy.getMonth()];
     this.getMes(this.hoy.getMonth());
     this.getDaysFromDate(this.hoy.getMonth()+1, 2022);
-    let valor="hola";
-    console.log(this.encriptaId("hola"));
-    valor=this.encriptaId("hola").toString();
-    console.log(this.desencriptaId(valor).toString());
+    this.isAdmin();
   }
     
   //----------------------------------- MES ----------------------------------------//
 
-  compruebaProf(){
-    let res=this.profActual;
+   compruebaProf(id:number){
     let url=this.router.url.toString();
     if(url.startsWith('/staff/hub/mi-agenda')){
-      this.rutaActiva.queryParams.subscribe({
-        next:resp=>{res=resp['id'];
-      this.hub=true;}
-      });
+      this.hub=true
+      console.log(id);
+      this.profActual=id;
+      console.log(this.profActual)
+      this.getMes(this.hoy.getMonth());
+      this.getDaysFromDate(this.hoy.getMonth()+1, 2022);
+      this.tachaOcupados(this.hoy.getMonth());
     }
     else{this.hub=false;}
-    this.profActual=res;
+    
   }
   
   //Obtiene el mes al cambiar de mes
     getMes(numero:number){
     let mes=this.mesActual+this.hoy.getMonth();
-    this.compruebaProf();
     this.agendaService.getMes(this.profActual,this.anio,mes).subscribe({
       next:resp=>{
         this.meses[numero]=resp;
@@ -400,30 +401,94 @@ export class CalendarioComponent implements OnInit {
   horaValida():boolean{
     return this.cita.hora!=0 ?  true : false;
   }
-
-
-  encriptaId(id:string){
-    return CryptoJS.AES.encrypt(("hola"),"asdp3NL2js");
-  }
-  desencriptaId(id:string){
-    return CryptoJS.AES.decrypt(id,"asdp3NL2js").toString(CryptoJS.enc.Utf8);
-  }
   
+//----------------------------------- ADMIN Y PROFESIONALES ----------------------------------------//
+cambiaProfesional(prof:any){
+  this.profActual=this.profesionales[prof.value].id;
+  this.recargarMes();
+}
+
   diaOcupado(){
-    //this.agendaService.ocupaDia(this.profActual,this.anio,mes,this.dateSelect)
     const mes=(this.mesActual+this.hoy.getMonth())
     const dia=this.diaSeleccionado;
     this.agendaService.ocupaDia(this.profActual,this.anio,mes,dia).subscribe({
       next:resp=>{
-        console.log(resp);
+        Swal.fire({
+          title:'Operación realizada con éxito',
+          icon: 'success',
+          confirmButtonText:'Ok'
+        }).then(()=>{
+          this.recargarMes();
+        })
       },
       error:error=>{
-        console.log(error)
+        Swal.fire({
+          title:'Error en la operación',
+          text:'Intentelo mas tarde',
+          icon: 'error',
+          confirmButtonText:'Ok'
+        })
       }
     })
   }
 
   diaVacaciones(){
+    const mes=(this.mesActual+this.hoy.getMonth())
+    const dia=this.diaSeleccionado;
+    this.agendaService.vacacionesDia(this.profActual,this.anio,mes,dia).subscribe({
+      next:resp=>{
+        Swal.fire({
+          title:'Operación realizada con éxito',
+          icon: 'success',
+          confirmButtonText:'Ok'
+        }).then(()=>{
+          this.recargarMes();
+        })
+      },
+      error:error=>{
+        Swal.fire({
+          title:'Error en la operación',
+          text:'Intentelo mas tarde',
+          icon: 'error',
+          confirmButtonText:'Ok'
+        })
+      }
+    })
+  }
 
+  async whoIs(){
+    this.authService.whoIs().subscribe({
+      next:resp=>{
+        this.compruebaProf(resp);
+      },error:error=>{
+      }
+    })
+  }
+
+
+  isAdmin(){
+    if(this.staffService.isAdmin()){
+      this.admin=true;
+      this.getProfesionales();
+    }else{
+      this.whoIs();
+    }
+  }
+  getProfesionales(){
+    this.staffService.getAllProfesionales().subscribe({
+      next:resp=>{
+        this.profesionales=resp;
+      },
+      error:error=>{
+        Swal.fire({
+          title:'Error al cargar los datos',
+          text:'Intentelo mas tarde',
+          icon: 'error',
+          confirmButtonText:'Ok'
+        }).then(()=>{
+          this.router.navigateByUrl("/staff/hub");
+        })
+      }
+    })
   }
 }

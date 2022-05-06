@@ -63,7 +63,6 @@ export class StaffService {
   whoIs(){
     const cabecera = new HttpHeaders()
     .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
-    console.log(cabecera);
     const url=this.api+'/whois'
     return this.http.get<number>(url,{headers:cabecera});
   }

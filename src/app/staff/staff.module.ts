@@ -9,8 +9,6 @@ import { AuthGuard } from '../AuthGuard';
 import { MisDatosComponent } from './mis-datos/mis-datos.component';
 import { FormsModule } from '@angular/forms';
 import { DatosProfesionalesComponent } from './datos-profesionales/datos-profesionales.component';
-import { MiAgendaComponent } from './mi-agenda/mi-agenda.component';
-import { CitaPreviaModule } from '../cita-previa/cita-previa.module';
 import { CalendarioComponent } from '../cita-previa/calendario/calendario.component';
 
 const routes: Routes = [
@@ -20,6 +18,7 @@ const routes: Routes = [
     {path:'mis-datos',component:MisDatosComponent},
     {path:'mi-agenda',component:CalendarioComponent},
     {path:'datos-profesionales',component:DatosProfesionalesComponent},
+    {path:'agendas-profesionales',component:CalendarioComponent},
   ]},  
   
   {path:'**',redirectTo:'hub'}
@@ -30,8 +29,7 @@ const routes: Routes = [
     HubComponent,
     NuevosRegistrosComponent,
     MisDatosComponent,
-    DatosProfesionalesComponent,
-    MiAgendaComponent
+    DatosProfesionalesComponent
   ],
   imports: [
     CommonModule,

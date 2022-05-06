@@ -24,23 +24,20 @@ export class AgendaService {
 
   }
   ocupaDia(id:number,anio:number,mes:number,dia:number){
-    const url=this.api+`/ocupado/profesional/${id}/agenda/anio/${anio}/mes/${mes}/dia/${dia}`;
-    let token=this.authService.getToken();
-    const cabecera = new HttpHeaders()
-    .set('Authorization',`Bearer ${token}`);
-    console.log(cabecera);
-    return this.http.post(url,{headers:cabecera});//PORQUE NO FUNCIONAA
+     const url=this.api+`/ocupado/profesional/${id}/agenda/anio/${anio}/mes/${mes}/dia/${dia}`;
+     const cabecera = this.authService.devuelveCabecera();
+     return this.http.get(url,{headers:cabecera});
   }
+  vacacionesDia(id:number,anio:number,mes:number,dia:number){
+    const url=this.api+`/vacaciones/profesional/${id}/agenda/anio/${anio}/mes/${mes}/dia/${dia}`;
+    const cabecera = this.authService.devuelveCabecera();
+    return this.http.get(url,{headers:cabecera});
+ }
   getProfesionales(){
     const url=this.api+'/profesionales'
     return this.http.get<Profesional[]>(url);
   }
 
-  whoIs(){
-    const cabecera = new HttpHeaders()
-    .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
-    const url=this.api+'/whois'
-    return this.http.get(url,{headers:cabecera});
-  }
+  
 
 }

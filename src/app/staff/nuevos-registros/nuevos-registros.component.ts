@@ -31,7 +31,6 @@ export class NuevosRegistrosComponent implements OnInit {
 
   acepta(event:any) {
     let id= event.target.id;
-    console.log(id);
     this.staffService.aceptaRegistro(id).subscribe({
       next:resp=>{
         Swal.fire({

@@ -1,4 +1,8 @@
 <div class="wrapper-calendar">
+	<select class="btn selector" name="selector" *ngIf="this.admin" (change)="cambiaProfesional($event.target)">
+		<option class="opcion" *ngFor="let prof of profesionales, let i=index" value={{i}}>{{prof.nombre}}</option>
+		
+	</select>
 	<div class="header-calendar">
 		<div>
 			<button (click)="changeMonth(-1)" class="btn-prev"><</button>
@@ -44,9 +48,9 @@
       </button>
     </div>
     <div class="modal-body">
-		<div class="botones" *ngIf="this.hub">
+		<div class="botones" *ngIf="this.hub || this.admin">
 			<button class="btn btn-warning" (click)="diaOcupado()">DIA OCUPADO</button>
-			<button class="btn btn-warning" (click)="diaVacaciones()">DIA VACAIONES</button>
+			<button class="btn btn-warning" (click)="diaVacaciones()">DIA VACACIONES</button>
 		</div>
 		
       <form autocomplete="off" #citaForm="ngForm" (ngSubmit)="formularioValido()" >

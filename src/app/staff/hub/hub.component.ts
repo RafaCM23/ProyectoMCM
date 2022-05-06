@@ -28,9 +28,6 @@ export class HubComponent implements OnInit {
       this.router.navigate([`/staff/hub/`+valor.value]);
     }
     return false;
-}
-   redirigeAgenda(){
-    this.router.navigateByUrl(`/staff/hub/mi-agenda?id=${this.idProf}`)
   }
    whoIs(){
     this.staffService.whoIs().subscribe({
