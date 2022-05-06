@@ -1,9 +1,12 @@
 <div class="wrapper-calendar">
-	<select class="btn selector" name="selector" *ngIf="this.admin" (change)="cambiaProfesional($event.target)">
-		<option class="opcion" *ngFor="let prof of profesionales, let i=index" value={{i}}>{{prof.nombre}}</option>
-		
-	</select>
+	<label for="selector" style="margin-right: 1%;"><h5>Profesional: </h5></label>
+		<select class="btn selector" name="selector" *ngIf="this.admin" (change)="cambiaProfesional($event.target)">
+			<option class="opcion" *ngFor="let prof of profesionales, let i=index" value={{i}}>{{prof.nombre}}</option>
+		</select>
 	<div class="header-calendar">
+	
+		
+	
 		<div>
 			<button (click)="changeMonth(-1)" class="btn-prev"><</button>
 		</div>

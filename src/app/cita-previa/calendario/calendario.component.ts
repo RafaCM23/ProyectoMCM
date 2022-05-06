@@ -467,12 +467,19 @@ cambiaProfesional(prof:any){
 
 
   isAdmin(){
-    if(this.staffService.isAdmin()){
-      this.admin=true;
-      this.getProfesionales();
-    }else{
-      this.whoIs();
-    }
+    this.staffService.isAdmin().subscribe({
+      next:resp=>{
+        if(resp==false){this.whoIs();}
+        else{
+          this.admin=true;
+          this.getProfesionales();
+        }
+       
+      },
+      error:error=>{
+        
+      }
+    })
   }
   getProfesionales(){
     this.staffService.getAllProfesionales().subscribe({

@@ -147,3 +147,15 @@ h2 {
 .btn-warning{
   margin: 1em;
 }
+.selector{
+  font-size: 1.3em;
+  margin-bottom: 1%;
+  font-weight: bold;
+}
+.selector:hover{
+  background-color: rgba(152, 193, 221, 0.418);
+}
+.opcion{
+  text-align: left;
+  font-weight: bold;
+}
