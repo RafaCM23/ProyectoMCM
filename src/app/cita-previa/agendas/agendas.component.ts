@@ -22,11 +22,11 @@ export class AgendasComponent implements OnInit {
   profesionales:Profesional[]=[];
 
   cambiaProfesional(cambio:number){
-    if(cambio>0 ){console.log(this.idprof +" "+(this.profesionales.length-1))
+    if(cambio>0 ){
       if(this.idprof==this.profesionales.length-1){this.idprof=0}
       else{ this.idprof+=1;}
     }
-    else{console.log(this.idprof +" "+(this.profesionales.length-1))
+    else{
       if(this.idprof==0){this.idprof=this.profesionales.length-1}
       else{ this.idprof-=1;}
     }
@@ -41,7 +41,6 @@ export class AgendasComponent implements OnInit {
     this.agendaService.getProfesionales().subscribe({
       next:resp=>{
         this.profesionales=resp;
-        console.log(resp);
       },
       error:error=>{
        this.errorAlCargar();

@@ -23,6 +23,24 @@ img{
     transition: all .20s ease-in-out;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
+a:visited{
+    color: black;
+}
+.fa-door-open{
+    transition: ease-in-out 0.4s;
+    font-size: 1.5em;
+}
+.fa-door-open:hover{
+    color:red;
+}
+.fa-door-open:hover::before{
+    content: "Salir ";
+}
+
 .cuerpo {
     
     box-shadow: 15px 20px 8px 1px #000000;
@@ -30,6 +48,13 @@ img{
     border-radius: 20px;
     min-height: 100%;
 
+}
+li{
+    font-size: 20px;
+    font-weight: bolder;
+    margin-right: 20%;
+    list-style-type: none;
+    margin-bottom: 1em;
 }
 
 

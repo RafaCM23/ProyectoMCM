@@ -2,6 +2,9 @@
     <div class="contenido row">
         <div class="col-12 solicitud" >
             <div class="row" style="width: 100%;">
+                <div class="none" *ngIf="profs.length==0">
+                    <h1>No hay nuevos registros que aceptar</h1>
+                </div>
                 <div class="card col-12" *ngFor="let prof of profs">
                     <h5 class="card-header" style="background-color: rgba(222, 184, 135, 0.582);">{{prof.nombre}} {{prof.apellidos}}</h5>
                     <div class="card-body row">

@@ -1,41 +1,45 @@
 
 
     <div class="row text-center contenedor">
-        <div class="col-12 col-md-3 col-lg-2  left-bar">
-            <div class="text-center mt-3 mb-3">
-                <img src="./assets/imagenes/Marta.jpeg" alt="imagen_profesional">
+        <div class="col-12 col-md-3 col-lg-2  left-bar ">
+            <div class="row">
+            <div class="text-center mt-3 mb-3 col-sm-12 col-5">
+                <img src={{this.img}} alt="imagen_profesional"><br>
+                <button class="btn salir" (click)="cerrarSesion()"><i class="fa fa-door-open"></i></button>
             </div>
-            <div class="misTareas">
+            <div class="misTareas col-sm-12 col-7">
                 <ul>
-                    <li>enlace 1</li>
-                    <li>enlace 2</li>
-                    <li>enlace 3</li>
-                    <li>enlace 4</li>
+                    <li><a [routerLink]="['/staff/hub/mis-datos']">Mis Datos</a></li>
+                    <li><a [routerLink]="['/staff/hub/mi-agenda']">Mi Agenda</a></li>
                 </ul>
             </div>
         </div>
+        </div>
         <div class="col-12 col-md-9 col-lg-10 " style="padding-left: 1em;">
                 
+
                     <div class="row cuerpo">
-                      <div class="col-3">
-                        <select  class=" selector" (change)="navigateTo($event.target)">
-                            <option  selected disabled hidden>Admin &#x25BC; </option>
-                            <option  id="1" value="/nuevos-registros">Aceptar Registros</option>
-                            <option  id="2" value="/crea-nuevo">Crea profesional</option>
-                            <option  id="3">-</option>
-                            <option  id="4">-</option>
+
+                        <div class="col-3">
+                            <select  class=" selector">
+                              <option  selected disabled hidden>Profesional &#x25BC; </option>
+                              <option >-1</option>
+                              <option >-2</option>
+                              <option >-3</option>
+                              <option >-4</option>
+                            </select>
+                          </div>  
+
+                      <div class="col-3"> 
+                        <select class=" selector" (change)="navigateTo($event.target)" *ngIf="esAdmin">
+                            <option class="opcion" selected disabled hidden>Admin &#x25BC; </option>
+                            <option class="opcion" id="1" value="/nuevos-registros">Aceptar Registros</option>
+                            <option class="opcion" id="2" value="/crea-nuevo">Crea profesional</option>
+                            <hr style="width: 100%; margin:0 ;padding:0">
+                            <option class="opcion" id="3" value="/datos-profesionales">Datos Profesionales</option>
+                            <option class="opcion" id="4" value="/agendas-profesionales">Agenda  Profesionales</option>
                         </select>
                       </div>
-                      <div class="col-3">
-                      <select  class=" selector">
-                        <option  selected disabled hidden>Profesional &#x25BC; </option>
-                        <option  id="hora4">-</option>
-                        <option  id="hora5">-</option>
-                        <option  id="hora6">-</option>
-                        <option  id="hora7">-</option>
-                      </select>
-                    </div>              
-                      
 
                     <div class="col-12 contenido">
                         <div class="foco">

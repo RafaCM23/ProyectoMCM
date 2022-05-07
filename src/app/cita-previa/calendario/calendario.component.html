@@ -1,5 +1,12 @@
 <div class="wrapper-calendar">
+	<label for="selector" style="margin-right: 1%;"><h5>Profesional: </h5></label>
+		<select class="btn selector" name="selector" *ngIf="this.admin" (change)="cambiaProfesional($event.target)">
+			<option class="opcion" *ngFor="let prof of profesionales, let i=index" value={{i}}>{{prof.nombre}}</option>
+		</select>
 	<div class="header-calendar">
+	
+		
+	
 		<div>
 			<button (click)="changeMonth(-1)" class="btn-prev"><</button>
 		</div>
@@ -44,6 +51,11 @@
       </button>
     </div>
     <div class="modal-body">
+		<div class="botones" *ngIf="this.hub || this.admin">
+			<button class="btn btn-warning" (click)="diaOcupado()">DIA OCUPADO</button>
+			<button class="btn btn-warning" (click)="diaVacaciones()">DIA VACACIONES</button>
+		</div>
+		
       <form autocomplete="off" #citaForm="ngForm" (ngSubmit)="formularioValido()" >
         <div class="form-group">
           <label for="nombre" >Nombre</label>
@@ -54,7 +66,7 @@
 		  <span *ngIf="citaForm.controls['nombre']!=null">
 			<span class="form-text text-danger"
 			*ngIf="!nombreValido() && citaForm.controls['nombre'].touched">
-		  * Mínimo 3 carácteres
+		  * Mínimo 3 carácteres sin espacios
 	  </span>
 		</span>
 		  

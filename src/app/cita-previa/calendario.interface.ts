@@ -11,10 +11,11 @@ export interface Mes{
 }
 export interface Dia{
 
-    citasSinConfirmar:Cita[]
-    citasConfirmadas:Cita[]
-    vacaciones:Boolean
-    numero:number
+    citasSinConfirmar:Cita[],
+    citasConfirmadas:Cita[],
+    vacaciones:Boolean,
+    ocupado:Boolean,
+    numero:number,
    
 }
 export interface Cita{

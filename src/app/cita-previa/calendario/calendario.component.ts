@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'
+import { AuthService } from 'src/app/auth/auth.service';
+import { StaffService } from 'src/app/staff/staff.service';
 import Swal from 'sweetalert2';
 import { AgendaService } from '../agenda.service';
-import { Mes, Cita, Dia } from '../calendario.interface';
+import { Mes, Cita, Profesional} from '../calendario.interface';
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.component.html',
@@ -14,7 +15,7 @@ import { Mes, Cita, Dia } from '../calendario.interface';
 export class CalendarioComponent implements OnInit {
 
   @Input() profActual =1;
- 
+  hub=false;
   ngOnChanges(changes: SimpleChanges) {
     this.ngOnInit();
   }
@@ -32,7 +33,7 @@ export class CalendarioComponent implements OnInit {
   mesActual:number=0;
   mesAct=this.mes[this.hoy.getMonth()];
   anio:number=this.hoy.getFullYear();
-
+  diaSeleccionado=0;
 
   monthSelect: any[]=[];  dateSelect: any;  dateValue: any; 
  
@@ -61,19 +62,39 @@ export class CalendarioComponent implements OnInit {
     hora:0
   }
 
+  profesionales:Profesional[]=[];
+  admin=false;
   
-  constructor(private agendaService: AgendaService,private modalService:NgbModal, private router:Router) {}
+  constructor(private authService:AuthService, private staffService:StaffService,private agendaService: AgendaService,private modalService:NgbModal, private router:Router, private rutaActiva:ActivatedRoute) {}
 
   //Carga el mes en el que estamos
   ngOnInit(): void {
+    this.mesActual=0;
+    this.mesAct=this.mes[this.hoy.getMonth()];
     this.getMes(this.hoy.getMonth());
     this.getDaysFromDate(this.hoy.getMonth()+1, 2022);
+    this.isAdmin();
   }
     
   //----------------------------------- MES ----------------------------------------//
 
+   compruebaProf(id:number){
+    let url=this.router.url.toString();
+    if(url.startsWith('/staff/hub/mi-agenda')){
+      this.hub=true
+      console.log(id);
+      this.profActual=id;
+      console.log(this.profActual)
+      this.getMes(this.hoy.getMonth());
+      this.getDaysFromDate(this.hoy.getMonth()+1, 2022);
+      this.tachaOcupados(this.hoy.getMonth());
+    }
+    else{this.hub=false;}
+    
+  }
+  
   //Obtiene el mes al cambiar de mes
-  getMes(numero:number){
+    getMes(numero:number){
     let mes=this.mesActual+this.hoy.getMonth();
     this.agendaService.getMes(this.profActual,this.anio,mes).subscribe({
       next:resp=>{
@@ -142,7 +163,6 @@ export class CalendarioComponent implements OnInit {
   }
   //botones de < > cambiar el mes
   changeMonth(flag:any) {
-
     if(this.mesActual==0 && flag<0) {
       Swal.fire({
         title:'Eso no es buena idea',
@@ -193,6 +213,7 @@ export class CalendarioComponent implements OnInit {
   clickDay(day:any) {
     const monthYear = this.dateSelect.format('YYYY-MM')
     const parse = `${monthYear}-${day.value}`
+    this.diaSeleccionado=day.value;
     const objectDate = moment(parse)
     this.dateValue = objectDate;
     this.cita.fecha=objectDate.toDate();
@@ -202,10 +223,12 @@ export class CalendarioComponent implements OnInit {
     
     const mes = this.meses[this.mesActual+this.hoy.getMonth()]
     const dias = mes.dias.values();
+    
     for (const dia of dias) {
       if((dia.numero+1)==day.value){
         for (const cita of dia.citasSinConfirmar) {
-          document.getElementById("hora"+cita.hora)!.hidden=true;
+          let hora=document.getElementById("hora"+cita.hora)!
+          hora.hidden=true;
         }
       }
     }
@@ -378,5 +401,102 @@ export class CalendarioComponent implements OnInit {
   }
   horaValida():boolean{
     return this.cita.hora!=0 ?  true : false;
+  }
+  
+//----------------------------------- ADMIN Y PROFESIONALES ----------------------------------------//
+cambiaProfesional(prof:any){
+  this.profActual=this.profesionales[prof.value].id;
+  this.recargarMes();
+}
+
+  diaOcupado(){
+    const mes=(this.mesActual+this.hoy.getMonth())
+    const dia=this.diaSeleccionado;
+    this.agendaService.ocupaDia(this.profActual,this.anio,mes,dia).subscribe({
+      next:resp=>{
+        Swal.fire({
+          title:'Operación realizada con éxito',
+          icon: 'success',
+          confirmButtonText:'Ok'
+        }).then(()=>{
+          this.recargarMes();
+        })
+      },
+      error:error=>{
+        Swal.fire({
+          title:'Error en la operación',
+          text:'Intentelo mas tarde',
+          icon: 'error',
+          confirmButtonText:'Ok'
+        })
+      }
+    })
+  }
+
+  diaVacaciones(){
+    const mes=(this.mesActual+this.hoy.getMonth())
+    const dia=this.diaSeleccionado;
+    this.agendaService.vacacionesDia(this.profActual,this.anio,mes,dia).subscribe({
+      next:resp=>{
+        Swal.fire({
+          title:'Operación realizada con éxito',
+          icon: 'success',
+          confirmButtonText:'Ok'
+        }).then(()=>{
+          this.recargarMes();
+        })
+      },
+      error:error=>{
+        Swal.fire({
+          title:'Error en la operación',
+          text:'Intentelo mas tarde',
+          icon: 'error',
+          confirmButtonText:'Ok'
+        })
+      }
+    })
+  }
+
+  async whoIs(){
+    this.authService.whoIs().subscribe({
+      next:resp=>{
+        this.compruebaProf(resp);
+      },error:error=>{
+      }
+    })
+  }
+
+
+  isAdmin(){
+    this.staffService.isAdmin().subscribe({
+      next:resp=>{
+        if(resp==false){this.whoIs();}
+        else{
+          this.admin=true;
+          this.getProfesionales();
+        }
+       
+      },
+      error:error=>{
+        
+      }
+    })
+  }
+  getProfesionales(){
+    this.staffService.getAllProfesionales().subscribe({
+      next:resp=>{
+        this.profesionales=resp;
+      },
+      error:error=>{
+        Swal.fire({
+          title:'Error al cargar los datos',
+          text:'Intentelo mas tarde',
+          icon: 'error',
+          confirmButtonText:'Ok'
+        }).then(()=>{
+          this.router.navigateByUrl("/staff/hub");
+        })
+      }
+    })
   }
 }

@@ -21,6 +21,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgbModule
   ],
-  exports:[AgendasComponent]
+  exports:[AgendasComponent,CalendarioComponent]
 })
 export class CitaPreviaModule { }

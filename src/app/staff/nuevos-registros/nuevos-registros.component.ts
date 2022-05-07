@@ -31,7 +31,6 @@ export class NuevosRegistrosComponent implements OnInit {
 
   acepta(event:any) {
     let id= event.target.id;
-    console.log(id);
     this.staffService.aceptaRegistro(id).subscribe({
       next:resp=>{
         Swal.fire({
@@ -40,7 +39,9 @@ export class NuevosRegistrosComponent implements OnInit {
           icon: 'success',
           confirmButtonText:'Ok'
         }
-      );
+      ).then(()=>{
+        this.getNuevosRegistros();
+      })
       },
       error:error=>{
         Swal.fire({
@@ -55,7 +56,6 @@ export class NuevosRegistrosComponent implements OnInit {
   }
   rechaza(event:any) {
     let id= event.target.id;
-    console.log(id);
     this.staffService.rechazaRegistro(id).subscribe({
       next:resp=>{
         Swal.fire({
@@ -73,7 +73,9 @@ export class NuevosRegistrosComponent implements OnInit {
           icon: 'error',
           confirmButtonText:'Ok'
         }
-      );
+      ).then(()=>{
+        this.getNuevosRegistros();
+      });
       }
     })
   }
