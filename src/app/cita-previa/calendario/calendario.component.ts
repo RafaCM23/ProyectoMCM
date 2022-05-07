@@ -82,9 +82,7 @@ export class CalendarioComponent implements OnInit {
     let url=this.router.url.toString();
     if(url.startsWith('/staff/hub/mi-agenda')){
       this.hub=true
-      console.log(id);
       this.profActual=id;
-      console.log(this.profActual)
       this.getMes(this.hoy.getMonth());
       this.getDaysFromDate(this.hoy.getMonth()+1, 2022);
       this.tachaOcupados(this.hoy.getMonth());
@@ -124,14 +122,25 @@ export class CalendarioComponent implements OnInit {
     }
     if (this.meses[numero]==null) return;
     for (const dia of this.meses[numero].dias) {
+      console.log(dia);
+      console.log(dia.vacaciones);
+      console.log(dia.ocupado);
       if(dia.vacaciones==true ){
-        diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","vacaciones")
+        
+        diasCalendario[dia.numero].classList.replace("libre","vacaciones")
       }
       else if(dia.citasSinConfirmar.length>0 && dia.citasSinConfirmar.length<4){
-        diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","sinConfirmar")
+        diasCalendario[dia.numero].classList.replace("libre","sinConfirmar")
       }
-      else if(dia.citasSinConfirmar.length>3){
-        diasCalendario[parseInt(dia.numero.toString())].classList.replace("libre","ocupado")
+      else if(dia.ocupado==true || dia.citasSinConfirmar.length>3){
+        console.log(dia.ocupado +" dia: "+dia.numero);
+        console.log(diasCalendario[dia.numero].classList.value);
+        diasCalendario[dia.numero].classList.remove("libre")
+        console.log(diasCalendario[dia.numero].classList.value);
+        diasCalendario[dia.numero].classList.remove("sin confirmar");
+        console.log(diasCalendario[dia.numero].classList.value);
+        diasCalendario[dia.numero].classList.add("ocupado");
+        console.log(diasCalendario[dia.numero].classList.value);
       }
     }
     
