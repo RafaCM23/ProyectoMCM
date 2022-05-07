@@ -122,14 +122,9 @@ export class CalendarioComponent implements OnInit {
     }
     if (this.meses[numero]==null) return;
     for (const dia of this.meses[numero].dias) {
-      console.log(dia);
-      console.log(dia.vacaciones);
-      console.log(dia.ocupado);
+
       if(dia.vacaciones==true ){
-        console.log("entra vacaciones");
-        console.log(diasCalendario[dia.numero-1]);
         diasCalendario[dia.numero-1].classList.replace("libre","vacaciones");
-        
       }
       else if(dia.citasSinConfirmar.length>0 && dia.citasSinConfirmar.length<4){
         diasCalendario[dia.numero].classList.replace("libre","sinConfirmar")
