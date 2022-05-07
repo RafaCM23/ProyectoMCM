@@ -21,12 +21,12 @@
                     <div class="row cuerpo">
 
                         <div class="col-3">
-                            <select  class=" selector">
-                              <option  selected disabled hidden>Profesional &#x25BC; </option>
-                              <option >-1</option>
-                              <option >-2</option>
-                              <option >-3</option>
-                              <option >-4</option>
+                            <select class=" selector" (change)="navigateTo($event.target)" >
+                                <option class="opcion" selected disabled hidden>Profesional &#x25BC; </option>
+                                <option class="opcion" id="1" value="/nuevo-post">Nuevo Post</option>
+                                <option class="opcion" id="2" value="/">-</option>
+                                <option class="opcion" id="3" value="/">-</option>
+                                <option class="opcion" id="4" value="/">-</option>
                             </select>
                           </div>  
 

@@ -10,6 +10,7 @@ import { MisDatosComponent } from './mis-datos/mis-datos.component';
 import { FormsModule } from '@angular/forms';
 import { DatosProfesionalesComponent } from './datos-profesionales/datos-profesionales.component';
 import { CalendarioComponent } from '../cita-previa/calendario/calendario.component';
+import { NuevoPostComponent } from '../blog/nuevo-post/nuevo-post.component';
 
 const routes: Routes = [
   {path:'hub',canActivate:[AuthGuard],component:HubComponent,children:[
@@ -19,6 +20,7 @@ const routes: Routes = [
     {path:'mi-agenda',component:CalendarioComponent},
     {path:'datos-profesionales',component:DatosProfesionalesComponent},
     {path:'agendas-profesionales',component:CalendarioComponent},
+    {path:'nuevo-post',component:NuevoPostComponent},
   ]},  
   
   {path:'**',redirectTo:'hub'}

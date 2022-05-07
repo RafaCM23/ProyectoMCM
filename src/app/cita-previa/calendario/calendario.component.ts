@@ -82,9 +82,7 @@ export class CalendarioComponent implements OnInit {
     let url=this.router.url.toString();
     if(url.startsWith('/staff/hub/mi-agenda')){
       this.hub=true
-      console.log(id);
       this.profActual=id;
-      console.log(this.profActual)
       this.getMes(this.hoy.getMonth());
       this.getDaysFromDate(this.hoy.getMonth()+1, 2022);
       this.tachaOcupados(this.hoy.getMonth());
