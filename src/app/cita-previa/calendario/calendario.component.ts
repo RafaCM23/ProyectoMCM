@@ -126,21 +126,17 @@ export class CalendarioComponent implements OnInit {
       console.log(dia.vacaciones);
       console.log(dia.ocupado);
       if(dia.vacaciones==true ){
-        
-        diasCalendario[dia.numero].classList.replace("libre","vacaciones")
+        console.log("entra vacaciones");
+        console.log(diasCalendario[dia.numero]);
+        console.log(diasCalendario[dia.numero].classList.value);
+        diasCalendario[dia.numero].classList.replace("libre","vacaciones");
+        console.log(diasCalendario[dia.numero].classList.value);
       }
       else if(dia.citasSinConfirmar.length>0 && dia.citasSinConfirmar.length<4){
         diasCalendario[dia.numero].classList.replace("libre","sinConfirmar")
       }
       else if(dia.ocupado==true || dia.citasSinConfirmar.length>3){
-        console.log(dia.ocupado +" dia: "+dia.numero);
-        console.log(diasCalendario[dia.numero].classList.value);
-        diasCalendario[dia.numero].classList.remove("libre")
-        console.log(diasCalendario[dia.numero].classList.value);
-        diasCalendario[dia.numero].classList.remove("sin confirmar");
-        console.log(diasCalendario[dia.numero].classList.value);
-        diasCalendario[dia.numero].classList.add("ocupado");
-        console.log(diasCalendario[dia.numero].classList.value);
+        diasCalendario[dia.numero].classList.replace("libre","ocupado")
       }
     }
     
