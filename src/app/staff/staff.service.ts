@@ -32,13 +32,6 @@ export class StaffService {
     const url=this.api+'/isAdmin'
     return this.http.get<boolean>(url,{headers:cabecera});
   }
-
-  miFoto(){
-    const cabecera = new HttpHeaders()
-    .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
-    const url=this.api+'/mifoto'
-    return this.http.get<string>(url,{headers:cabecera});
-  }
   getMisDatos(){
     const cabecera = new HttpHeaders()
     .set('Authorization',`Bearer ${this.authService.getToken()}` || '');

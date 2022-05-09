@@ -46,10 +46,12 @@
 
                 <div class="col-sm-6 col-12 campo">
                 <span class="input-group-text bold " ><i class="fa fa-image"></i> Foto Perfil</span>
-                <button class="btn botonImagen"  onclick="document.getElementById('getFile').click()">Subir Imagen</button>
-                <input type='file' id="getFile" style="display:none" name="img">
+                <button class="btn botonImagen"  (click)="open(content)">Subir Imagen</button>
                 </div>
-               
+                <!-- <div class="col-sm-3 col-6 campo">
+                  Preview
+                  <img src={{prof.img}} alt="imagen_profesional"><br>
+                  </div> -->
 
                 <!--descripcion-->
                 <div class=" col-12 campo">
@@ -72,3 +74,31 @@
         </form>
     </div>
 </div>
+
+<!--Modal para reservar Cita-->
+<ng-template #content let-modal class="mt-5">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Subir una nueva imagen</h4>
+   
+    <button type="button" class="btn btn-danger" aria-label="cerrar" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="subirImg text-center">
+      <img src={{imagenNueva}} alt="imagen_profesional">
+      <h5>Preview</h5>
+      <input type="file" style="margin-top: 1em;" (change)="capturaImg($event)">
+      <div>
+        <button class="btn btn-danger boton">Cancelar</button>
+      <button class="btn btn-success boton" (click)="guardaImagen()">Guardar</button>
+      </div>
+      
+    </div>
+  </div>
+  
+   
+
+  
+</ng-template>
+
