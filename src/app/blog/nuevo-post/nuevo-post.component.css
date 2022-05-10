@@ -1,0 +1,71 @@
+@media (max-width :577px) {
+    .guardaCategoria{
+        margin-top: 3%;
+        
+    }
+}
+
+.container{
+    background-color: cadetblue;
+    height: 100vh;
+    width: 100%;
+    margin: 0!important;
+    max-width: none;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.cuerpo {  
+    box-shadow: 10px 10px 8px 1px #00000062;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    min-height: 100%;
+}
+.formulario{
+    padding:4%;
+}
+.campo{
+    padding:10px;
+}
+.botonImagen{
+    border: 2px solid rgba(179, 179, 179, 0.514);
+    width: 100%;
+    transition: ease-in-out 0.3s;
+}
+.botonImagen:hover{
+    border-color: rgba(26, 144, 223, 0.781);
+}
+input,textarea,select{
+    border:2px solid rgba(179, 179, 179, 0.514);
+}
+input:hover,textarea:hover,select:hover{
+    border-color: rgba(26, 144, 223, 0.781);
+}
+.volver{
+    border-color: black;
+    position: absolute;
+    margin: 0.5em;
+    left: 30%;
+ }
+.guardaCategoria{
+    text-align:center;
+
+}
+.formulario{
+    padding-top: 3em;
+}
+.boton{
+    margin-top: 2em;
+}
+.cierra{
+    border-radius: 30%;
+    height: 20px;
+    width: 22px;
+    padding:0 0 25px 0;
+    margin-left: 1em;
+    
+}
+img{
+    width:50%;
+    height: 50%;
+}

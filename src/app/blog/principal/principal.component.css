@@ -53,7 +53,6 @@ h1{
 .contenido{
     text-align: center;
 	padding: 0;
-	height: 100vh;
 }
 .imagen{
     width: 100%;
@@ -62,12 +61,45 @@ h1{
 }
 .buscador{
 	margin-top: 2em;
-	justify-content: right;
+	justify-content: center;
 }
 .card{
 	border-radius: 3%;
 }
+.carta{
+	max-width: 600px;
+
+}
+
 .posts{
 	margin-top: 2em;
-	margin-left: 0.4em;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+.card-text{
+	overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
+}
+
+.botonPost{
+	font: 16px Arial;
+    display: inline-block;
+    padding: 1em 2em;
+    text-align: center;
+    color: white;
+    background: red; /* default color */
+	background: linear-gradient(to left, salmon 50%, lightblue 50%) right;
+    background-size: 200%;
+    transition: .5s ease-out;
+}
+.botonPost, a{
+	text-decoration: none;
+}
+.botonPost:hover{
+	background-position: left;
 }

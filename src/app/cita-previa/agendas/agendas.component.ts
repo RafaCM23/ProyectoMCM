@@ -16,7 +16,6 @@ export class AgendasComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProfesionales();
-    this.getImagenProf();
   }
 
   imgProfActual='';
@@ -73,6 +72,7 @@ export class AgendasComponent implements OnInit {
     this.agendaService.getProfesionales().subscribe({
       next:resp=>{
         this.profesionales=resp;
+        this.getImagenProf();
       },
       error:error=>{
        this.errorAlCargar();

@@ -7,7 +7,7 @@
     </div>
     
      <div class="row contenido">
-      <div class="busqueda col-12 col-sm-9 " style="height: 100vh; background-color: rgba(255, 128, 128, 0.322);"><!--motor de busqueda -->
+      <div class="busqueda col-12 " style="height: 100vh; background-color: rgba(255, 128, 128, 0.322);"><!--motor de busqueda -->
           <div class="input-group buscador">
             <div class="form-outline">
               <input type="search" id="form1" class="form-control" placeholder="Buscar"/>
@@ -15,23 +15,25 @@
             <button type="button" class="btn btn-primary">
               <i class="fas fa-search"></i>
             </button>
+            <div class="filtros" style=" background-color: rgba(181, 219, 255, 0.5);">
+              Filtros
+            </div>
           </div>
           <div class="posts col-12" style="height: 100vh;">
             
             <!--POST-->
-            <div class="container posts">
-              <div class="row">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="container posts row">
+                <div class="col-12 col-md-6" *ngFor="let post of todos"><!--  carta -->
                   <div class="card">
                     <img class="card-img" src="./assets/imagenes/fondoBlog.jpg" alt="Bologna">
                     
                     <div class="card-body">
-                      <h4 class="card-title">Post de Ejemplo</h4>
+                      <h4 class="card-title">{{post.nombre}}</h4>
                       <small class="text-muted cat">
                         <i class="fas fa-user text-info"></i> Marta Cuberos Mesa
                       </small>
-                      <p class="card-text">Descripción del primer Post de ejemplo</p>
-                      <a href="#" class="btn btn-info">Leer Más</a>
+                      <p class="card-text">{{post.contenido}}</p>
+                      <a href="#" class="botonPost">Leer Más</a>
                     </div>
                     <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                       <div class="views">20/10/2021
@@ -43,7 +45,6 @@
                        
                     </div>
                   </div>
-                </div>
               </div>
             </div>
 
@@ -52,9 +53,7 @@
 
           </div>
         </div>
-      <div class="filtros col-12 col-sm-3" style="height: 100vh; background-color: rgba(181, 219, 255, 0.5);">
-  
-      </div>
+      
      </div>
     
     

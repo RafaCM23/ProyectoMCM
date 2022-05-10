@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Post } from '../blog.interface';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-principal',
@@ -7,13 +9,32 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class PrincipalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private blogService:BlogService) { }
 
   ngOnInit(): void {
+    this.getAllPost();
   }
   botonflotante:boolean=false;
 
-  
+  todos:Post[]=[];
+
+  getAllPost(){
+    this.blogService.getAllPosts().subscribe({
+      next:resp=>{
+        console.log(resp);
+        this.todos=resp;
+      },
+      error:error=>{
+        console.log(error);
+      }
+    })
+  }
+
+
+
+
+
+
 
 
   //Para mostrar el boton de scroll-up cuando baje un poco
