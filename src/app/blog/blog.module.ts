@@ -7,7 +7,6 @@ import { NuevoPostComponent } from './nuevo-post/nuevo-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  {path:'nuevo-post',component:NuevoPostComponent},
   {path:'post',component:PostComponent},
   {path:'**',component:PrincipalComponent}
 ];

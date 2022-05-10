@@ -46,13 +46,13 @@ export class HubComponent implements OnInit {
   }
 
   getImg(){
-    console.log("entra")
     this.imagenService.getMiFoto().subscribe({
       next:resp=>{
-        this.formateaBlob(resp)
+        if(resp.size==0){this.img="./assets/imagenes/usuario.png"}
+        else{this.formateaBlob(resp);}
+        
       },
       error:error=>{
-        console.log(error)
         //Si no tiene imagen se pone una por defecto
         this.img="./assets/imagenes/usuario.png"
       }

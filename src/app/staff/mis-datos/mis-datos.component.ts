@@ -4,7 +4,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Profesional } from 'src/app/cita-previa/calendario.interface';
 import Swal from 'sweetalert2';
 import { StaffService } from '../staff.service';
-import { DomSanitizer } from '@angular/platform-browser';
+
 import { ImagenService } from '../imagen.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { ImagenService } from '../imagen.service';
 export class MisDatosComponent implements OnInit {
 
   constructor(private staffService:StaffService,private router:Router, 
-    private modalService:NgbModal,private sanitizer: DomSanitizer, private imagenService:ImagenService) { }
+    private modalService:NgbModal, private imagenService:ImagenService) { }
 
   cerrarModal:string='';
   
@@ -107,7 +107,7 @@ export class MisDatosComponent implements OnInit {
     if(!regex.test(p.especialidad)){resp+="<br>*Especialidad mínimo 5 carácteres"}
 
     var regex = new RegExp('^[a-zA-ZáéíóúÁÉÍÓÚ\\-\\s]{20,}$');
-    if(!regex.test(p.descripcion)){}
+    if(!regex.test(p.descripcion)){resp+="<br>*Descripción mínimo 20 carácteres"}
 
    if(resp!=''){  Swal.fire({
       title:'Formulario invalido',
@@ -140,8 +140,10 @@ export class MisDatosComponent implements OnInit {
   }
   //Recoge la imagen del input file
   capturaImg($evento:any){
+    console.log(this.archivoImagen);
     const imagen=$evento.target.files[0];
     this.archivoImagen=imagen;
+    console.log(this.archivoImagen);
     if(imagen){
       var reader = new FileReader();
       reader.readAsDataURL(imagen);
@@ -171,7 +173,8 @@ export class MisDatosComponent implements OnInit {
     }
     else{
     let nombreImagen=this.generaIdImagen();
-    this.imagenService.subeImagen(this.archivoImagen,nombreImagen).subscribe({
+    console.log(this.archivoImagen);
+    this.imagenService.subeImagen(this.prof.id,this.archivoImagen,nombreImagen).subscribe({
       next:resp=>{
         this.archivoImagen=null;
         this.modalService.dismissAll();
@@ -198,11 +201,11 @@ export class MisDatosComponent implements OnInit {
   getImg(){
     this.imagenService.getMiFoto().subscribe({
       next:resp=>{
-        this.formateaBlob(resp);
+        if(resp.size==0){this.imagenNueva="./assets/imagenes/usuario.png"}
+        else{this.formateaBlob(resp);}
       },
       error:error=>{
-        console.log(error)
-        //Si no tiene imagen se pone una por defecto
+
         this.prof.img="./assets/imagenes/usuario.png"
       }
     })
@@ -218,9 +221,6 @@ export class MisDatosComponent implements OnInit {
         this.imagenNueva=imagenMod;
 
       }
-  }
-  changePreview(ruta:string){
-    this.imagenNueva=ruta;
   }
 
 }
