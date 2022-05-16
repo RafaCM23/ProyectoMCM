@@ -140,10 +140,8 @@ export class MisDatosComponent implements OnInit {
   }
   //Recoge la imagen del input file
   capturaImg($evento:any){
-    console.log(this.archivoImagen);
     const imagen=$evento.target.files[0];
     this.archivoImagen=imagen;
-    console.log(this.archivoImagen);
     if(imagen){
       var reader = new FileReader();
       reader.readAsDataURL(imagen);
