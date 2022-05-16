@@ -1,0 +1,35 @@
+.sobreTabla{
+    margin-bottom: 1em;
+}
+.datatable{
+    border: 1px solid rgb(95, 95, 95);
+    width: max-content;
+}
+.comentarios{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;
+}
+.comentAutor{
+    text-align: left!important;
+    font-size:1.1em;
+
+}
+.comentFecha{
+    text-align: right!important;
+
+}
+.comentContenido{
+    text-align: justify!important;
+}
+
+.comentario-box{
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    max-width: 600px;
+    margin-top: 1em;
+    padding: 10px;
+    background-color: rgba(41, 111, 165, 0.151);
+    border-radius: 10px;
+}

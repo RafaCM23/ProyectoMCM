@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
-import { Cita, Mes, Profesional } from './calendario.interface';
+import { Cita, Mes, Profesional } from '../interfaces/calendario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,24 @@ export class AgendaService {
     return this.http.get<Profesional[]>(url);
   }
 
+
+  getProximasCitas(verificadas:boolean){
+    const url=this.api+`/citasProximas?verificadas=${verificadas}`;
+    const cabecera = this.authService.devuelveCabecera();
+    return this.http.get<Cita[]>(url,{headers:cabecera});
+  }
+
+  aceptaCita(id:number){
+    const url=this.api+`/acepta/cita/${id}`;
+    const cabecera = this.authService.devuelveCabecera();
+    return this.http.get(url,{headers:cabecera});
+  }
+
+  rechazaCita(id:number){
+    const url=this.api+`/rechaza/cita/${id}`;
+    const cabecera = this.authService.devuelveCabecera();
+    return this.http.get(url,{headers:cabecera});
+  }
   
 
 }

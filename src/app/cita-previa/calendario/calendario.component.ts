@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'
 import { AuthService } from 'src/app/auth/auth.service';
-import { StaffService } from 'src/app/staff/staff.service';
+import { StaffService } from 'src/app/services/staff.service';
 import Swal from 'sweetalert2';
-import { AgendaService } from '../agenda.service';
-import { Mes, Cita, Profesional} from '../calendario.interface';
+import { AgendaService } from '../../services/agenda.service';
+import { Mes, Cita, Profesional} from '../../interfaces/calendario.interface';
 
 @Component({
   selector: 'app-calendario',
@@ -106,13 +106,14 @@ export class CalendarioComponent implements OnInit {
     }
     if (this.meses[numero]==null) return;
     for (const dia of this.meses[numero].dias) {
+      let citasTotales=dia.citasSinConfirmar.length + dia.citasConfirmadas.length
       if(dia.vacaciones==true ){
         diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","vacaciones")
       }
-      else if(dia.citasSinConfirmar.length>0 && dia.citasSinConfirmar.length<4){
+      else if( citasTotales>0 &&  citasTotales<4){
         diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","sinConfirmar")
       }
-      else if(dia.citasSinConfirmar.length>3 || dia.ocupado==true){
+      else if( citasTotales>3 || dia.ocupado==true){
         diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","ocupado")
       }
     }
@@ -174,7 +175,7 @@ export class CalendarioComponent implements OnInit {
    }
    //cambia mes hacia delante o atras segun el valor
    cambiaMes(numero:number){
-    if(numero>0){this.mesActual-=1;}     else{this.mesActual+=1;}
+    if(numero<0){this.mesActual-=1;}     else{this.mesActual+=1;}
     this.getMes(this.mesActual+this.hoy.getMonth());
     this.mesAct=this.mes[this.mesActual+this.hoy.getMonth()];
    }
@@ -200,6 +201,10 @@ export class CalendarioComponent implements OnInit {
     for (const dia of dias) {
       if(dia.numero==day.value){
         for (const cita of dia.citasSinConfirmar) {
+          let hora=document.getElementById("hora"+cita.hora)!
+          hora.hidden=true;
+        }
+        for (const cita of dia.citasConfirmadas) {
           let hora=document.getElementById("hora"+cita.hora)!
           hora.hidden=true;
         }
@@ -396,6 +401,7 @@ export class CalendarioComponent implements OnInit {
           confirmButtonText:'Ok'
         }).then(()=>{
           this.recargarMes();
+          this.modalService.dismissAll();
         })
       },
       error:error=>{
@@ -420,6 +426,7 @@ export class CalendarioComponent implements OnInit {
           confirmButtonText:'Ok'
         }).then(()=>{
           this.recargarMes();
+          this.modalService.dismissAll();
         })
       },
       error:error=>{

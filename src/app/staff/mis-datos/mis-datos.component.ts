@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Profesional } from 'src/app/cita-previa/calendario.interface';
+import { Profesional } from '../../interfaces/calendario.interface';
 import Swal from 'sweetalert2';
-import { StaffService } from '../staff.service';
+import { StaffService } from '../../services/staff.service';
 
-import { ImagenService } from '../imagen.service';
+import { ImagenService } from '../../services/imagen.service';
 
 @Component({
   selector: 'app-mis-datos',
@@ -199,7 +199,7 @@ export class MisDatosComponent implements OnInit {
   }
   //recupera la imagen en formato Blob y lo pasa a otra funcion que la convierte a imagen
   getImg(){
-    this.imagenService.getMiFoto().subscribe({
+    this.imagenService.getFoto(this.prof.id).subscribe({
       next:resp=>{
         if(resp.size==0){this.imagenNueva="./assets/imagenes/usuario.png"}
         else{this.formateaBlob(resp);}

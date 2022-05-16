@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ImagenService } from '../../services/imagen.service';
 import Swal from 'sweetalert2';
-import { Categoria, Post } from '../blog.interface';
-import { BlogService } from '../blog.service';
+import { Categoria, Post } from '../../interfaces/blog.interface';
+import { BlogService } from '../../services/blog.service';
 
 @Component({
   selector: 'app-nuevo-post',
@@ -12,20 +13,45 @@ import { BlogService } from '../blog.service';
 })
 export class NuevoPostComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private blogService: BlogService,private modalService:NgbModal) { }
+  constructor(private fb: FormBuilder, private blogService: BlogService,private modalService:NgbModal,
+    private imagenService:ImagenService) { }
 
   nuevaCat=false;
   categorias:Categoria[]=[];
-  
+  edicion=false;
   post:Post={
+    id:0,
     nombre:'',
     contenido:'',
-    categoria:0
+    categoria:0,
+    autor:{
+      id:0,
+      nombre:'',
+      apellidos:'',
+      contrasenia:'',
+      img:'',
+      email:'',
+      tlfn:'',
+      especialidad:'',
+      descripcion:''
+    },
+    fecha:new Date()
   }
   cerrarModal:string='';
-  imagen='';
+  archivoImagen:any=null;
+
   ngOnInit(): void {
+    this.iniciaEditar()
     this.recuperaCategorias();
+  }
+
+  iniciaEditar(){
+    const queryString = window.location.search;
+    const id = new URLSearchParams(queryString).get("id");
+    if(id!=null){
+      this.edicion=true;
+      this.recuperaPost(Number.parseInt(id));
+    }
   }
 
 
@@ -33,10 +59,11 @@ export class NuevoPostComponent implements OnInit {
     nombre: ['',[Validators.required, Validators.minLength(5)]],  
     categoria: ['0',[]],
     contenido:['',[Validators.required, Validators.minLength(150)]],
-    nuevaCategoria:['     ',[Validators.minLength(5)]]
-    //imagen
+    nuevaCategoria:['',[Validators.minLength(5)]],
+    imagen:['./assets/imagenes/ocupado.png',[]]
   })
 
+  img='./assets/imagenes/ocupado.png';
   recuperaCategorias(){
     this.blogService.recuperaCategorias().subscribe({
       next:resp=>{
@@ -51,6 +78,39 @@ export class NuevoPostComponent implements OnInit {
         })
       }
     })
+  }
+
+  recuperaPost(id:number){
+    this.blogService.getPost(id).subscribe({
+      next:resp=>{
+        this.post=resp;
+        this.cargaValores(resp);
+        this.recuperaImagen(resp.id)
+      },
+      error:error=>{
+        console.log("error al cargar")
+      }
+    })
+  }
+
+  recuperaImagen(id:number){
+    this.imagenService.getFotoPost(this.post.id).subscribe({
+      next:resp=>{
+        if(resp.size==0){this.img='./assets/imagenes/ocupado.png'}
+
+        else{this.formateaBlob(resp);}
+      },
+      error:error=>{
+        this.img='./assets/imagenes/ocupado.png'
+      }
+    })
+
+  }
+
+  cargaValores(post:Post){
+    this.postForm.controls['nombre'].setValue(post.nombre);
+    this.postForm.controls['contenido'].setValue(post.contenido);
+    this.postForm.controls['categoria'].setValue(post.categoria);
   }
 
   cancelarNuevaCat(){
@@ -88,10 +148,21 @@ export class NuevoPostComponent implements OnInit {
   campoEsInvalido(campo:string){
     return this.postForm.controls[campo].errors && this.postForm.controls[campo].touched;
   }
+  imagenValida(){
+    return this.postForm.controls['imagen'].value=='./assets/imagenes/ocupado.png' && this.postForm.controls['imagen'].touched;
+  }
 
 
   guardaPost(){
-    if(this.postForm.valid){
+    if(this.archivoImagen==null && this.img=='./assets/imagenes/ocupado.png'){
+      Swal.fire({
+        title:'Debe Seleccionar un archivo',
+        text:'Intentelo de nuevo cuando haya subido una imagen',
+        icon: 'error',
+        confirmButtonText:'Ok'
+      });
+    }
+    else if(this.postForm.valid && this.edicion==false){
       this.post.nombre=this.postForm.get('nombre')?.value;
       this.post.categoria=this.postForm.get('categoria')?.value;
       this.post.contenido=this.postForm.get('contenido')?.value;
@@ -102,30 +173,58 @@ export class NuevoPostComponent implements OnInit {
             icon: 'success',
             confirmButtonText:'ok'
           }).then(()=>{
+            this.guardaImagen(resp)
             this.ngOnInit();
           })
         },
         error:error=>{
+          console.log(error);
           Swal.fire({
             title:'Error al publicar el Post',
             icon: 'error',
-            text:'Intentelo más tarde',
+            text:error.error,
             confirmButtonText:'ok'
           })
         }
       })
     }
+    else if(this.postForm.valid && this.edicion==true){
+      this.post.nombre=this.postForm.get('nombre')?.value;
+      this.post.categoria=this.postForm.get('categoria')?.value;
+      this.post.contenido=this.postForm.get('contenido')?.value;
+      this.blogService.editaPost(this.post).subscribe({
+        next:resp=>{
+          Swal.fire({
+            title:'Post modificado con éxito',
+            icon: 'success',
+            confirmButtonText:'ok'
+          }).then(()=>{
+            this.guardaImagen(resp)
+            this.ngOnInit();
+          })
+        },
+        error:error=>{
+          console.log(error);
+          Swal.fire({
+            title:'Error al modificar el Post',
+            icon: 'error',
+            text:error.error,
+            confirmButtonText:'ok'
+          })
+        }
+      })
+    }
+    
     else{
       this.postForm.controls['nombre'].markAsTouched();
       this.postForm.controls['contenido'].markAsTouched();
-      this.imprimeErrores();
+      this.postForm.controls['imagen'].markAsTouched();
     }
+    
   }
 
   imprimeErrores(){
-    console.log(this.postForm.errors)
       let resp='';
-      let p=this.post;
 
       if(this.campoEsInvalido('nombre')){
         resp+="<br>*Nombre mínimo 5 carácteres"
@@ -134,10 +233,13 @@ export class NuevoPostComponent implements OnInit {
         resp+="<br>*Descripción mínimo 140 carácteres"
       }
       if(this.campoEsInvalido('categoria')){
-        console.log("categoria invalida")
+        resp+="<br>*Categoría inválida"
       }
       if(this.campoEsInvalido('nuevaCategoria')){
-        console.log("nueva cat invalida")
+        resp+="<br>*Nueva categoría inválida"
+      }
+      if(this.postForm.controls['imagen'].value=='./assets/imagenes/ocupado.png'){
+        resp+="<br>*Debe subir una imagen"
       }
   
      if(resp!=''){  Swal.fire({
@@ -146,7 +248,7 @@ export class NuevoPostComponent implements OnInit {
         icon: 'error',
         confirmButtonText:'Ok'
       });
-        return false;}   else{return true;}
+        return false;}   else{this.guardaPost(); return true;}
     
   }
 //-----------------------------------MODAL IMG----------------------------------------------//
@@ -172,59 +274,75 @@ export class NuevoPostComponent implements OnInit {
   //Recoge la imagen del input file
   capturaImg($evento:any){
     const imagen=$evento.target.files[0];
-    //this.archivoImagen=imagen;
+    this.archivoImagen=imagen;
     if(imagen){
       var reader = new FileReader();
       reader.readAsDataURL(imagen);
       reader.onload=(event:any)=>{
-        this.imagen=event.target.result;
+        this.img=event.target.result;
+        this.postForm.controls['imagen'].setValue(this.img);
       }
     }
     
   }
-  generaIdImagen(){
+  cierraImagen(){
+    this.img='./assets/imagenes/ocupado.png';
+    this.archivoImagen=null;
+    this.modalService.dismissAll();
+  }
+  
+  subeImagen(){
+    if(this.archivoImagen!=null){
+      Swal.fire({
+        title:'Imagen guardada',
+        text:'RECUERDA, la imagen no quedara guardada si no guarda el post',
+        icon: 'success',
+        confirmButtonText:'Ok'
+      });
+      this.modalService.dismissAll();
+    }
+    else{
+      Swal.fire({
+        title:'Debe Seleccionar un archivo',
+        text:'Intentelo de nuevo',
+        icon: 'error',
+        confirmButtonText:'Ok'
+      });
+    }
+  }
+  generaIdImagen(id:number){
     let respuesta="";
-    let cabeza="fotoPerfil_";
-   // let prof= this.prof.id+"_";
+    let cabeza="imagenPost_";
+    let post= id+"_";
     let fecha=new Date().getMilliseconds()
-   // respuesta=cabeza+prof+fecha;
+    respuesta=cabeza+post+fecha;
     return respuesta;
   }
   //Si hay una imagen seleccionada, se genera un nombre y se guarda en el Back
-  // guardaImagen(){
-  //   if(this.archivoImagen==null){
-  //     Swal.fire({
-  //       title:'Debe Seleccionar un archivo',
-  //       text:'Intentelo de nuevo',
-  //       icon: 'error',
-  //       confirmButtonText:'Ok'
-  //     });
-  //   }
-  //   else{
-  //   let nombreImagen=this.generaIdImagen();
-  //   this.imagenService.subeImagen(this.archivoImagen,nombreImagen).subscribe({
-  //     next:resp=>{
-  //       this.archivoImagen=null;
-  //       this.modalService.dismissAll();
-  //       Swal.fire({
-  //         title:'Imagen Subida con éxito',
-  //         icon: 'success',
-  //         confirmButtonText:'Ok'
-  //       }).then(()=>{
-  //         this.router.navigateByUrl("/staff/hub/mis-datos");
-  //       })
-  //     },
-  //     error:error=>{
-  //       Swal.fire({
-  //         title:'Error al subir la imagen',
-  //         text:'Intentelo de nuevo',
-  //         icon: 'error',
-  //         confirmButtonText:'Ok'
-  //       });
-  //     }
-  //   });
-  //   }
-  // }
+  guardaImagen(id:number){
+    let nombreImagen=this.generaIdImagen(id);
+    console.log(nombreImagen)
+    this.imagenService.subeImagenPost(id,this.archivoImagen,nombreImagen).subscribe({
+      next:resp=>{
+        this.archivoImagen=null;
+        this.modalService.dismissAll();
+        Swal.fire({
+          title:'Imagen Subida con éxito',
+          icon: 'success',
+          confirmButtonText:'Ok'
+        })
+      },
+      error:error=>{
+        Swal.fire({
+          title:'Error al subir la imagen',
+          text:error.error,
+          icon: 'error',
+          confirmButtonText:'Ok'
+        });
+      }
+    });
+    
+  }
   //transforma blob en imagen y la asigna
   formateaBlob(blob:Blob){
     var reader = new FileReader();
@@ -232,8 +350,8 @@ export class NuevoPostComponent implements OnInit {
       reader.onload=(event:any)=>{
         let imagen:string=event.target.result
         let imagenMod=imagen.replace("data:application/octet-stream","data:image/png");
-        this.imagen=imagenMod;
-
+        this.postForm.controls['imagen'].setValue(imagenMod)
+        this.img=imagenMod;
       }
   }
   

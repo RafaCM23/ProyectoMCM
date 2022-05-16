@@ -23,21 +23,26 @@
                         <div class="col-3">
                             <select class=" selector" (change)="navigateTo($event.target)" >
                                 <option class="opcion" selected disabled hidden>Profesional &#x25BC; </option>
-                                <option class="opcion" id="1" value="/nuevo-post">Nuevo Post</option>
-                                <option class="opcion" id="2" value="/">-</option>
-                                <option class="opcion" id="3" value="/">-</option>
-                                <option class="opcion" id="4" value="/">-</option>
+                                <option class="opcion"  value="/nuevo-post">Nuevo Post</option>
+                                <hr style="width: 100%; margin:0 ;padding:0">
+                                <option class="opcion"  value="/proximas-citas">Proximas Citas</option>
+
+
                             </select>
                           </div>  
 
                       <div class="col-3"> 
                         <select class=" selector" (change)="navigateTo($event.target)" *ngIf="esAdmin">
                             <option class="opcion" selected disabled hidden>Admin &#x25BC; </option>
-                            <option class="opcion" id="1" value="/nuevos-registros">Aceptar Registros</option>
-                            <option class="opcion" id="2" value="/crea-nuevo">Crea profesional</option>
+                            <option class="opcion"  value="/nuevos-registros">Aceptar Registros</option>
+                            <option class="opcion"  value="/crea-nuevo">Crea profesional</option>
                             <hr style="width: 100%; margin:0 ;padding:0">
-                            <option class="opcion" id="3" value="/datos-profesionales">Datos Profesionales</option>
-                            <option class="opcion" id="4" value="/agendas-profesionales">Agenda  Profesionales</option>
+                            <option class="opcion"  value="/datos-profesionales">Datos Profesionales</option>
+                            <option class="opcion"  value="/agendas-profesionales">Agenda  Profesionales</option>
+                            <hr style="width: 100%; margin:0 ;padding:0">
+                            <option class="opcion" value="/revisar-comentarios">Revisar comentarios</option>
+                            <hr style="width: 100%; margin:0 ;padding:0">
+                            <option class="opcion" value="/gestion-blog">Gestion Blog</option>
                         </select>
                       </div>
 

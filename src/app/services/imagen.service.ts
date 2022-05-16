@@ -22,17 +22,26 @@ export class ImagenService {
     return this.http.post(url,fd,{headers:cabecera});
   }
 
-  getMiFoto(){
-    const cabecera = new HttpHeaders()
-    .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
-    const url=this.api+'/mifoto'
-    return this.http.get(url,{responseType:'blob',headers:cabecera});
-  }
-
   getFoto(id:number){
     const cabecera = new HttpHeaders()
     .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
     const url=this.api+`/profesional/${id}/imagen`
+    return this.http.get(url,{responseType:'blob',headers:cabecera});
+  }
+
+  subeImagenPost(id:number,imagen:File,nombre:string){
+    const cabecera = new HttpHeaders()
+    .set('Authorization',`Bearer ${this.authService.getToken()}` || '')
+    const url=this.api+`/post/${id}/imagen`;
+    const fd = new FormData();
+    fd.append('file',imagen,nombre);
+    return this.http.post(url,fd,{headers:cabecera});
+  }
+
+  getFotoPost(id:number){
+    const cabecera = new HttpHeaders()
+    .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
+    const url=this.api+`/post/${id}/imagen`
     return this.http.get(url,{responseType:'blob',headers:cabecera});
   }
 

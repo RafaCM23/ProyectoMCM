@@ -7,8 +7,12 @@
            <div class="row formulario">
                <!--IMG-->
                <div class="col-sm-6 col-12 campo">
-                <span class="input-group-text bold " ><i class="fa fa-image"></i> Foto Perfil</span>
+                <span class="input-group-text bold " >Imagen</span>
                 <button class="btn botonImagen"  (click)="open(content)">Subir Imagen</button>
+                <span class="form-text text-danger"
+                                *ngIf="imagenValida()">
+                                * Debe subir una imagen *
+                    </span>
                 </div>
 
                 <!--Nombre Post-->
@@ -19,7 +23,7 @@
                     <span class="form-text text-danger"
                                 *ngIf="campoEsInvalido('nombre')">
                                 * El nombre debe tener mínimo 5 caracteres *
-                            </span>
+                    </span>
                 </div>
 
                 
@@ -69,13 +73,10 @@
                 </div>  
 
                 <div class="boton">
-                    <button type="submit" class="btn btn-lg btn-success" (click)="guardaPost()">Guardar</button>
+                    <button type="submit" class="btn btn-lg btn-success" (click)="imprimeErrores()" *ngIf="edicion==false">Guardar</button>
+                    <button type="submit" class="btn btn-lg btn-success" (click)="imprimeErrores()" *ngIf="edicion==true">Guardar Edición</button>
                 </div>
            </div>
-
-        </form>
-    </div>
-</div>
 
 
 <!--Modal para subir imagen-->
@@ -89,13 +90,13 @@
     </div>
     <div class="modal-body">
       <div class="subirImg text-center">
-        <img src={{imagen}} alt="imagen_profesional">
+        <img src={{img}} alt="imagen_post">
         <h5>Preview</h5>
         <button onclick="document.getElementById('subirImg').click()" class="btn btn-primary">Subir</button>
-        <input type="file" id="subirImg" style="margin-top: 1em; display: none;" (change)="capturaImg($event)">
+        <input type="file" id="subirImg" formControlName="imagen" style="margin-top: 1em; display: none;" (change)="capturaImg($event)">
         <div>
-          <button class="btn btn-danger boton">Cancelar</button>
-        <!-- <button class="btn btn-success boton" (click)="guardaImagen()">Guardar</button> -->
+          <button class="btn btn-danger boton" (click)="cierraImagen()">Cancelar</button>
+        <button class="btn btn-success boton" (click)="subeImagen()">Guardar</button> 
         </div>
         
       </div>
@@ -105,3 +106,8 @@
   
     
   </ng-template>
+
+        </form>
+    </div>
+</div>
+

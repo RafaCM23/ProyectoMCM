@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Post } from '../blog.interface';
-import { BlogService } from '../blog.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { Post } from '../../interfaces/blog.interface';
+import { BlogService } from '../../services/blog.service';
 
 @Component({
   selector: 'app-principal',
@@ -9,30 +11,42 @@ import { BlogService } from '../blog.service';
 })
 export class PrincipalComponent implements OnInit {
 
-  constructor(private blogService:BlogService) { }
+  constructor(private blogService:BlogService, private router:Router) { }
 
   ngOnInit(): void {
-    this.getAllPost();
+    this.getNextPost();
   }
   botonflotante:boolean=false;
-
+  cuantos=0;
   todos:Post[]=[];
 
-  getAllPost(){
-    this.blogService.getAllPosts().subscribe({
+
+  getNextPost(){
+    this.blogService.loadNextPosts(this.cuantos).subscribe({
       next:resp=>{
-        console.log(resp);
-        this.todos=resp;
+        for (const p of resp) {
+          this.todos.push(p);
+        }
+        this.cuantos+=8;
       },
       error:error=>{
-        console.log(error);
+        Swal.fire({
+          title:'Error al cargar más entradas',
+          text:'Puede que no haya más',
+          icon: 'error',
+          confirmButtonText:'Ok'
+        });
       }
     })
   }
 
-
-
-
+  redirige(id:number){
+    this.router.navigateByUrl(`/blog/post?id=${id}`)
+    
+  }
+  fechaSimple(fecha:Date){
+    return fecha.toString().substr(0,10)
+  }
 
 
 

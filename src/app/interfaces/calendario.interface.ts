@@ -19,7 +19,7 @@ export interface Dia{
    
 }
 export interface Cita{
-
+    id?:number,
     persona:Persona,
     motivo:string,
     fecha:Date,
@@ -42,7 +42,7 @@ export interface Profesional{
     id:number,
     nombre:string,
     apellidos:string,
-    contrasenia:string,
+    contrasenia?:string,
     email:string,
     tlfn:string,
     img:string,

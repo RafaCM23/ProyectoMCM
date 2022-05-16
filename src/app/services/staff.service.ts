@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
-import { Profesional } from '../cita-previa/calendario.interface';
+import { Profesional } from '../interfaces/calendario.interface';
+import { comentario } from '../interfaces/comentario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -59,4 +60,6 @@ export class StaffService {
     const url=this.api+'/whois'
     return this.http.get<number>(url,{headers:cabecera});
   }
+
+  
 }

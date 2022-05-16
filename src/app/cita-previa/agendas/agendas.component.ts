@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ImagenService } from 'src/app/staff/imagen.service';
+import { ImagenService } from '../../services/imagen.service';
 import Swal from 'sweetalert2';
-import { AgendaService } from '../agenda.service';
-import { Profesional } from '../calendario.interface';
+import { AgendaService } from '../../services/agenda.service';
+import { Profesional } from '../../interfaces/calendario.interface';
 
 @Component({
   selector: 'app-agendas',
@@ -39,7 +39,6 @@ export class AgendasComponent implements OnInit {
    getImagenProf(){
     this.imagenService.getFoto(this.profesionales[this.idprof].id).subscribe({
       next:resp=>{
-        console.log(resp);
         if(resp.size==0){this.imgProfActual="./assets/imagenes/usuario.png"}
         else{this.formateaBlob(resp);}
       },
@@ -51,15 +50,12 @@ export class AgendasComponent implements OnInit {
   }
   //transforma blob en imagen y la asigna
   formateaBlob(blob:Blob){
-    console.log(this.imgProfActual)
     var reader = new FileReader();
       reader.readAsDataURL(blob);
       reader.onload=(event:any)=>{
         let imagen:string=event.target.result
-        console.log(imagen)
         let imagenMod=imagen.replace("data:application/octet-stream","data:image/png");
         this.imgProfActual=imagenMod;
-        console.log(this.imgProfActual)
       }
 
   }

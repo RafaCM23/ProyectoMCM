@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import Swal from 'sweetalert2';
-import { ImagenService } from '../imagen.service';
-import { StaffService } from '../staff.service';
+import { ImagenService } from '../../services/imagen.service';
+import { StaffService } from '../../services/staff.service';
 import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-hub',
@@ -46,7 +46,7 @@ export class HubComponent implements OnInit {
   }
 
   getImg(){
-    this.imagenService.getMiFoto().subscribe({
+    this.imagenService.getFoto(this.idProf).subscribe({
       next:resp=>{
         if(resp.size==0){this.img="./assets/imagenes/usuario.png"}
         else{this.formateaBlob(resp);}

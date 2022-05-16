@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Profesional } from 'src/app/cita-previa/calendario.interface';
+import { Profesional } from '../../interfaces/calendario.interface';
 import Swal from 'sweetalert2';
-import { ImagenService } from '../imagen.service';
-import { StaffService } from '../staff.service';
+import { ImagenService } from '../../services/imagen.service';
+import { StaffService } from '../../services/staff.service';
 
 @Component({
   selector: 'app-datos-profesionales',
