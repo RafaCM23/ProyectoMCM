@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import Swal from 'sweetalert2';
-import { StaffService } from '../staff.service';
+import { ImagenService } from '../../services/imagen.service';
+import { StaffService } from '../../services/staff.service';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-hub',
   templateUrl: './hub.component.html',
@@ -10,7 +12,9 @@ import { StaffService } from '../staff.service';
 })
 export class HubComponent implements OnInit {
 
-  constructor(private router:Router,private staffService:StaffService, private authService:AuthService) { }
+  constructor(private router:Router,private staffService:StaffService,
+     private authService:AuthService,private imagenService:ImagenService
+     ,private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
     this.isAdmin();
@@ -40,10 +44,13 @@ export class HubComponent implements OnInit {
     this.authService.delToken();
     this.router.navigateByUrl("/admin/login")
   }
+
   getImg(){
-    this.staffService.miFoto().subscribe({
+    this.imagenService.getFoto(this.idProf).subscribe({
       next:resp=>{
-        this.img=resp;
+        if(resp.size==0){this.img="./assets/imagenes/usuario.png"}
+        else{this.formateaBlob(resp);}
+        
       },
       error:error=>{
         //Si no tiene imagen se pone una por defecto
@@ -52,6 +59,17 @@ export class HubComponent implements OnInit {
     })
 
   }
+
+    formateaBlob(blob:Blob){
+    var reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onload=(event:any)=>{
+        let imagen:string=event.target.result
+        let imagenMod=imagen.replace("data:application/octet-stream","data:image/png");
+        this.img= imagenMod;
+      }
+  }
+  
   isAdmin(){
     this.staffService.isAdmin().subscribe({
       next:resp=>{

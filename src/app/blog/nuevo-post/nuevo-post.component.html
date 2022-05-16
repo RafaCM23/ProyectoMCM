@@ -1,0 +1,113 @@
+<div class="container" style="height: 100vh;">
+    <div class="cuerpo">
+        <button class="btn btn-warning volver"
+        [routerLink]="['/staff/hub']" ><i class="fa fa-arrow-left"></i> Volver</button>
+        <form autocomplete="off" [formGroup]="postForm" enctype="multipart/form-data"> 
+           
+           <div class="row formulario">
+               <!--IMG-->
+               <div class="col-sm-6 col-12 campo">
+                <span class="input-group-text bold " >Imagen</span>
+                <button class="btn botonImagen"  (click)="open(content)">Subir Imagen</button>
+                <span class="form-text text-danger"
+                                *ngIf="imagenValida()">
+                                * Debe subir una imagen *
+                    </span>
+                </div>
+
+                <!--Nombre Post-->
+                <div class="col-sm-6 col-12 campo">
+                    <span class="input-group-text bold " >Nombre del Post</span>
+                    <input type="text" class="form-control" placeholder="Nombre del Post"
+                    required  name="nombre" formControlName="nombre">
+                    <span class="form-text text-danger"
+                                *ngIf="campoEsInvalido('nombre')">
+                                * El nombre debe tener mínimo 5 caracteres *
+                    </span>
+                </div>
+
+                
+
+                <!--Categoria-->
+                <div class="col-sm-6 col-12 campo">
+                    <span class="input-group-text bold" >Categoría</span>
+                    <select name="huecos" id="huecos" class="form-select" formControlName="categoria">
+                        <option value=0 selected disabled hidden>Elige la categoría</option>
+                        <option *ngFor="let cat of categorias" value={{cat.id}}>{{cat.nombre}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 col-12 campo" *ngIf="!this.nuevaCat" style="padding-right: 15%;">
+                    <button class="btn btn-warning" name=addCat (click)="this.nuevaCat=true" >+ Añadir nueva categoría</button>
+                </div>
+                <div class="col-sm-6 col-12 campo" *ngIf="this.nuevaCat">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="input-group-text bold " > Nueva Categoría <button class="btn btn-danger cierra" (click)="cancelarNuevaCat()">x</button></span>
+                        </div>
+                       
+                        <div class="col-sm-8 col-12">
+                            <input type="text" class="form-control col-9" name="nuevaCat" formControlName="nuevaCategoria">
+                            <span class="form-text text-danger"
+                                *ngIf="campoEsInvalido('nuevaCategoria')">
+                                *La categoría debe tener mínimo 5 caracteres*
+                            </span>
+                        </div>
+                        <div class="col-sm-2 col-12 guardaCategoria" >
+                            <button class="btn btn-success" name=addCat (click)="creaCategoria()">Guardar</button>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                   
+                </div>
+                <!--Contenido-->
+                <div class=" col-12 campo">
+                    <span class="input-group-text bold" > Contenido</span>
+                    <textarea class="form-control" placeholder="Contenido"
+                    required  rows="4" name="contenido" formControlName="contenido"></textarea>
+                    <span class="form-text text-danger" 
+                        *ngIf="campoEsInvalido('contenido')">
+                    * El contenido debe tener mínimo 150 caracteres *
+                    </span>
+                </div>  
+
+                <div class="boton">
+                    <button type="submit" class="btn btn-lg btn-success" (click)="imprimeErrores()" *ngIf="edicion==false">Guardar</button>
+                    <button type="submit" class="btn btn-lg btn-success" (click)="imprimeErrores()" *ngIf="edicion==true">Guardar Edición</button>
+                </div>
+           </div>
+
+
+<!--Modal para subir imagen-->
+<ng-template #content let-modal class="mt-5">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Subir una nueva imagen</h4>
+     
+      <button type="button" class="btn btn-danger" aria-label="cerrar" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="subirImg text-center">
+        <img src={{img}} alt="imagen_post">
+        <h5>Preview</h5>
+        <button onclick="document.getElementById('subirImg').click()" class="btn btn-primary">Subir</button>
+        <input type="file" id="subirImg" formControlName="imagen" style="margin-top: 1em; display: none;" (change)="capturaImg($event)">
+        <div>
+          <button class="btn btn-danger boton" (click)="cierraImagen()">Cancelar</button>
+        <button class="btn btn-success boton" (click)="subeImagen()">Guardar</button> 
+        </div>
+        
+      </div>
+    </div>
+    
+     
+  
+    
+  </ng-template>
+
+        </form>
+    </div>
+</div>
+

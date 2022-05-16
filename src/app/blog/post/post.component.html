@@ -1,0 +1,79 @@
+<div class="container row text-center">
+    <div class="col-10">
+        <div class="cabecera col-12">
+            <h2 class="cabecera">
+                {{post.nombre}}
+            </h2>
+        </div>
+        <div class="cuerpo col-12 row">
+            <div class="imagen col-12 " *ngIf="this.imagen">
+                <img src={{this.imagen}}>
+            </div>
+            <div class="texto col-12">
+                <p class="contenido text-left">
+                    {{post.contenido}}
+                </p>
+            </div>
+            
+            
+        </div>
+        <div class="info col-12">
+            <p class="categoria">
+                {{post.categoria}}
+            </p>
+        </div>
+        <div class="comentSection col-12">
+            <hr>
+            <button class="btn btn-primary" *ngIf="!nuevoComentario" (click)="nuevoComentario=true;">Realizar Comentario</button>
+            <div class="nuevoComentario row" *ngIf="nuevoComentario">
+                <form autocomplete="off" [formGroup]="comentarioForm">
+                <div class="col-12">
+                    <input type="text" name="nombreInput"  formControlName="nombre" placeholder="Indice su nombre y primer Apellido">
+                </div>
+                <span class="form-text text-danger"
+                    *ngIf="campoEsValido('nombre')">
+                    * Nombre mínimo 5 caracteres *
+                    </span>
+                <div class="col-12">
+                    <textarea id="comentarioInput" rows="7" formControlName="contenido" placeholder="Escriba aqui su comentario"></textarea>
+                </div>
+                <span class="form-text text-danger"
+                    *ngIf="campoEsValido('contenido')">
+                    * El comentario debe tener entre 5 y 100 caracteres*
+                    </span>
+                <div class="col-12">
+                    <button class="btn btn-primary" (click)="enviarComentario()">Guardar</button>
+                </div>
+                </form>
+
+                
+            </div>
+            <div class="comentarios ">
+                <div *ngFor="let c of comentarios">
+                    <div class="comentario-box row">
+                        <div class="comentAutor col-8 mb-2" >
+                            {{c.autor}}
+                        </div>
+                        <div class="comentFecha col-4 mb-2 text-muted" *ngIf="c.fecha" >
+                            {{fechaSimple(c.fecha) || "Ahora Mismo"}}
+                        </div>
+                        <div class="comentFecha col-4 mb-2 text-muted" *ngIf="!c.fecha" >
+                           <p>Ahora Mismo</p>
+                        </div>
+                        <div class="comentContenido col-12">
+                           {{c.contenido}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-2 row">
+            <div class="col-2 hrV">
+                <hr class="hrVertical">
+            </div>
+            <div class="col-10 postRel">
+                Relacionados
+            </div>
+    </div>
+</div>

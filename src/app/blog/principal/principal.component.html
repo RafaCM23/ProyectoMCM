@@ -1,3 +1,83 @@
-<h1>Pagina principal Blog</h1>
+<div class="row">    
+    <a href="blog#portada" class="btn-flotante" [ngClass]="(botonflotante === true) ? 'aparece' : 'desaparece'" >
+    <i class="fa fa-arrow-up"></i></a>
+    
+    <div class="portada col-12" id="portada">
+      <img class="imagen" src="./assets/imagenes/fondoBlog.jpg" alt="">
+  </div>
+    
+  <div class="col-12 row contenido" style="background-color: rgba(255, 128, 128, 0.322);">
+    <div class="busqueda col-12 ">
+        <div class="input-group buscador">
+          <div class="form-outline">
+            <input type="search" id="form1" class="form-control" placeholder="Buscar"/>
+          </div>
+          <button type="button" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+          <div class="filtros" style=" background-color: rgba(181, 219, 255, 0.5);">
+            Filtros
+          </div>
+        </div>
+      </div>
 
-<button class="btn btn-primary" [routerLink]="['/']"  > Volver</button>
+      <div class="posts col-12">
+          
+        <!--POST-->
+        <div class="container posts row">
+            <div class="col-12 col-md-6" *ngFor="let post of todos"><!--  carta -->
+              <div class="card">                    
+                <div class="card-body row">
+                  <div class="col-8">
+                    <h4 class="card-title">{{post.nombre}}</h4>
+                  </div>
+                  <div class="col-4">
+                    <small class="text-muted cat">
+                      <i class="fas fa-user text-info"></i> {{post.autor.nombre}} {{post.autor.apellidos}}
+                    </small>
+                  </div>
+                  
+                  <div class="col-12">
+                    <p class="card-text">{{post.contenido}}</p>
+                  <a class="botonPost" (click)="redirige(post.id)">Leer Más</a>
+                  </div>
+                  
+                </div>
+                <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+                  <div class="fecha">{{fechaSimple(post.fecha)}}
+                  </div>
+                  <div class="stats">
+                     <!-- VISITAS <i class="far fa-eye"></i> 1347 -->
+                    <i class="far fa-comment"></i> 12
+                  </div>
+                   
+                </div>
+              </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+      <div class="col-12 cargaMas">
+        <a (click)="getNextPost()">CARGAR MÁS</a>
+        <hr class="mt-0">
+        
+      </div>
+    
+   </div>
+    
+    
+    <div class="col-12 footer-div">
+        <footer class="text-center footer" style="background-color:#000000;">
+    
+            <div class="p-3">
+              <p class="text-white">© 2022 Copyright: RCM</p>
+            </div>
+          </footer>
+    </div>
+       
+    </div> 
+
+

@@ -23,10 +23,6 @@ export class MainPageComponent implements OnInit {
 
     if(currentScrollHeight>450){this.botonflotante=true;}
     else{this.botonflotante=false; }
-
-
-    
-   
   }
 
 }

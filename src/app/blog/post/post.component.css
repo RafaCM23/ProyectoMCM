@@ -1,0 +1,91 @@
+@media (max-width:1050px){
+    .hrV{
+        display: none;
+    }
+    .postRel{
+        margin-top: 2em;
+        margin-bottom: 2em;
+        font-size: 2em;
+        color: darkblue;
+        font-weight: bold;
+    }
+}
+.postRel{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+    color: darkblue;
+    font-weight: bold;
+}
+
+.row{
+    padding-left: 0;
+    padding-right: 0;
+}
+.container{
+    margin-top: 5em;
+    margin-left: 1em;
+    max-width: 100%;
+}
+.hrVertical{
+    border:         none;
+    border-left:    1px solid hsla(200, 10%, 50%,100);
+    height:         100%;
+    width:          2px;       
+    
+}
+.contenido{
+    max-width: 85%;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: burlywood;
+    text-align: justify!important;
+}
+.card-text{
+    white-space: normal;
+    word-break: break-word
+}
+
+img{
+    max-width: 500px;
+    max-height: 500px;
+}
+input, textarea{
+    border: 2px solid rgb(99, 98, 98);
+    width: 80%;
+}
+input:hover, textarea:hover{
+    border: 2px solid rgb(46, 46, 46);
+}
+input{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.comentarios{
+    margin-left: auto;
+    margin-right: auto;
+}
+.comentAutor{
+    text-align: left!important;
+    font-size:1.1em;
+
+}
+.comentFecha{
+    text-align: right!important;
+
+}
+.comentContenido{
+    text-align: justify!important;
+}
+
+.comentario-box{
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    max-width: 600px;
+    margin-top: 1em;
+    padding: 10px;
+    background-color: rgba(41, 111, 165, 0.151);
+    border-radius: 10px;
+}

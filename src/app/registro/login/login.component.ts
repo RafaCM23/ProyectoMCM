@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Profesional } from 'src/app/cita-previa/calendario.interface';
+import { Profesional } from '../../interfaces/calendario.interface';
 import Swal from 'sweetalert2';
 import { RegistroService } from '../registro.service';
 

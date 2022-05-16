@@ -47,6 +47,13 @@ input:hover,textarea:hover{
 i{
     margin-right: 5%;
 }
+img{
+    width: 100px;
+    height: 100px;
+    border: 5px solid rgba(15, 102, 124, 0.781);
+    border-radius: 100%;
+    transition: all .20s ease-in-out;
+}
 .boton{
     margin: 1em;
 }

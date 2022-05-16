@@ -1,0 +1,55 @@
+<div class="container" style="min-height: 80vh; max-width: 1000px;">
+    <div class="cuerpo text-center">
+
+
+        <div class="sobreTabla container">
+   
+            <table class="table-striped  datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="table">
+              <thead>
+              <tr class="cabecera">
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Autor</th>
+                  <th>Editar</th>
+                  <th>Borrar</th>
+                  <th>Comentarios</th>
+              </tr>
+              </thead>
+              <tbody class="tcuerpo">
+              <tr *ngFor="let p of posts;let i=index">
+                 
+                  <td>{{p.id}}</td>
+                  <td>{{p.nombre }}</td>
+                  <td>{{p.autor.nombre}} {{p.autor.apellidos}}</td>
+                  <td><button type="button" class="btn btn-warning" id={{p.id}} (click)="editarPost($event.target)">Editar</button></td> <!--[routerLink]="['/editarPost',p.id]" -->
+                  <td><button type="button" class="btn btn-danger" id={{p.id}} (click)="borrarPost($event.target)">Borrar</button></td>
+                  <td><button type="button" class="btn btn-primary" id={{i}} (click)="comentariosPost($event.target)">Comentarios</button></td>
+                  
+              </tr>
+              </tbody>
+          </table>
+        </div>
+
+        <div class="comentarios" *ngIf="comentarios.length!=0">
+            <div *ngFor="let c of comentarios">
+                <div class="comentario-box row">
+                    <div class="comentAutor col-8 mb-2" >
+                        {{c.autor}}
+                    </div>
+                    <div class="comentFecha col-4 mb-2 text-muted" *ngIf="c.fecha" >
+                        {{fechaSimple(c.fecha) || "Ahora Mismo"}}
+                        <button class="btn btn-danger" id={{c.id}} (click)="borraComentario($event.target)">x</button>
+                    </div>
+                    <div class="comentFecha col-4 mb-2 text-muted" *ngIf="!c.fecha" >
+                       <p>Ahora Mismo</p>
+                    </div>
+                    <div class="comentContenido col-12">
+                       {{c.contenido}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

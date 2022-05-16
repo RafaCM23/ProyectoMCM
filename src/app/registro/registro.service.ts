@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Profesional } from '../cita-previa/calendario.interface';
+import { Profesional } from '../interfaces/calendario.interface';
 
 @Injectable({
   providedIn: 'root'

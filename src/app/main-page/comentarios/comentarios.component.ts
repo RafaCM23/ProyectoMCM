@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal ,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap'
 import Swal from 'sweetalert2';
-import { comentario } from '../comentario.interface';
-import { ComentarioService } from '../comentario.service';
+import { comentario } from '../../interfaces/comentario.interface';
+import { ComentarioService } from '../../services/comentario.service';
 
 @Component({
   selector: 'app-comentarios',
@@ -16,15 +16,26 @@ export class ComentariosComponent implements OnInit {
   constructor(private modalService:NgbModal, private comentService:ComentarioService) {}
 
   ngOnInit(): void {
+    this.getComentarios();
   }
   comentario:comentario={
     autor:'',
     contenido:''
   }
 
-  comentarios:String[]=[];
+  comentarios:comentario[]=[];
 
 
+  getComentarios(){
+    this.comentService.getComentariosVerificados().subscribe({
+      next:resp=>{
+        this.comentarios=resp;
+        console.log(this.comentarios);
+      },
+      error:error=>{
+      }
+    })
+  }
   guardarComentario(){
     if(this.comentario.autor.length>4 && this.comentario.contenido.length>20){
       this.comentService.postComentario(this.comentario).subscribe({
@@ -61,19 +72,6 @@ export class ComentariosComponent implements OnInit {
       }
     );
     }
-  }
-
-
-
-
-
-
-
-
-
-
-  addComentario(comentario:String){
-    this.comentarios.push(comentario);
   }
 
   open(content: any) {

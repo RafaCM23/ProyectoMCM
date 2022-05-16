@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Profesional } from 'src/app/cita-previa/calendario.interface';
+import { Profesional } from '../../interfaces/calendario.interface';
 import Swal from 'sweetalert2';
-import { StaffService } from '../staff.service';
+import { StaffService } from '../../services/staff.service';
 
 @Component({
   selector: 'app-nuevos-registros',
