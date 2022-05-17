@@ -114,7 +114,7 @@ export class CalendarioComponent implements OnInit {
         diasCalendario[dia.numero].classList.replace("libre","sinConfirmar")
       }
       else if( citasTotales>3 || dia.ocupado==true){
-        diasCalendario[dia.numero].classList.replace("libre","ocupado")
+        diasCalendario[dia.numero-1].classList.replace("libre","ocupado")
       }
     }
     
