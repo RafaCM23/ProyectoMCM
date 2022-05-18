@@ -106,7 +106,7 @@ export class MisDatosComponent implements OnInit {
     var regex = new RegExp('^[a-zA-ZáéíóúÁÉÍÓÚ\\-\\s]{5,}$');
     if(!regex.test(p.especialidad)){resp+="<br>*Especialidad mínimo 5 carácteres"}
 
-    var regex = new RegExp('^[a-zA-ZáéíóúÁÉÍÓÚ\\-\\s]{20,}$');
+    var regex = new RegExp('^[a-zA-ZáéíóúÁÉÍÓÚ,\\-\\s]{20,}$');
     if(!regex.test(p.descripcion)){resp+="<br>*Descripción mínimo 20 carácteres"}
 
    if(resp!=''){  Swal.fire({

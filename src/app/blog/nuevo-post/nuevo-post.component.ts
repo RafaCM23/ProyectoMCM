@@ -23,7 +23,10 @@ export class NuevoPostComponent implements OnInit {
     id:0,
     nombre:'',
     contenido:'',
-    categoria:0,
+    categoria:{
+      id:0,
+      nombre:''
+    },
     autor:{
       id:0,
       nombre:'',
@@ -164,8 +167,9 @@ export class NuevoPostComponent implements OnInit {
     }
     else if(this.postForm.valid && this.edicion==false){
       this.post.nombre=this.postForm.get('nombre')?.value;
-      this.post.categoria=this.postForm.get('categoria')?.value;
+      this.post.categoria.id=this.postForm.get('categoria')?.value;
       this.post.contenido=this.postForm.get('contenido')?.value;
+      console.log(this.post);
       this.blogService.nuevoPost(this.post).subscribe({
         next:resp=>{
           Swal.fire({

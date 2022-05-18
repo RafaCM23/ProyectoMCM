@@ -7,7 +7,7 @@ export interface Categoria{
 export interface Post{
     id:number,
     nombre:string,
-    categoria:number,
+    categoria:Categoria,
     contenido:string,
     autor:Profesional,
     fecha:Date,

@@ -20,7 +20,10 @@ export class PostComponent implements OnInit {
     id:0,
     nombre:'',
     contenido:'',
-    categoria:0,
+    categoria:{
+      id:0,
+      nombre:''
+    },
     autor:{
       id:0,
       nombre:'',
