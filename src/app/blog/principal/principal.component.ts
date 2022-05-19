@@ -26,6 +26,7 @@ export class PrincipalComponent implements OnInit {
       next:resp=>{
         for (const p of resp) {
           this.todos.push(p);
+          console.log(p.comentarios?.length)
         }
         this.cuantos+=8;
       },

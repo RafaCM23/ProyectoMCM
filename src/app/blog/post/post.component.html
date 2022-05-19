@@ -1,4 +1,4 @@
-<div class="container row text-center">
+<div class="container row text-center" style="min-height: 60em;">
     <div class="col-10">
         <div class="cabecera col-12">
             <h2 class="cabecera">
@@ -6,20 +6,21 @@
             </h2>
         </div>
         <div class="cuerpo col-12 row">
-            <div class="imagen col-12 " *ngIf="this.imagen">
-                <img src={{this.imagen}}>
-            </div>
-            <div class="texto col-12">
+            <div class="texto col-12 col-md-8 order-md-first">
                 <p class="contenido text-left">
                     {{post.contenido}}
                 </p>
             </div>
+            <div class="imagen col-12 col-md-4" *ngIf="this.imagen">
+                <img src={{this.imagen}}>
+            </div>
+            
             
             
         </div>
         <div class="info col-12">
             <p class="categoria">
-                {{post.categoria}}
+                    <img src="./assets/imagenes/nota.png" alt="icono-nota" width="30px">{{post.categoria.nombre}}
             </p>
         </div>
         <div class="comentSection col-12">

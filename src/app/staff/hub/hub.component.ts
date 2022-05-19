@@ -18,8 +18,8 @@ export class HubComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdmin();
-    this.getImg();
     this.whoIs();
+    
   }
 
   idProf=1;
@@ -35,7 +35,9 @@ export class HubComponent implements OnInit {
   }
    whoIs(){
     this.staffService.whoIs().subscribe({
-      next:resp=>{this.idProf=resp }
+      next:resp=>{
+        this.idProf=resp
+        this.getImg(); }
     })
   
   }
@@ -46,6 +48,7 @@ export class HubComponent implements OnInit {
   }
 
   getImg(){
+    console.log(this.idProf)
     this.imagenService.getFoto(this.idProf).subscribe({
       next:resp=>{
         if(resp.size==0){this.img="./assets/imagenes/usuario.png"}

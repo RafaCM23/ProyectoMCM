@@ -20,7 +20,10 @@ export class PostComponent implements OnInit {
     id:0,
     nombre:'',
     contenido:'',
-    categoria:0,
+    categoria:{
+      id:0,
+      nombre:''
+    },
     autor:{
       id:0,
       nombre:'',
@@ -108,7 +111,9 @@ export class PostComponent implements OnInit {
             title:'Comentario publicado con éxito',
             icon: 'success',
             confirmButtonText:'Ok'
-          });
+          }).then(()=>{
+            this.nuevoComentario=false;
+          })
           this.comentarios.unshift(comentario)
           console.log(this.comentarios[0]);
          },

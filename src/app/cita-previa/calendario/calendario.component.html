@@ -141,7 +141,7 @@
           </div>
 		  <div class="form-group">
 			<label for="tipoCita">Tipo de cita</label>
-			<select name="tipoCita" id="tipoCita" class="form-select" >
+			<select name="tipoCita" id="tipoCita" class="form-select" [(ngModel)]="this.cita.presencial">
                 <option value="true">Presencial</option>
                 <option value="false">Online</option>
             </select>

@@ -43,12 +43,13 @@
                   </div>
                   
                 </div>
-                <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-                  <div class="fecha">{{fechaSimple(post.fecha)}}
+                <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0 row">
+                  <div class="fecha col-4">{{fechaSimple(post.fecha)}}
                   </div>
-                  <div class="stats">
-                     <!-- VISITAS <i class="far fa-eye"></i> 1347 -->
-                    <i class="far fa-comment"></i> 12
+                  <div class="categoria col-4" *ngIf="post.categoria.nombre!=null">
+                    <img src="./assets/imagenes/nota.png" alt="icono-nota" width="30px">{{post.categoria.nombre}}</div>
+                  <div class="stats col-4" >
+                    <i class="far fa-comment"></i> {{post.comentarios?.length}}
                   </div>
                    
                 </div>

@@ -9,13 +9,22 @@
                     <option value=1 >Verificados</option>
                 </select>
             </div>
-                <div *ngIf="existentes==0"><!--Comentarios sin Verificar-->
-
-
-                
+            <div class="comentarios">
+                <div *ngIf="existentes==0">
                     <div class="mensaje" *ngIf="comentarios.length==0">
                         <h1>No hay nuevos comentarios que aceptar</h1>
                     </div>
+                    
+                </div>
+
+                <div *ngIf="existentes!=0">
+                    <div class="mensaje mensajeVerificados" *ngIf="comentarios.length==0">
+                        <h1>No hay comentarios públicos</h1>
+                    </div>
+                </div>
+                    
+                
+                   
                     <div class="card col-12" *ngFor="let c of comentarios">
                         <h5 class="card-header" style="background-color: rgba(222, 184, 135, 0.582);"><b>Autor: </b>{{c.autor}}</h5>
                         <div class="card-body row">
@@ -35,30 +44,8 @@
                         </div>
                         </div>
                     </div>
-
-            </div>
-            <div class="espacio"></div>
-            <div *ngIf="existentes==1"> <!--Comentarios Verificados-->
-                <div class="mensaje mensajeVerificados" *ngIf="comentarios.length==0">
-                    <h1>No hay comentarios públicos</h1>
                 </div>
-                <div class="card col-12" *ngFor="let c of comentarios">
-                    <h5 class="card-header" style="background-color: rgba(222, 184, 135, 0.582);"><b>Autor: </b>{{c.autor}}</h5>
-                    <div class="card-body row">
-                        <div class="left col-8">
-                            <p class="card-text"><b>Contenido: </b>{{c.contenido}}</p>
-                            <p class="card-text" *ngIf="c.fecha"><b>Fecha: </b>{{this.fechaSimple(c.fecha)}} </p>
-                        </div>
-                    <div class="col-2 row">
-                        <div class="col-12">
-                            <button class="btn btn-circle btn-danger" id={{c.id}} (click)="borraComentario($event.target)">
-                                Borrar
-                            </button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
+            
             </div>
         </div>
     </div>
