@@ -7,18 +7,29 @@
   </div>
     
   <div class="col-12 row contenido" style="background-color: rgba(255, 128, 128, 0.322);">
-    <div class="busqueda col-12 ">
+    <div class="busqueda col-12 col-md-6">
         <div class="input-group buscador">
           <div class="form-outline">
-            <input type="search" id="form1" class="form-control" placeholder="Buscar"/>
+            <input type="search" id="form1" class="form-control" placeholder="Buscar" [(ngModel)]="busqueda" minlength="3" maxlength="10"/>
           </div>
-          <button type="button" class="btn btn-primary">
+          <button type="button" class="btn btn-primary" (click)="buscaNombre()">
             <i class="fas fa-search"></i>
           </button>
-          <div class="filtros" style=" background-color: rgba(181, 219, 255, 0.5);">
-            Filtros
-          </div>
+          
         </div>
+      </div>
+      <div class="filtros col-12 col-md-6" >
+        <label for="selectCategorias">Categoria: </label>
+        <select class="form-select" name="selectCategorias" [(ngModel)]="idCat" (change)="buscaCategoria()">
+          <option value=-1 selected disabled hidden>Buscar por categoría</option>
+          <option value=-1 >Ninguna</option>
+          <option *ngFor="let cat of categorias" value={{cat.id}}>{{cat.nombre}}</option>
+      </select>
+      <label for="fecha">fecha: </label> 
+      <select class="form-select" name="fecha" [(ngModel)]="fecha" (change)="cambiaOrdenFecha()">
+        <option value=1>Más nuevos</option>
+        <option value=-1>Más antiguos</option>
+    </select>
       </div>
 
       <div class="posts col-12">
@@ -61,8 +72,8 @@
 
 
       </div>
-      <div class="col-12 cargaMas">
-        <a (click)="getNextPost()">CARGAR MÁS</a>
+      <div class="col-12 cargaMas" >
+        <a (click)="getNextPost()" *ngIf="busqueda==''">CARGAR MÁS</a>
         <hr class="mt-0">
         
       </div>

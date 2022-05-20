@@ -1,5 +1,31 @@
+@media (max-width:500px){
+    .botones1{
+        display:unset!important;
+    }
+    .botones2{
+        display: none!important;
+    }
+}
+@media (max-width:760px){
+    .mensaje{
+        margin-top: 14em!important;
+    }
+    .container{
+        min-height: 70vh!important;
+    }
+}
+.container{
+    min-height: 100vh;
+    margin-top: 2em;
+}
 .btn{
     border-radius: 40px;
+}
+h5{
+    font-size: 15px;
+}
+.botones1{
+    display: none;
 }
 svg{
     width: 30px;
@@ -13,4 +39,7 @@ svg{
     margin-bottom: 1em;
     border-color: rgb(29, 29, 29);
     padding:0;
+}
+.mensaje{
+    margin-top: 20em;
 }

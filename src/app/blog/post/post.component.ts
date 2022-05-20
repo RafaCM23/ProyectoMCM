@@ -78,6 +78,8 @@ export class PostComponent implements OnInit {
           icon: 'error',
           text:'Intentelo de nuevo más tarde',
           confirmButtonText:'ok'
+        }).then(()=>{
+          this.router.navigateByUrl("/blog/")
         })
 
       }

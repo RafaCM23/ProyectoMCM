@@ -1,5 +1,5 @@
-<div class="container" style="height: 100vh;">
-    <div class="cuerpo">
+
+    <div class="cuerpo" style="min-height: 100vh;">
         <button class="btn btn-warning volver"
         [routerLink]="['/staff/hub']" ><i class="fa fa-arrow-left"></i> Volver</button>
         <form autocomplete="off" [formGroup]="postForm" enctype="multipart/form-data"> 
@@ -31,7 +31,7 @@
                 <!--Categoria-->
                 <div class="col-sm-6 col-12 campo">
                     <span class="input-group-text bold" >Categoría</span>
-                    <select name="huecos" id="huecos" class="form-select" formControlName="categoria">
+                    <select class="form-select" formControlName="categoria">
                         <option value=0 selected disabled hidden>Elige la categoría</option>
                         <option *ngFor="let cat of categorias" value={{cat.id}}>{{cat.nombre}}</option>
                     </select>
@@ -109,5 +109,5 @@
 
         </form>
     </div>
-</div>
+
 

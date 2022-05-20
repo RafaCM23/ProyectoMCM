@@ -48,7 +48,6 @@ export class HubComponent implements OnInit {
   }
 
   getImg(){
-    console.log(this.idProf)
     this.imagenService.getFoto(this.idProf).subscribe({
       next:resp=>{
         if(resp.size==0){this.img="./assets/imagenes/usuario.png"}

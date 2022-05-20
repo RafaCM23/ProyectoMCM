@@ -24,10 +24,8 @@ export class BlogService {
   }
 
   recuperaCategorias(){
-    const cabecera = new HttpHeaders()
-    .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
     const url=this.api+'/categorias'
-    return this.http.get<Categoria[]>(url,{headers:cabecera});
+    return this.http.get<Categoria[]>(url);
   }
 
   nuevoPost(post:Post){
@@ -83,5 +81,16 @@ export class BlogService {
     const url=this.api+`/post/${post.id}`;
     const body=post;
     return this.http.put<number>(url,body,{headers:cabecera});
+  }
+
+  // -- Filtros -- //
+
+  buscaPorCategoria(id:number){
+    const url=this.api+`/posts?categoria=${id}`;
+    return this.http.get<Post[]>(url);
+  }
+  buscaPorTitulo(titulo:string){
+    const url=this.api+`/posts?titulo=${titulo}`;
+    return this.http.get<Post[]>(url);
   }
 }

@@ -2,6 +2,9 @@
 	.buscador{
 		justify-content: center!important;
 	}
+	.filtros{
+		max-width: 60%!important;
+	}
 }
 .cargaMas{
 	margin-top: 1em;
@@ -77,6 +80,8 @@ h1{
 }
 .buscador{
 	margin-top: 2em;
+	margin-left: auto;
+	margin-right: 0;
 	justify-content: center;
 }
 .card{
@@ -122,4 +127,10 @@ h1{
 }
 .botonPost:hover{
 	background-position: left;
+}
+
+.filtros{
+	max-width: 20%;
+	margin-left: auto;
+	margin-right: auto;
 }

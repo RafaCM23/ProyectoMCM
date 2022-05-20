@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Post } from '../../interfaces/blog.interface';
+import { Categoria, Post } from '../../interfaces/blog.interface';
 import { BlogService } from '../../services/blog.service';
 
 @Component({
@@ -15,20 +15,85 @@ export class PrincipalComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNextPost();
+    this.recuperaCategorias();
   }
   botonflotante:boolean=false;
   cuantos=0;
   todos:Post[]=[];
 
-
+  categorias:Categoria[]=[];
+  idCat=-1;
+  fecha=1;
+  busqueda='';
+  recuperaCategorias(){
+    this.blogService.recuperaCategorias().subscribe({
+      next:resp=>{
+        this.categorias=resp;
+      },
+      error:error=>{
+        Swal.fire({
+          title:'Ooops',
+          icon: 'error',
+          text:'Error al cargar las categorías',
+          confirmButtonText:'ok'
+        })
+      }
+    })
+  }
+  
+  buscaNombre(){
+    const titulo = this.busqueda;
+    if(titulo==''){this.getPrimeros8SinCat();return}
+    this.blogService.buscaPorTitulo(titulo).subscribe({
+      next:resp=>{
+        this.todos=resp.reverse();
+        this.fecha=1;
+      },
+      error:error=>{
+      }
+    })
+  }
+  buscaCategoria(){
+    const id = this.idCat;
+    if(id==-1){this.getPrimeros8SinCat();return}
+    this.blogService.buscaPorCategoria(id).subscribe({
+      next:resp=>{
+        this.todos=resp.reverse();
+        this.fecha=1;
+      },
+      error:error=>{
+      }
+    })
+  }
+  cambiaOrdenFecha(){
+    this.todos=this.todos.reverse();
+  }
+  getPrimeros8SinCat(){
+    this.blogService.loadNextPosts(0).subscribe({
+      next:resp=>{
+        this.todos=resp;
+        this.cuantos=8;
+        this.fecha=1;
+      },
+      error:error=>{
+        Swal.fire({
+          title:'Error al cargar más entradas',
+          text:'Puede que no haya más',
+          icon: 'error',
+          confirmButtonText:'Ok'
+        });
+      }
+    })
+  }
   getNextPost(){
+    console.log(this.fecha)
     this.blogService.loadNextPosts(this.cuantos).subscribe({
       next:resp=>{
         for (const p of resp) {
           this.todos.push(p);
-          console.log(p.comentarios?.length)
         }
         this.cuantos+=8;
+        this.fecha=1;
       },
       error:error=>{
         Swal.fire({

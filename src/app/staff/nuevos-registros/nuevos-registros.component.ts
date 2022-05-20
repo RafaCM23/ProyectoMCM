@@ -12,7 +12,7 @@ export class NuevosRegistrosComponent implements OnInit {
 
   constructor(private staffService:StaffService) { }
 
-  profs:Profesional[]=[];
+  profs:Profesional[]|null=[];
   
   ngOnInit(): void {
     this.getNuevosRegistros();
@@ -24,7 +24,7 @@ export class NuevosRegistrosComponent implements OnInit {
         this.profs=resp;
       },
       error:error=>{
-        console.log(error)
+        this.profs=null;
       }
     })
   }
@@ -50,7 +50,9 @@ export class NuevosRegistrosComponent implements OnInit {
           icon: 'error',
           confirmButtonText:'Ok'
         }
-      );
+      ).then(()=>{
+        this.getNuevosRegistros();
+      })
       }
     })
   }
@@ -64,7 +66,9 @@ export class NuevosRegistrosComponent implements OnInit {
           icon: 'success',
           confirmButtonText:'Ok'
         }
-      );
+      ).then(()=>{
+        this.getNuevosRegistros();
+      })
       },
       error:error=>{
         Swal.fire({
