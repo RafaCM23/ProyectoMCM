@@ -3,7 +3,22 @@
 		justify-content: center!important;
 	}
 	.filtros{
-		max-width: 60%!important;
+		margin-left: 1em;
+	}
+	.info:hover:after{
+		width: 330px!important;
+		right:  0px!important;
+	}
+	.duda{
+		top: 1em!important;
+		left: 45%!important;
+		margin-left: 7em!important;
+	}
+	.busqueda{
+		margin-left: 1em;
+	}
+	.posts, .portada{
+		padding-right: 0!important;
 	}
 }
 .cargaMas{
@@ -72,6 +87,7 @@ h1{
 .contenido{
     text-align: center;
 	padding: 0;
+	max-width: none;
 }
 .imagen{
     width: 100%;
@@ -130,7 +146,54 @@ h1{
 }
 
 .filtros{
-	max-width: 20%;
+	margin-top: 1.5em;
+	margin-left: 10px;
+}
+
+.lblFecha, .lblCat{
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-size: 1.1em;
+	font-weight: 600;
+}
+.duda{
+    position: relative;
+    bottom: 35%;
+    left: 50%;
+	margin-left: 10em;
+}
+
+.info{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+
+}
+
+.iconoInfo{
+    fill: rgb(0, 0, 0);
+    transition: ease-in 0.3s;
+}
+.iconoInfo:hover{
+    fill: rgb(123, 21, 133);
+}
+.info:hover:after{
+    background: #333;
+    background: rgba(0, 0, 0, 0.884);
+    border-radius: 5px;
+    color: #fff;
+    content: attr(content);
+    right:  -40px;
+    bottom:70px;
+    padding: 10px 10px ;
+    position: absolute;
+    z-index: 98;
+    width: 350px;
+    white-space: pre;
+	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 }

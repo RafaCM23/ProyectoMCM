@@ -42,8 +42,19 @@ export class PrincipalComponent implements OnInit {
   }
   
   buscaNombre(){
+
     const titulo = this.busqueda;
+    
     if(titulo==''){this.getPrimeros8SinCat();return}
+    if(titulo.length<3){
+      Swal.fire({
+        title:'Error',
+        icon: 'error',
+        text:'Busqueda entre 3 y 10 caracteres',
+        confirmButtonText:'ok'
+      });
+      return
+    }
     this.blogService.buscaPorTitulo(titulo).subscribe({
       next:resp=>{
         this.todos=resp.reverse();
@@ -108,7 +119,6 @@ export class PrincipalComponent implements OnInit {
 
   redirige(id:number){
     this.router.navigateByUrl(`/blog/post?id=${id}`)
-    
   }
   fechaSimple(fecha:Date){
     return fecha.toString().substr(0,10)

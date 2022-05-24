@@ -51,8 +51,8 @@ export class AgendaService {
     return this.http.get(url,{headers:cabecera});
   }
 
-  rechazaCita(id:number){
-    const url=this.api+`/rechaza/cita/${id}`;
+  rechazaCita(id:number,motivo:number){
+    const url=this.api+`/rechaza/cita/${id}?motivo=${motivo}`;
     const cabecera = this.authService.devuelveCabecera();
     return this.http.get(url,{headers:cabecera});
   }

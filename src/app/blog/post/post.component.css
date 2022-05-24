@@ -1,13 +1,21 @@
-@media (max-width:1050px){
+@media (max-width:900px){
     .hrV{
         display: none;
     }
     .postRel{
         margin-top: 2em;
         margin-bottom: 2em;
+        padding-right: 0.5em;
         font-size: 2em;
         color: darkblue;
         font-weight: bold;
+    }
+    .card{
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+    .botonPost{
+        padding: 1em 2em;
     }
 }
 .postRel{
@@ -18,6 +26,7 @@
     font-weight: bold;
 }
 
+
 .row{
     padding-left: 0;
     padding-right: 0;
@@ -25,14 +34,19 @@
 .container{
     margin-top: 5em;
     margin-left: 1em;
-    max-width: 100%;
+    max-width: none;
+    width: 100%;
 }
 .hrVertical{
     border:         none;
     border-left:    1px solid hsla(200, 10%, 50%,100);
     height:         100%;
-    width:          2px;       
+    width:          2px;
+    margin: 0;       
     
+}
+.izquierda{
+   padding-right: 0;
 }
 .contenido{
     max-width: 85%;
@@ -49,8 +63,8 @@
 }
 
 img{
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 100%;
+    max-height: 100%;
 }
 input, textarea{
     border: 2px solid rgb(99, 98, 98);
@@ -89,4 +103,44 @@ input{
     padding: 10px;
     background-color: rgba(41, 111, 165, 0.151);
     border-radius: 10px;
+}
+.posts{
+    margin: 0;
+}
+.post{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 0;
+}
+.card{
+    font-size: 14px;
+}
+.h4{
+    font-size: 18px;
+}
+
+.botonPost{
+    margin-top: 4%;
+	cursor:pointer;
+	font: 16px Arial;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-align: center;
+    color: white;
+    background: red; /* default color */
+	background: linear-gradient(to left, salmon 50%, lightblue 50%) right;
+    background-size: 200%;
+    transition: .5s ease-out;
+}
+.botonPost, a{
+	text-decoration: none;
+}
+.botonPost:hover{
+	background-position: left;
+}
+h5{
+    font-size: 1.5em;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(0, 99, 112);
+    text-decoration: underline;
 }

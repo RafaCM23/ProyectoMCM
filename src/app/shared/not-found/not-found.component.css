@@ -43,7 +43,7 @@ h3{
 }
 .duda{
     position: absolute;
-    bottom: -30px;
+    bottom: 0px;
     right: 30px;
 }
 
@@ -58,20 +58,20 @@ h3{
 
 }
 .iconoInfo{
-    fill: rebeccapurple;
-    transition: ease-in 0.5s;
+    fill: rgb(0, 0, 0);
+    transition: ease-in 0.3s;
 }
 .iconoInfo:hover{
-    fill: rgb(153, 51, 82);
+    fill: rgb(123, 21, 133);
 }
 .info:hover:after{
     background: #333;
     background: rgba(0,0,0,.8);
     border-radius: 5px;
-    bottom: 26px;
     color: #fff;
     content: attr(content);
     right:  -10px;
+    bottom: 50px;
     padding: 5px 15px;
     position: absolute;
     z-index: 98;

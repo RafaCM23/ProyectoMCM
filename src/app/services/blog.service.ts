@@ -83,6 +83,11 @@ export class BlogService {
     return this.http.put<number>(url,body,{headers:cabecera});
   }
 
+  getRelacionados(categoria:number){//Saca 3 post de la misma categoría, aleatorios
+    const url=this.api+`/postRelacionados/${categoria}`;
+    return this.http.get<Post[]>(url);
+  }
+
   // -- Filtros -- //
 
   buscaPorCategoria(id:number){

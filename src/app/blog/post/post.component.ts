@@ -39,6 +39,8 @@ export class PostComponent implements OnInit {
   }
   comentarios:any=[];
   
+  relacionados:Post[]=[];
+
   comentarioForm: FormGroup = this.fb.group({
     nombre: ['',[Validators.required, Validators.minLength(5)]],  
     contenido: ['',[Validators.required, Validators.minLength(5),Validators.maxLength(100)]]
@@ -54,7 +56,17 @@ export class PostComponent implements OnInit {
     this.iniciaPost();
   }
 
+  getRelacionados(){
+    this.blogService.getRelacionados(this.post.categoria.id).subscribe({
+      next:resp=>{
+        this.relacionados=resp;
+        console.log(resp);
+      },
+      error:error=>{
 
+      }
+    })
+  }
 
   iniciaPost(){
     const queryString = window.location.search;
@@ -70,6 +82,7 @@ export class PostComponent implements OnInit {
       next:resp=>{
         this.post=resp;
         this.getImgPost();
+        this.getRelacionados();
         this.comentarios=resp.comentarios?.reverse();
       },
       error:error=>{
@@ -158,4 +171,8 @@ export class PostComponent implements OnInit {
       }
   }
 
+
+  redirige(id:number){
+    this.getPost(id);
+  }
 }
