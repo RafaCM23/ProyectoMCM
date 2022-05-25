@@ -54,6 +54,7 @@ export class PostComponent implements OnInit {
   imagen='';
   ngOnInit(): void {
     this.iniciaPost();
+    
   }
 
   getRelacionados(){
@@ -70,7 +71,7 @@ export class PostComponent implements OnInit {
 
   iniciaPost(){
     const queryString = window.location.search;
-    const id = new URLSearchParams(queryString).get("id");;
+    const id = new URLSearchParams(queryString).get("id");
     if(id==null){this.router.navigateByUrl("/blog");}
     else{
       this.getPost(parseInt(id));

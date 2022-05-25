@@ -90,3 +90,17 @@
 	padding-right: 0!important;
     padding-left: 0!important;
 }
+.red{
+	margin: 0;
+	text-align: Left;
+	font-size: 1.1em;
+	transition: ease-in-out 0.3s;
+}
+.red:hover{
+	color: cadetblue;
+	transform: translateX(10px);
+}
+.red:hover i{
+	color: rgb(255, 255, 255);
+}
+

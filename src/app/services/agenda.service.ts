@@ -56,6 +56,11 @@ export class AgendaService {
     const cabecera = this.authService.devuelveCabecera();
     return this.http.get(url,{headers:cabecera});
   }
+
+  cancelaCita(id:number){
+    const url=this.api+`/cancelar/cita?id=${id}`;
+    return this.http.get(url);
+  }
   
 
 }

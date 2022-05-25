@@ -333,6 +333,8 @@ export class CalendarioComponent implements OnInit {
     );
     }
   }
+
+
   reseteaFormulario(){
     this.cita={
       persona:{
