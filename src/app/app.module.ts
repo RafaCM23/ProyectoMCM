@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { CitaPreviaModule } from './cita-previa/cita-previa.module';
 import { MainPageModule } from './main-page/main-page.module';
 import { SharedModule } from './shared/shared.module';
+import { SpinnerInterceptor } from './shared/spinner.interceptor';
+import { SpinnerModule } from './shared/spinner/spinner.module';
 import { StaffModule } from './staff/staff.module';
 @NgModule({
   declarations: [
@@ -24,9 +26,10 @@ import { StaffModule } from './staff/staff.module';
     CitaPreviaModule,
     NgbModalModule,
     HttpClientModule,
-    StaffModule
+    StaffModule,
+    SpinnerModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass:SpinnerInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

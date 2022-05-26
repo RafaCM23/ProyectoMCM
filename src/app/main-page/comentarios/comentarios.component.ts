@@ -30,7 +30,6 @@ export class ComentariosComponent implements OnInit {
     this.comentService.getComentariosVerificados().subscribe({
       next:resp=>{
         this.comentarios=resp;
-        console.log(this.comentarios);
       },
       error:error=>{
       }

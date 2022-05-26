@@ -67,8 +67,8 @@
                 <h4 class="card-title">{{post.nombre}}</h4>
               </div>
               <div class="col-4">
-                <small class="text-muted cat">
-                  <i class="fas fa-user text-info"></i> {{post.autor.nombre}} {{post.autor.apellidos}}
+                <small class="text-muted cat"*ngIf="post.autor">
+                  <i class="fas fa-user text-info" ></i> {{post.autor.nombre}} {{post.autor.apellidos}}
                 </small>
               </div>
 
