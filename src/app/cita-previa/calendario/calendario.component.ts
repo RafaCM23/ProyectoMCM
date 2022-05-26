@@ -7,6 +7,7 @@ import { StaffService } from 'src/app/services/staff.service';
 import Swal from 'sweetalert2';
 import { AgendaService } from '../../services/agenda.service';
 import { Mes, Cita, Profesional} from '../../interfaces/calendario.interface';
+import { onErrorResumeNext } from 'rxjs/operators';
 
 @Component({
   selector: 'app-calendario',
@@ -321,17 +322,41 @@ export class CalendarioComponent implements OnInit {
   //----------------------------------- FORMULARIO Y VERIFICACIONES DE CAMPOS ----------------------------------------//
   //comprueba si el formulario del modal es válido
   formularioValido(){
-    if(this.nombreValido() && this.apellidosValido() && this.telefonoValido() && this.correoValido() && this.motivoValido() && this.horaValida()){
+    const errores=this.sacaErrores();
+    if(errores==null){
       this.guardarDatos()
     }else{
       Swal.fire({
         title:'El formulario presenta errores',
         icon: 'error',
-        text:'Por favor, revise que todos los campos estan rellenos correctamente',
+        html:errores,
         confirmButtonText:'ok'
       }
     );
     }
+  }
+
+  sacaErrores(){
+    let resp="*Errores*<br>";
+    if(!this.nombreValido()){
+      resp+="<br>-Nombre";
+    }
+    if(!this.apellidosValido()){
+      resp+="<br>-Apellidos";
+    }
+    if(!this.telefonoValido()){
+      resp+="<br>-Telefono";
+    }
+    if(!this.correoValido()){
+      resp+="<br>-Correo";
+    }
+    if(!this.motivoValido()){
+      resp+="<br>-Motivo";
+    }
+    if(!this.horaValida()){
+      resp+="<br>-Hora";
+    }
+    return  resp.length<=14 ? null : resp;
   }
 
 

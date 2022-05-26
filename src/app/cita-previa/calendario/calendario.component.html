@@ -118,7 +118,7 @@
             </span>
 			<span *ngIf="citaForm.controls['email']!=null">
 				<span class="form-text text-danger"
-                    *ngIf="!correoValido()">
+                    *ngIf="!correoValido() && citaForm.controls['email'].touched">
                   * Ej: correo@dominio.com
               </span>
             </span>
