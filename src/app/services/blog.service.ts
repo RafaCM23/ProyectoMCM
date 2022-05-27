@@ -88,6 +88,11 @@ export class BlogService {
     return this.http.get<Post[]>(url);
   }
 
+  getBlogPreview(){//Saca 3 post de la misma categoría, aleatorios
+    const url=this.api+`/blogPreview`;
+    return this.http.get<Post[]>(url);
+  }
+
   // -- Filtros -- //
 
   buscaPorCategoria(id:number){

@@ -1,3 +1,11 @@
+@media (max-width:500px){
+    .red{
+		margin-left: 1em!important;
+	}
+	.red:nth-child(2){
+		margin-left: 1.2em!important;
+	}
+}
 .container{
     padding: 0!important;
     margin-left: auto;
@@ -12,15 +20,6 @@
     width: auto!important;
 }
 .nutricion{
-    /*background-color: #cfcfce98;
-	 background-color: #b1dbcd;
-
-	 656176
-	B0DACC 
-	FEFEFE
-	E8B5A2
-	FF934F
-	*/
 	background-color: #656176b2;
 	z-index: 1;
 	
