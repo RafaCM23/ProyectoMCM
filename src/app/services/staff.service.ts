@@ -54,6 +54,13 @@ export class StaffService {
     return this.http.put(url,body,{headers:cabecera});
   }
 
+  borraProf(id:number){
+    const cabecera = new HttpHeaders()
+    .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
+    const url=this.api+`/profesional/${id}`;
+    return this.http.delete(url,{headers:cabecera});
+  }
+
   whoIs(){
     const cabecera = new HttpHeaders()
     .set('Authorization',`Bearer ${this.authService.getToken()}` || '');

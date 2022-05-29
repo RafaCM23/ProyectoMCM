@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CancelarCitaModule } from './cancelar-cita/cancelar-cita.module';
 import { StaffModule } from './staff/staff.module';
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
   {path:'sobre',loadChildren:()=>import("./sobre-mi/sobre-mi.module").then(m=>m.SobreMiModule)},
   {path:'admin',loadChildren:()=>import("./registro/registro.module").then(m=>m.RegistroModule)},
   {path:'staff',loadChildren:()=>import("./staff/staff.module").then(m=>StaffModule)},
+  {path:'cancelar',loadChildren:()=>import("./cancelar-cita/cancelar-cita.module").then(m=>CancelarCitaModule)},
   {path:'**',loadChildren:()=>import("./shared/shared.module").then(m=>m.SharedModule)},
 ];
 

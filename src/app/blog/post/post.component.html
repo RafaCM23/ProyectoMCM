@@ -1,25 +1,27 @@
-<div class="container row text-center">
-    <div class="col-10">
+<div class="container row text-center" style="min-height: 60em;">
+    <div class="col-12 col-lg-9 izquierda">
         <div class="cabecera col-12">
             <h2 class="cabecera">
                 {{post.nombre}}
             </h2>
         </div>
         <div class="cuerpo col-12 row">
-            <div class="imagen col-12 " *ngIf="this.imagen">
+            <div class="imagen col-12 col-md-4 order-md-2" *ngIf="this.imagen">
                 <img src={{this.imagen}}>
             </div>
-            <div class="texto col-12">
+            <div class="texto col-12 col-md-8 order-md-first">
                 <p class="contenido text-left">
                     {{post.contenido}}
                 </p>
             </div>
             
             
+            
+            
         </div>
         <div class="info col-12">
             <p class="categoria">
-                {{post.categoria}}
+                    <img src="./assets/imagenes/nota.png" alt="icono-nota" width="30px">{{post.categoria.nombre}}
             </p>
         </div>
         <div class="comentSection col-12">
@@ -68,12 +70,49 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-lg-2 row">
-            <div class="col-2 hrV">
+    <div class="col-12 col-lg-3">
+        <div class="row">
+            <div class="col-1 hrV">
                 <hr class="hrVertical">
             </div>
-            <div class="col-10 postRel">
-                Relacionados
+            <div class="col-12 col-sm-11  postRel">
+                <div class="tituloRelacionados">
+                    <h5>Relacionados</h5>
+                </div>
+                <div class="container posts row">
+                    <div class="col-6 col-lg-12 post" *ngFor="let post of relacionados">
+                      <!--  carta -->
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="col-12">
+                            <h4 class="card-title">{{post.nombre}}</h4>
+                          </div>
+                          <div class="col-12">
+                            <small class="text-muted cat">
+                              <i class="fas fa-user text-info"></i> {{post.autor.nombre}} {{post.autor.apellidos}}
+                            </small>
+                          </div>
+                          <div class="col-12">
+                            <a class="botonPost" (click)="redirige(post.id)" >Leer Más</a>
+                          </div>
+            
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0 row">
+                          <div class="fecha col-4 col-lg-12">{{fechaSimple(post.fecha)}}
+                          </div>
+                          <div class="categoria col-4 col-lg-12" *ngIf="post.categoria.nombre!=null">
+                            <img src="./assets/imagenes/nota.png" alt="icono-nota" width="30px">{{post.categoria.nombre}}
+                          </div>
+                          <div class="stats col-4 col-lg-12">
+                            <i class="far fa-comment"></i> {{post.comentarios?.length}}
+                          </div>
+            
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
             </div>
+    </div>
     </div>
 </div>

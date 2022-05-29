@@ -1,83 +1,118 @@
-<div class="row">    
-    <a href="blog#portada" class="btn-flotante" [ngClass]="(botonflotante === true) ? 'aparece' : 'desaparece'" >
+<div class="row">
+  <a href="blog#portada" class="btn-flotante" [ngClass]="(botonflotante === true) ? 'aparece' : 'desaparece'">
     <i class="fa fa-arrow-up"></i></a>
-    
-    <div class="portada col-12" id="portada">
-      <img class="imagen" src="./assets/imagenes/fondoBlog.jpg" alt="">
+
+  <div class="portada col-12" id="portada">
+    <img class="imagen" src="./assets/imagenes/fondoBlog.jpg" alt="">
   </div>
-    
+
   <div class="col-12 row contenido" style="background-color: rgba(255, 128, 128, 0.322);">
-    <div class="busqueda col-12 ">
-        <div class="input-group buscador">
-          <div class="form-outline">
-            <input type="search" id="form1" class="form-control" placeholder="Buscar"/>
-          </div>
-          <button type="button" class="btn btn-primary">
-            <i class="fas fa-search"></i>
-          </button>
-          <div class="filtros" style=" background-color: rgba(181, 219, 255, 0.5);">
-            Filtros
-          </div>
+    <div class="busqueda col-12 col-md-6 row">
+      <div class="input-group buscador col-10">
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" placeholder="Buscar" [(ngModel)]="busqueda" minlength="3"
+            maxlength="10" />
         </div>
-      </div>
-
-      <div class="posts col-12">
-          
-        <!--POST-->
-        <div class="container posts row">
-            <div class="col-12 col-md-6" *ngFor="let post of todos"><!--  carta -->
-              <div class="card">                    
-                <div class="card-body row">
-                  <div class="col-8">
-                    <h4 class="card-title">{{post.nombre}}</h4>
-                  </div>
-                  <div class="col-4">
-                    <small class="text-muted cat">
-                      <i class="fas fa-user text-info"></i> {{post.autor.nombre}} {{post.autor.apellidos}}
-                    </small>
-                  </div>
-                  
-                  <div class="col-12">
-                    <p class="card-text">{{post.contenido}}</p>
-                  <a class="botonPost" (click)="redirige(post.id)">Leer Más</a>
-                  </div>
-                  
-                </div>
-                <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-                  <div class="fecha">{{fechaSimple(post.fecha)}}
-                  </div>
-                  <div class="stats">
-                     <!-- VISITAS <i class="far fa-eye"></i> 1347 -->
-                    <i class="far fa-comment"></i> 12
-                  </div>
-                   
-                </div>
-              </div>
-          </div>
-        </div>
-
-
-
+        <button type="button" class="btn btn-primary" (click)="buscaNombre()">
+          <i class="fas fa-search"></i>
+        </button>
 
       </div>
-      <div class="col-12 cargaMas">
-        <a (click)="getNextPost()">CARGAR MÁS</a>
-        <hr class="mt-0">
-        
+      <div class="col-2 duda">
+        <button class="info" content="   ¿Como puedo buscar?
+        Introduzca entre 3 y 10 caracteres
+        Puede escribir palabras clave como 
+        'tips' o 'dieta'. Para volver a
+        buscar por categoria presione la 
+        lupa con el buscador vacio">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50" class="iconoInfo">
+            <path
+              d="M13 7.5a1 1 0 11-2 0 1 1 0 012 0zm-3 3.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75v4.25h.75a.75.75 0 010 1.5h-3a.75.75 0 010-1.5h.75V12h-.75a.75.75 0 01-.75-.75z">
+            </path>
+            <path fill-rule="evenodd"
+              d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z">
+            </path>
+          </svg>
+        </button>
       </div>
-    
-   </div>
-    
-    
-    <div class="col-12 footer-div">
-        <footer class="text-center footer" style="background-color:#000000;">
-    
-            <div class="p-3">
-              <p class="text-white">© 2022 Copyright: RCM</p>
-            </div>
-          </footer>
+
     </div>
-       
-    </div> 
+    <div class="filtros col-12 col-md-6 row">
+      <div class="col-6">
+        <label for="selectCategorias" class="lblCat">Categoria </label>
+        <select class="form-select" name="selectCategorias" [(ngModel)]="idCat" (change)="buscaCategoria()">
+          <option value=-1 selected disabled hidden>Buscar por categoría</option>
+          <option value=-1>Ninguna</option>
+          <option *ngFor="let cat of categorias" value={{cat.id}}>{{cat.nombre}}</option>
+        </select>
+      </div>
+      <div class="col-6">
+        <label for="fecha" class="lblFecha">Fecha </label>
+        <select class="form-select" name="fecha" [(ngModel)]="fecha" (change)="cambiaOrdenFecha()">
+          <option value=1>Más nuevos</option>
+          <option value=-1>Más antiguos</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="posts col-12">
+
+      <!--POST-->
+      <div class="container posts row">
+        <div class="col-12 col-md-6" *ngFor="let post of todos">
+          <!--  carta -->
+          <div class="card">
+            <div class="card-body row">
+              <div class="col-8">
+                <h4 class="card-title">{{post.nombre}}</h4>
+              </div>
+              <div class="col-4">
+                <small class="text-muted cat"*ngIf="post.autor">
+                  <i class="fas fa-user text-info" ></i> {{post.autor.nombre}} {{post.autor.apellidos}}
+                </small>
+              </div>
+
+              <div class="col-12">
+                <p class="card-text">{{post.contenido}}</p>
+                <a class="botonPost" (click)="redirige(post.id)">Leer Más</a>
+              </div>
+
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0 row">
+              <div class="fecha col-4">{{fechaSimple(post.fecha)}}
+              </div>
+              <div class="categoria col-4" *ngIf="post.categoria.nombre!=null">
+                <img src="./assets/imagenes/nota.png" alt="icono-nota" width="30px">{{post.categoria.nombre}}
+              </div>
+              <div class="stats col-4">
+                <i class="far fa-comment"></i> {{post.comentarios?.length}}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
 
 
+
+
+    </div>
+    <div class="col-12 cargaMas">
+      <a (click)="getNextPost()" *ngIf="busqueda==''">CARGAR MÁS</a>
+      <hr class="mt-0">
+
+    </div>
+
+  </div>
+
+
+  <div class="col-12 footer-div">
+    <footer class="text-center footer" style="background-color:#000000;">
+
+      <div class="p-3">
+        <p class="text-white">© 2022 Copyright: RCM</p>
+      </div>
+    </footer>
+  </div>
+
+</div>

@@ -1,8 +1,76 @@
-.row{
-margin-top: 10em;
+@media (max-width:769px){
+    .datos, svg, .texto{
+        margin-left: auto!important;
+        margin-right: auto!important;
+    }
+    .foto{
+        text-align: center!important;
+    }
+    svg{
+        max-width: 400px!important;
+        max-height: 460px!important;
+    }
+    .datos{margin-top: 1em!important;}
 }
 .texto{
+    
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 17px;
+    font-weight: 500;
+    height: 100%;
+  
+}
+.datos{
+    margin-bottom: 2em;
+}
+.container{
+    background-color: rgb(233, 179, 179);
+    width: 100%;
+    padding-left: 8%;
+    max-width: none;
+    min-height: 100vh;
+    padding-top: 5em;
+
+}
+.profInfo{
+    margin-top: 1em;
+    margin-left: 1em;
+}
+.info{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2;
     font-weight: 600;
 }
+.nombre{
+    font-size: 1.1em;
+}
+.nombre, .especialidad, .descripcion{
+    color: rgb(8, 6, 8);
+    font-weight: 500;
+}
+.datos{
+    height: 100%;
+    max-width: 40em;
+    margin-top: 4em;
+    padding-bottom: 2em;
+    /* Filtro Cristal */
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.2px);
+    -webkit-backdrop-filter: blur(7.2px);
+    -webkit-backdrop-filter: blur(7.2px);
+    /* Sombra */
+    box-shadow:5px 5px 25px 2px rgba(0, 21, 78, 0.8)
+}
+
+svg{
+    max-width: 500px;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+.masMi{
+    font-size: 1.2;
+    font-weight: 600;
+}
+

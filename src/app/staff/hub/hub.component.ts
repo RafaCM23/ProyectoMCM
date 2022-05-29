@@ -18,8 +18,8 @@ export class HubComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdmin();
-    this.getImg();
     this.whoIs();
+    
   }
 
   idProf=1;
@@ -35,7 +35,9 @@ export class HubComponent implements OnInit {
   }
    whoIs(){
     this.staffService.whoIs().subscribe({
-      next:resp=>{this.idProf=resp }
+      next:resp=>{
+        this.idProf=resp
+        this.getImg(); }
     })
   
   }

@@ -11,5 +11,9 @@ export class NotFoundComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  volver(){
+    window.history.go(-1);
+  }
 
 }

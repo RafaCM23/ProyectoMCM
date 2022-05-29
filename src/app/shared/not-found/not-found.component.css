@@ -1,1 +1,89 @@
-.all{margin-top: 10em;}
+@media (max-width:700px){
+    .fondo{
+        clip-path:
+    polygon(100% 0, 100% 75%, 50% 100%, 0 100%, 0 0)!important;
+    }
+    
+    .duda{
+        position: absolute;
+        bottom: -20px!important;
+        right: 30px!important;
+    }
+    
+}
+h1 {
+    font-family: "Fontdiner Swanky", cursive;
+    color: #5091dc;
+    font-size: 50px;
+}
+h3{
+    margin-top: 2em;
+    color: #5091dc;
+    font-family: "AksharAkshar";
+    font-size: 30px;
+    font-weight: bold;
+    font-style: italic;
+}
+.logo{
+    width: 200px;
+    height: 130px;
+}
+.fondo{
+    padding-top: 3em;
+    margin-top: 4em;
+    height: 100vh;
+    background-color: khaki;
+    clip-path:
+    polygon(100% 0, 100% 70%, 80% 100%, 0 100%, 0 0);
+    
+}
+
+.container{
+    text-align: center;
+}
+.duda{
+    position: absolute;
+    bottom: 0px;
+    right: 30px;
+}
+
+.info{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+
+}
+.iconoInfo{
+    fill: rgb(0, 0, 0);
+    transition: ease-in 0.3s;
+}
+.iconoInfo:hover{
+    fill: rgb(123, 21, 133);
+}
+.info:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    color: #fff;
+    content: attr(content);
+    right:  -10px;
+    bottom: 50px;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 350px;
+    white-space: pre;
+}
+.volver{
+    margin-right: 1em;
+}
+.volver, .volverPrincipal{
+    margin-top: 2em;
+}
+.volverPrincipal{
+    margin-left: 1em;
+}

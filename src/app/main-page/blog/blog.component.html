@@ -1,26 +1,76 @@
 <div class="container">
+            
     <div class="col-12 titulo">
         <p>Blog</p>
     </div>
     <hr>
     <div class="col-12 subtitulo">
         <p>&horbar;
-            Aprende mas que nunca
+            Aprende más que nunca
             &horbar;
     </div>
-    <div class="col-12 contenido">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales accumsan sapien in dictum. Nullam hendrerit velit et tortor interdum commodo. Sed vehicula eleifend mi id faucibus. Pellentesque faucibus purus ut velit iaculis, eget rutrum ipsum interdum. Fusce et nisi libero. Sed eget sapien pretium, condimentum ligula eget, tristique augue. Praesent fringilla ac sapien in ullamcorper. Nullam eu imperdiet orci.
 
-            Morbi mollis sem ex, non volutpat quam euismod sit amet. In vel sapien at libero sodales porta non sed tortor. Curabitur auctor eget lacus in molestie. Quisque non arcu odio. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus blandit nibh est, eu hendrerit elit suscipit sit amet. Aliquam felis nisi, cursus sed vestibulum id, hendrerit eget nunc. Phasellus mattis maximus nibh ultrices euismod. Donec condimentum convallis vehicula.
-        </p>
-        <div class="col-12 col-md-4 text-center">
-            <button type="button" class="slide" [routerLink]="['/blog']" >
-                <div>Visitar Blog</div>
-                <i class="fa fa-angle-right"></i>
-              </button>
+
+    <div class="row">
+
+        <div class="col-12 contenido">
+            <p>En nuestro blog publicamos periodicamente posts muy intersantes!<br>
+                En algunos de ellos encontraras recetas saludables pero no por ello menos sabrosas.
+                Otros tratan de salud y bienestar, consejos o cazamos algunos mitos sobre alimentos
+              </p>
+            <span class="enlace"> Si quieres aprender un poco más o tienes alguna sugerencia
+                sobre algún tema relacionado puedes usar la sección de comentarios! </span>
         </div>
+
+        <div class="col-12 posts">
+
+          <div class="vacio" *ngIf="vacio">
+            <h2>No se han podido cargar los posts</h2>
+          </div>
+            <div id="posts"*ngIf="!vacio"  class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
+              <div class="carousel-inner" >              
+                <div class="carousel-item"
+                *ngFor="let post of posts; let i = index" 
+                [attr.data-slide-to]="i" [class.active]="i === 0">
+                
+                <div class="card">
+                    <div class="card-body row">
+                      <div class="col-8">
+                        <h4 class="card-title">{{post.nombre}}</h4>
+                      </div>
+                      <div class="col-4">
+                        <small class="text-muted cat"*ngIf="post.autor">
+                          <i class="fas fa-user text-info" ></i> {{post.autor.nombre}} {{post.autor.apellidos}}
+                        </small>
+                      </div>
+        
+                      <div class="col-12">
+                        <p class="card-text">{{post.contenido}}</p>
+                      </div>
+                      <div class="col-12 text-center">
+                        <a class="botonPost" (click)="redirige(post.id)">Leer Más</a>
+                      </div>
+        
+                    </div>
+                    <div class="card-footer text-center d-flex justify-content-between bg-transparent border-top-0 row">
+                      <div class="fecha col-4">{{fechaSimple(post.fecha)}}
+                      </div>
+                      <div class="categoria col-4" *ngIf="post.categoria.nombre!=null">
+                        <img src="./assets/imagenes/nota.png" alt="icono-nota" width="30px">{{post.categoria.nombre}}
+                      </div>
+                      <div class="stats col-4">
+                        <i class="far fa-comment"></i> {{post.comentarios?.length}}
+                      </div>
+        
+                    </div>
+                  </div>
+                
+
+              </div>
+            </div>
+            
+        </div>
+
     </div>
-    
-    
-    
 </div>
+   

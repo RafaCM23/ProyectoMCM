@@ -7,11 +7,108 @@
                 <img src={{this.img}} alt="imagen_profesional"><br>
                 <button class="btn salir" (click)="cerrarSesion()"><i class="fa fa-door-open"></i></button>
             </div>
-            <div class="misTareas col-sm-12 col-7">
-                <ul>
-                    <li><a [routerLink]="['/staff/hub/mis-datos']">Mis Datos</a></li>
-                    <li><a [routerLink]="['/staff/hub/mi-agenda']">Mi Agenda</a></li>
-                </ul>
+            <div class="misTareas col-sm-12 col-7" >
+                <div id="accordion" *ngIf="this.esAdmin">
+
+                    <div class="card">
+                      <div class="titulo">
+                        <h5 class="mb-0">
+                          <button class="btn cabecera" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Profesional</button>
+                        </h5>
+                      </div>
+                  
+                      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                        <div class="card-body">
+                         <ul>
+                            <li class="enlace" [routerLink]="['/staff/hub/datos-profesionales']">Datos</li>
+                            <li class="enlace" [routerLink]="['/staff/hub/agendas-profesionales']">Agendas</li>                            
+                         </ul>
+                         <hr style="margin: 0;">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card">
+                      <div class="titulo">
+                        <h5 class="mb-0">
+                          <button class="btn cabecera collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Blog
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                        <div class="card-body">
+                            <ul>
+                                <li class="enlace" [routerLink]="['/staff/hub/nuevo-post']">Nuevo Post</li>
+                                <li class="enlace" [routerLink]="['/staff/hub/gestion-blog']">Gestionar</li>                            
+                             </ul>
+                             <hr style="margin: 0;">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="titulo">
+                          <h5 class="mb-0">
+                            <button class="btn cabecera collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                              Gestión
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                          <div class="card-body">
+                            <ul>
+                                <li class="enlace" [routerLink]="['/staff/hub/crea-nuevo']">Nuevo Prof.</li>
+                                <li class="enlace" [routerLink]="['/staff/hub/nuevos-registros']">Acepta Prof.</li> 
+                                <li class="enlace" [routerLink]="['/staff/hub/revisar-comentarios']">Comentarios</li>                            
+                             </ul>
+                          </div>
+                        </div>
+                      </div>
+                   
+                  </div>
+                  <div id="accordion" *ngIf="!this.esAdmin">
+
+                    <div class="card">
+                      <div class="titulo">
+                        <h5 class="mb-0">
+                          <button class="btn cabecera" [routerLink]="['/staff/hub/mis-datos']">
+                            Mis Datos</button>
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div class="card">
+                      <div class="titulo">
+                        <h5 class="mb-0">
+                          <button class="btn cabecera collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Agenda
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                        <div class="card-body">
+                            <ul>
+                                <li class="enlace" [routerLink]="['/staff/hub/mi-agenda']">Mi Agenda</li>
+                                <li class="enlace" [routerLink]="['/staff/hub/proximas-citas']">Proximas Citas</li>                            
+                             </ul>
+                             <hr style="margin: 0;">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="titulo">
+                          <h5 class="mb-0">
+                            <button class="btn cabecera" [routerLink]="['/staff/hub/nuevo-post']">
+                              Nuevo Post
+                            </button>
+                          </h5>
+                        </div>
+                      </div>
+                   
+                  </div>
             </div>
         </div>
         </div>
@@ -19,33 +116,6 @@
                 
 
                     <div class="row cuerpo">
-
-                        <div class="col-3">
-                            <select class=" selector" (change)="navigateTo($event.target)" >
-                                <option class="opcion" selected disabled hidden>Profesional &#x25BC; </option>
-                                <option class="opcion"  value="/nuevo-post">Nuevo Post</option>
-                                <hr style="width: 100%; margin:0 ;padding:0">
-                                <option class="opcion"  value="/proximas-citas">Proximas Citas</option>
-
-
-                            </select>
-                          </div>  
-
-                      <div class="col-3"> 
-                        <select class=" selector" (change)="navigateTo($event.target)" *ngIf="esAdmin">
-                            <option class="opcion" selected disabled hidden>Admin &#x25BC; </option>
-                            <option class="opcion"  value="/nuevos-registros">Aceptar Registros</option>
-                            <option class="opcion"  value="/crea-nuevo">Crea profesional</option>
-                            <hr style="width: 100%; margin:0 ;padding:0">
-                            <option class="opcion"  value="/datos-profesionales">Datos Profesionales</option>
-                            <option class="opcion"  value="/agendas-profesionales">Agenda  Profesionales</option>
-                            <hr style="width: 100%; margin:0 ;padding:0">
-                            <option class="opcion" value="/revisar-comentarios">Revisar comentarios</option>
-                            <hr style="width: 100%; margin:0 ;padding:0">
-                            <option class="opcion" value="/gestion-blog">Gestion Blog</option>
-                        </select>
-                      </div>
-
                     <div class="col-12 contenido">
                         <div class="foco">
                             <router-outlet></router-outlet>
@@ -60,4 +130,3 @@
 
 
 
- 

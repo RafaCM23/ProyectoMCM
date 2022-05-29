@@ -113,7 +113,7 @@ export class NuevoPostComponent implements OnInit {
   cargaValores(post:Post){
     this.postForm.controls['nombre'].setValue(post.nombre);
     this.postForm.controls['contenido'].setValue(post.contenido);
-    this.postForm.controls['categoria'].setValue(post.categoria);
+    this.postForm.controls['categoria'].setValue(post.categoria.nombre);
   }
 
   cancelarNuevaCat(){
@@ -194,7 +194,7 @@ export class NuevoPostComponent implements OnInit {
     }
     else if(this.postForm.valid && this.edicion==true){
       this.post.nombre=this.postForm.get('nombre')?.value;
-      this.post.categoria=this.postForm.get('categoria')?.value;
+      this.post.categoria.id=this.postForm.get('categoria')?.value;
       this.post.contenido=this.postForm.get('contenido')?.value;
       this.blogService.editaPost(this.post).subscribe({
         next:resp=>{

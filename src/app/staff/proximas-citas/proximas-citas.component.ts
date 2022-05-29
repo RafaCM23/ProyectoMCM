@@ -81,9 +81,9 @@ export class ProximasCitasComponent implements OnInit {
       }
     });
   }
-  rechazaCita($event:any){
+  rechazaCita($event:any, motivo:number,){
     const id = $event.id;
-    this.agendaService.rechazaCita(id).subscribe({
+    this.agendaService.rechazaCita(id,motivo).subscribe({
       next:resp=>{
         Swal.fire({
           title:'Cita rechazada con éxito',
@@ -111,7 +111,8 @@ export class ProximasCitasComponent implements OnInit {
     });
   }
   fechaSimple(fecha:Date){
-    return fecha.toString().substr(0,10)
+    
+    return ((fecha.toString().substr(0,9))+(Number.parseInt( fecha.toString().substr(9,10))+1));
   }
 
   esperaConfirmadas() {

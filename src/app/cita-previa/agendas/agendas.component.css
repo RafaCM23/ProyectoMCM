@@ -6,6 +6,11 @@
 
 .container{
     margin-top: 7em;
+    max-width: 95%;
+    padding: 0;
+}
+.d-flex{
+    max-width: 40px;
 }
 img{
     width: 150px;
@@ -19,6 +24,11 @@ img:hover{
     border: 3px solid rgb(13, 133, 163);;
 }
 
+.profesional{
+    align-items: right;
+    max-width: 400px;
+    padding-left: 2em;
+}
 .profInfo{
     margin-top: 1em;
     font-weight: 200;

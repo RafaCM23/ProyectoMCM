@@ -9,6 +9,8 @@ import { ComentariosComponent } from './comentarios/comentarios.component';
 import { BlogComponent } from './blog/blog.component';
 import { PedirCitaComponent } from './pedir-cita/pedir-cita.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { FooterModule } from '../shared/footer/footer.module';
 
 const routes: Routes = [
 
@@ -29,6 +31,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    FooterModule,
     RouterModule.forChild(routes)
   ]
 })

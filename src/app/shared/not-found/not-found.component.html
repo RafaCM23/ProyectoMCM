@@ -1,6 +1,25 @@
-<div class="row all">
-    <div class="col-8 offset-2">
-        <h1 style="color:red">PAGINA NO ENCONTRADA</h1>
-        <a [routerLink]="['/']" ><h2>Volver al Home</h2></a>
+<div>
+<div class="fondo">
+    <div class="container">
+
+        <h1>Ooopss..</h1>
+        <img src="./assets/imagenes/notFound.svg" alt="logo-mcm" class="logo">
+        <h3>No se ha encontrado la página que buscaba</h3>
+        <button class="btn btn-warning btn-lg volver" (click)="volver()">< Volver</button>
+        <button class="btn btn-primary btn-lg  volverPrincipal" [routerLink]="['/']" >Pagina Principal</button>
+
     </div>
+
+</div>
+<span class="duda">
+    <button class="info"  content="¿Qué hago aquí?
+    No se ha encontrado la página que estaba 
+    buscando,puede que esa página haya sido
+    eliminada o nunca haya existido, 
+    compruebe la dirección de nuevo.
+    Sentimos las molestias">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50" class="iconoInfo"><path d="M13 7.5a1 1 0 11-2 0 1 1 0 012 0zm-3 3.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75v4.25h.75a.75.75 0 010 1.5h-3a.75.75 0 010-1.5h.75V12h-.75a.75.75 0 01-.75-.75z"></path><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z"></path></svg>
+      </button>
+</span>
+   
 </div>
