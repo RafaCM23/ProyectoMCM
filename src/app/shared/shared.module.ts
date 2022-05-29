@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
 
@@ -15,8 +14,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     NavbarComponent,
-    NotFoundComponent,
-    FooterComponent
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -24,8 +22,7 @@ const routes: Routes = [
   ],
   exports:[
     NavbarComponent,
-    NotFoundComponent,
-    FooterComponent
+    NotFoundComponent
   ]
 })
 export class SharedModule { }

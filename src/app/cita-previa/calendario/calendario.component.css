@@ -3,15 +3,6 @@
   .wrapper-calendar{
     margin-left: 0!important;
   }
-  .ejemplo{
-    margin-top: 1em;
-  }
-  .ejemplo-libre::after{  
-    background-color: rgba(99, 216, 22, 0.404);
-    margin-left: 45px!important;}
-  .ejemplo-pendiente::after
-  {  background-color: rgba(255, 208, 0, 0.596);
-  margin-left: 22px!important;}
 }
 
 *{
@@ -75,16 +66,15 @@ li {
   pointer-events: none;
 }
 .ejemplos{
-  margin-top: 5%;
-  margin-bottom: 5%;
-  text-align: center;
+  margin-top: 4%;
+  margin-bottom: 1%;
+  text-align: left;
 }
 
 .ejemplo::after{
   content: '';
   padding: 10px;
   padding-right: 30px;
-  margin-left: 1em;
 }
 .ejemplo-libre::after{  background-color: rgba(99, 216, 22, 0.404);}
 .ejemplo-ocupado::after{  background-color: rgba(255, 0, 0, 0.404);}
