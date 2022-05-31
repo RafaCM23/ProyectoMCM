@@ -91,27 +91,39 @@ export class DatosProfesionalesComponent implements OnInit {
 
   borraProf(){
     const id = this.prof.id;
-    this.staffService.borraProf(id).subscribe({
-      next:resp=>{
-        console.log(resp);
-        Swal.fire({
-          title:'Profesional Borrado',
-          icon: 'success',
-          confirmButtonText:'Ok'
-        }).then(()=>{
-          this.cargaProfesionales(0);
-        });
-      },
-      error:error=>{
-        console.log(error);
-        Swal.fire({
-          title:'Error al guardar',
-          text:'Intentelo mas tarde',
-          icon: 'error',
-          confirmButtonText:'Ok'
-        });
-      }
-    })
+    Swal.fire({
+      title: "Borrar Profesional",
+      text: "¿Está seguro que desea borrar el profesional?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+  })
+  .then(resultado => {
+    if(resultado.isConfirmed){
+      this.staffService.borraProf(id).subscribe({
+        next:resp=>{
+          console.log(resp);
+          Swal.fire({
+            title:'Profesional Borrado',
+            icon: 'success',
+            confirmButtonText:'Ok'
+          }).then(()=>{
+            this.cargaProfesionales(0);
+          });
+        },
+        error:error=>{
+          console.log(error);
+          Swal.fire({
+            title:'Error al guardar',
+            text:'Intentelo mas tarde',
+            icon: 'error',
+            confirmButtonText:'Ok'
+          });
+        }
+      })
+    }})
+    
   }
 
   compruebaDatos(){
