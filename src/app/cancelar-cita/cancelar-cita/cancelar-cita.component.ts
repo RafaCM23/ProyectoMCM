@@ -40,7 +40,6 @@ export class CancelarCitaComponent implements OnInit {
         next:resp=>{
           Swal.fire({
             title: "Cita Cancelada con éxito",
-            text: "¿Está seguro que desea eliminar este post?",
             icon: 'success',
             confirmButtonText: "Ok",
         }).then(()=>{
