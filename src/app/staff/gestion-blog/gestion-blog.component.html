@@ -17,13 +17,13 @@
               </thead>
               <tbody class="tcuerpo">
               <tr *ngFor="let p of posts;let i=index">
-                <td ><span *ngIf="p.nombre">{{p.nombre}}</span></td>
-                <td ><span *ngIf="p.categoria.nombre">{{p.categoria.nombre}}</span></td>
-                <td *ngIf="p.autor && p.autor.nombre">{{p.autor.nombre}} {{p.autor.apellidos}}</td>
-                <td *ngIf="!p.autor || !p.autor.nombre">-</td>
-                <td><button type="button" class="btn btn-warning" id={{p.id}} (click)="editarPost($event.target)">Editar</button></td> <!--[routerLink]="['/editarPost',p.id]" -->
-                <td><button type="button" class="btn btn-danger" id={{p.id}} (click)="borrarPost($event.target)">Borrar</button></td>
-                <td><button type="button" class="btn btn-primary" id={{i}} (click)="comentariosPost($event.target)">Comentarios</button></td>
+                  <td>{{p.nombre}}</td>
+                  <td>{{p.categoria.nombre}}</td>
+                  <td *ngIf="p.autor && p.autor.nombre">{{p.autor.nombre}} {{p.autor.apellidos}}</td>
+                  <td *ngIf="!p.autor || !p.autor.nombre">-</td>
+                  <td><button type="button" class="btn btn-warning" id={{p.id}} (click)="editarPost($event.target)">Editar</button></td> <!--[routerLink]="['/editarPost',p.id]" -->
+                  <td><button type="button" class="btn btn-danger" id={{p.id}} (click)="borrarPost($event.target)">Borrar</button></td>
+                  <td><button type="button" class="btn btn-primary" id={{i}} (click)="comentariosPost($event.target)">Comentarios</button></td>
                   
               </tr>
               </tbody>
