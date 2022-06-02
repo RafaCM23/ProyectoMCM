@@ -85,7 +85,7 @@ export class CalendarioComponent implements OnInit {
     this.agendaService.getMes(this.profActual,this.anio,mes).subscribe({
       next:resp=>{
         this.meses[numero]=resp;
-        this.tachaOcupados(numero);        
+        this.tachaOcupados(numero);   
       },
       error:error=>{
         Swal.fire({
@@ -389,7 +389,7 @@ export class CalendarioComponent implements OnInit {
     else return false
   }
   telefonoValido():boolean{
-    var regex = new RegExp('^(\\+[0-9]{2})?(\\s{0,1})?([0-9]{9})$')
+    var regex = new RegExp('^(\\+[0-9]{2})?(\\s{0,1})?([6][0-9]{8})$')
     var resultado=regex.test(this.cita.persona.tlfn);
     if(resultado==true ) return true;
     else return false

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Profesional } from '../../interfaces/calendario.interface';
 import Swal from 'sweetalert2';
-import { RegistroService } from '../registro.service';
-import { EmailOcupadoService } from '../email-ocupado.service';
+import { RegistroService } from 'src/app/services/registro.service';
+import { EmailOcupadoService } from 'src/app/services/email-ocupado.service';
 
 @Component({
   selector: 'app-register',

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Profesional } from '../../interfaces/calendario.interface';
 import Swal from 'sweetalert2';
-import { RegistroService } from '../registro.service';
+import { RegistroService } from 'src/app/services/registro.service';
 
 @Component({
   selector: 'app-login',
