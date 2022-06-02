@@ -85,6 +85,7 @@ export class CalendarioComponent implements OnInit {
     this.agendaService.getMes(this.profActual,this.anio,mes).subscribe({
       next:resp=>{
         this.meses[numero]=resp;
+        console.log(resp);
         this.tachaOcupados(numero);        
       },
       error:error=>{
