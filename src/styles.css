@@ -10,3 +10,23 @@
     align-items: center;
     justify-content: center;
 }
+/* ScrollBar */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #16749c #b0b0b0;
+  }
+
+  /* Chrome, Edge, y Safari */
+  *::-webkit-scrollbar {
+    width: 18px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #979797a1;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #16749c;
+    border-radius: 8px;
+  }
