@@ -11,14 +11,13 @@
     justify-content: center;
 }
 /* ScrollBar */
-/* ===== Scrollbar CSS ===== */
   /* Firefox */
   * {
     scrollbar-width: auto;
     scrollbar-color: #16749c #b0b0b0;
   }
 
-  /* Chrome, Edge, and Safari */
+  /* Chrome, Edge, y Safari */
   *::-webkit-scrollbar {
     width: 18px;
   }
