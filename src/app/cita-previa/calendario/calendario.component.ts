@@ -421,7 +421,7 @@ export class CalendarioComponent implements OnInit {
   //Funcion que marca el dia como ocupado
   diaOcupado(){
     const mes=(this.mesActual+this.hoy.getMonth())
-    const dia=this.diaSeleccionado;
+    const dia=this.diaSeleccionado-1;
     this.agendaService.ocupaDia(this.profActual,this.anio,mes,dia).subscribe({
       next:resp=>{
         Swal.fire({
@@ -446,7 +446,7 @@ export class CalendarioComponent implements OnInit {
   //Funcion que marca el dia como vacaciones
   diaVacaciones(){
     const mes=(this.mesActual+this.hoy.getMonth())
-    const dia=this.diaSeleccionado;
+    const dia=this.diaSeleccionado-1;
     this.agendaService.vacacionesDia(this.profActual,this.anio,mes,dia).subscribe({
       next:resp=>{
         Swal.fire({
