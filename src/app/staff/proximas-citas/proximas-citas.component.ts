@@ -34,11 +34,10 @@ export class ProximasCitasComponent implements OnInit {
   recuperaCitasSinVerificar(){
     this.agendaService.getProximasCitas(false).subscribe({
       next:resp=>{
-        console.log(resp);
         this.citas=resp;
       },
       error:error=>{
-        console.log(error);
+        this.citas=[]  
       }
     })
   }
@@ -46,13 +45,11 @@ export class ProximasCitasComponent implements OnInit {
   recuperaCitasVerificadas(){
     this.agendaService.getProximasCitas(true).subscribe({
       next:resp=>{
-        console.log(resp);
         this.citas=resp;
        
       },
-      error:error=>{
-        console.log(error);
-        
+      error:error=>{  
+        this.citas=[]      
       }
     })
   }

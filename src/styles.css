@@ -19,7 +19,7 @@
 
   /* Chrome, Edge, y Safari */
   *::-webkit-scrollbar {
-    width: 18px;
+    width: 15px;
   }
 
   *::-webkit-scrollbar-track {
@@ -30,3 +30,25 @@
     background-color: #16749c;
     border-radius: 8px;
   }
+.titulo{
+    text-align: left;
+    font-family: "Prata",Arial,Helvetica,sans-serif;
+    font-weight: 600;
+    font-size: 3em;
+    color: #424242;
+    margin-top: 2em;
+}
+.subtitulo{
+    font-size: 21px;
+    font-weight: 600;
+    margin-top: 2em;
+    text-align: left;
+    color: #df824c;
+}
+.contenidoPrincipal{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-top: 2em;
+  color: #525252;
+  margin-bottom: 3em;
+  font-size: 20px;
+}

@@ -15,13 +15,13 @@ export class AuthService {
   
   jwtValidator = new JwtHelperService();
   token: string = '';
+
   //comprueba validez del token
   compruebaToken() {
     let token = this.token;
     if (token == '') { token = this.getToken() }
     const expirado = this.jwtValidator.isTokenExpired(token);
     return !expirado;
-
   }
 
   //recupera el token de las cookies
@@ -37,19 +37,17 @@ export class AuthService {
   delToken() {
     this.cookies.delete("_mcm");
   }
-
-   whoIs(){
+  //Pregunta por la id del profesional
+  whoIs(){
     const cabecera = new HttpHeaders()
     .set('Authorization',`Bearer ${this.getToken()}` || '');
     const url=this.api+'/whois'
     return this.http.get<number>(url,{headers:cabecera});
   }
+  //Genera cabecera con token
   devuelveCabecera(){
     const cabecera = new HttpHeaders()
     .set('Authorization',`Bearer ${this.getToken()}` || '');
     return cabecera;
-  }
-  borraId(){
-    this.cookies.delete("_idProf_mcm");
   }
 }

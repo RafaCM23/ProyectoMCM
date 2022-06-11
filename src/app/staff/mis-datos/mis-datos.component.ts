@@ -73,7 +73,6 @@ export class MisDatosComponent implements OnInit {
           });
         },
         error:error=>{
-          console.log(error);
           Swal.fire({
             title:'Error al guardar',
             text:'Intentelo mas tarde',
@@ -140,10 +139,8 @@ export class MisDatosComponent implements OnInit {
   }
   //Recoge la imagen del input file
   capturaImg($evento:any){
-    console.log(this.archivoImagen);
     const imagen=$evento.target.files[0];
     this.archivoImagen=imagen;
-    console.log(this.archivoImagen);
     if(imagen){
       var reader = new FileReader();
       reader.readAsDataURL(imagen);
@@ -173,7 +170,6 @@ export class MisDatosComponent implements OnInit {
     }
     else{
     let nombreImagen=this.generaIdImagen();
-    console.log(this.archivoImagen);
     this.imagenService.subeImagen(this.prof.id,this.archivoImagen,nombreImagen).subscribe({
       next:resp=>{
         this.archivoImagen=null;

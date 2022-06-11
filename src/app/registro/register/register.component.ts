@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
       mayorEdad:false
     })
   }
-  //formulario -> Faltan validadores externos
+  //formulario 
   registroForm: FormGroup = this.fb.group({
     nombre: ['',[Validators.required, Validators.minLength(3)]],                  
     apellidos: ['',[Validators.required, Validators.minLength(7),this.apellidosValido]],      

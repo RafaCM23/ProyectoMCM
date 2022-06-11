@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import Swal from 'sweetalert2';
 import { ImagenService } from '../../services/imagen.service';
 import { StaffService } from '../../services/staff.service';

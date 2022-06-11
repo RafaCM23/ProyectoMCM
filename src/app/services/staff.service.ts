@@ -18,14 +18,22 @@ export class StaffService {
     const url=this.api+"/profesionales?verificado=false";
     return this.http.get<Profesional[]>(url);
   }
+  getProfesionalesVerificados(){
+    const url=this.api+"/profesionales?verificado=true";
+    return this.http.get<Profesional[]>(url);
+  }
 
   aceptaRegistro(id:number){
+    const cabecera = new HttpHeaders()
+    .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
     const url=this.api+`/verifica/profesional/${id}`;
-    return this.http.get(url);
+    return this.http.get(url,{headers:cabecera});
   }
   rechazaRegistro(id:number){
+    const cabecera = new HttpHeaders()
+    .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
     const url=this.api+`/rechaza/profesional/${id}`;
-    return this.http.get(url);
+    return this.http.get(url,{headers:cabecera});
   }
   isAdmin(){
     const cabecera = new HttpHeaders()

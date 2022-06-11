@@ -91,7 +91,6 @@ export class NuevoPostComponent implements OnInit {
         this.recuperaImagen(resp.id)
       },
       error:error=>{
-        console.log("error al cargar")
       }
     })
   }
@@ -113,7 +112,7 @@ export class NuevoPostComponent implements OnInit {
   cargaValores(post:Post){
     this.postForm.controls['nombre'].setValue(post.nombre);
     this.postForm.controls['contenido'].setValue(post.contenido);
-    this.postForm.controls['categoria'].setValue(post.categoria.nombre);
+    this.postForm.controls['categoria'].setValue(post.categoria.id);
   }
 
   cancelarNuevaCat(){
@@ -181,7 +180,7 @@ export class NuevoPostComponent implements OnInit {
           })
         },
         error:error=>{
-          console.log(error);
+
           Swal.fire({
             title:'Error al publicar el Post',
             icon: 'error',
@@ -207,7 +206,6 @@ export class NuevoPostComponent implements OnInit {
           })
         },
         error:error=>{
-          console.log(error);
           Swal.fire({
             title:'Error al modificar el Post',
             icon: 'error',
@@ -324,7 +322,6 @@ export class NuevoPostComponent implements OnInit {
   //Si hay una imagen seleccionada, se genera un nombre y se guarda en el Back
   guardaImagen(id:number){
     let nombreImagen=this.generaIdImagen(id);
-    console.log(nombreImagen)
     this.imagenService.subeImagenPost(id,this.archivoImagen,nombreImagen).subscribe({
       next:resp=>{
         this.archivoImagen=null;

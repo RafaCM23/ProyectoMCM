@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { getWindowScrollTop } from 'handsontable/helpers/dom';
 
 @Component({
   selector: 'app-main-page',
@@ -12,17 +13,22 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
   }
   botonflotante:boolean=false;
-
+  posicion=0;
   
 
 
   //Para mostrar el boton de scroll-up cuando baje un poco
-  @HostListener('window:scroll', ['$event']) onScroll(event: { path: any[]; }) {
-    const window = event.path[1];
-    const currentScrollHeight = window.scrollY;
-
-    if(currentScrollHeight>450){this.botonflotante=true;}
-    else{this.botonflotante=false; }
-  }
+  @HostListener('window:mousewheel', ['$event'])
+    apareceBoton(event:any) {
+      let direccion = event.wheelDelta;
+      if(direccion>1 && this.posicion<=0){ this.posicion++; }
+      else{  this.posicion--;   }
+      this.botonflotante = (this.posicion<-5)? this.botonflotante=true : this.botonflotante=false ;
+    }
+  
+    resetPosicion(){
+      this.posicion=0;
+      this.botonflotante=false;
+    }
 
 }

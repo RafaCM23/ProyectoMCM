@@ -17,7 +17,7 @@
 img{
     width: 100px;
     height: 100px;
-    border: 5px solid rgba(15, 102, 124, 0.781);
+    border: 4px solid #689eca;
     border-radius: 100%;
     transition: all .20s ease-in-out;
 }
@@ -42,10 +42,11 @@ a:visited{
 
 .cuerpo {
     
-    box-shadow: 15px 20px 8px 1px #000000;
+    box-shadow: 15px 20px 8px 1px #131313dc;
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
     min-height: 100%;
+
 
 }
 li{
@@ -55,9 +56,7 @@ li{
     margin-bottom: 1em;
 }
 
-
 .container-fluid{
-    
     max-width: none;
     max-height: none;
     background-color: #56638A;
@@ -67,7 +66,7 @@ li{
     height: 15%;
 }
 .contenedor{
-    background-color: cornflowerblue;
+    background-color: #a1c2fd;
     height: auto;
     min-height: 100vh;
 }
@@ -88,7 +87,7 @@ li{
 .left-bar{
     background-color: rgba(219, 185, 219, 0.685);
     min-height: 20%;
-    border: 3px solid rgba(41, 0, 117, 0.562);
+    border: 3px solid #689eca;
     border-radius: 20px;
 }
 select {

@@ -22,7 +22,6 @@ export class BlogComponent implements OnInit {
   getPreview(){
     this.blogService.getBlogPreview().subscribe({
       next:resp=>{
-        console.log(resp);
         this.posts=resp;
       },
       error:error=>{
