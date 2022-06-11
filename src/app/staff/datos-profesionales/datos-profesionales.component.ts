@@ -103,10 +103,6 @@ export class DatosProfesionalesComponent implements OnInit {
     if(resultado.isConfirmed){
       this.staffService.borraProf(id).subscribe({
         next:resp=>{
-<<<<<<< HEAD
-          console.log(resp);
-=======
->>>>>>> master
           Swal.fire({
             title:'Profesional Borrado',
             icon: 'success',
@@ -116,10 +112,6 @@ export class DatosProfesionalesComponent implements OnInit {
           });
         },
         error:error=>{
-<<<<<<< HEAD
-          console.log(error);
-=======
->>>>>>> master
           Swal.fire({
             title:'Error al guardar',
             text:'Intentelo mas tarde',
