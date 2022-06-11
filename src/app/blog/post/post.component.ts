@@ -61,7 +61,6 @@ export class PostComponent implements OnInit {
     this.blogService.getRelacionados(this.post.categoria.id).subscribe({
       next:resp=>{
         this.relacionados=resp;
-        console.log(resp);
       },
       error:error=>{
 
@@ -122,7 +121,6 @@ export class PostComponent implements OnInit {
        }
        this.blogService.creaComentario(this.post.id,comentario).subscribe({
          next:resp=>{
-          console.log(resp);
           Swal.fire({
             title:'Comentario publicado con éxito',
             icon: 'success',
@@ -131,7 +129,6 @@ export class PostComponent implements OnInit {
             this.nuevoComentario=false;
           })
           this.comentarios.unshift(comentario)
-          console.log(this.comentarios[0]);
          },
          error:error=>{
           Swal.fire({

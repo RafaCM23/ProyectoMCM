@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,4 +10,5 @@ export class AppComponent {
   title = 'Front-PI';
 
   constructor(){}
+
 }

@@ -73,7 +73,6 @@ export class MisDatosComponent implements OnInit {
           });
         },
         error:error=>{
-          console.log(error);
           Swal.fire({
             title:'Error al guardar',
             text:'Intentelo mas tarde',
@@ -171,7 +170,6 @@ export class MisDatosComponent implements OnInit {
     }
     else{
     let nombreImagen=this.generaIdImagen();
-    console.log(this.archivoImagen);
     this.imagenService.subeImagen(this.prof.id,this.archivoImagen,nombreImagen).subscribe({
       next:resp=>{
         this.archivoImagen=null;

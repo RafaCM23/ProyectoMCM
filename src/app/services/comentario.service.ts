@@ -45,10 +45,4 @@ export class ComentarioService {
     return this.http.get(url,{headers:cabecera});
   }
 
-  borraComentario(id:number){
-    const cabecera = new HttpHeaders()
-    .set('Authorization',`Bearer ${this.authService.getToken()}` || '');
-    const url=this.api+`/comentario/${id}`;
-    return this.http.delete(url,{headers:cabecera});
-  }
 }

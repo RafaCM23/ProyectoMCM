@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { StaffService } from 'src/app/services/staff.service';
 import Swal from 'sweetalert2';
 import { AgendaService } from '../../services/agenda.service';
@@ -18,21 +18,25 @@ export class CalendarioComponent implements OnInit {
 
   @Input() profActual =1;
   hub=false;
+
   ngOnChanges(changes: SimpleChanges) {
     this.ngOnInit();
   }
-
+  //todos los nombres de meses y semanas
   mes:string[]=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
   semana: string[] = ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"];
 
-  hoy=new Date();  mesActual:number=0;  mesAct=this.mes[this.hoy.getMonth()];  anio:number=this.hoy.getFullYear();  diaSeleccionado=0;
-
+  hoy=new Date(); mesActual:number=0;  mesAct=this.mes[this.hoy.getMonth()];  anio:number=this.hoy.getFullYear();  diaSeleccionado=0;
+  
+  //Selecciones por el usuario
   monthSelect: any[]=[];  dateSelect: any;  dateValue: any; 
- 
+  
+  //Inicializacion de todos los meses
   enero:Mes={dias:[]}; febrero:Mes={dias:[]}; marzo:Mes={dias:[]}; abril:Mes={dias:[]};
   mayo:Mes={dias:[]}; junio:Mes={dias:[]}; julio:Mes={dias:[]}; agosto:Mes={dias:[]};
   septiembre:Mes={dias:[]}; octubre:Mes={dias:[]}; noviembre:Mes={dias:[]}; diciembre:Mes={dias:[]}
-  
+
+  //Meses agrupados
   meses:Mes[]= [
     this.enero,    this.febrero,    this.marzo,    this.abril,    this.mayo,    this.junio,    this.julio,
     this.agosto,   this.septiembre,    this.octubre,    this.noviembre,    this.diciembre
@@ -85,8 +89,7 @@ export class CalendarioComponent implements OnInit {
     this.agendaService.getMes(this.profActual,this.anio,mes).subscribe({
       next:resp=>{
         this.meses[numero]=resp;
-        console.log(resp);
-        this.tachaOcupados(numero);        
+        this.tachaOcupados(numero);   
       },
       error:error=>{
         Swal.fire({
@@ -179,7 +182,9 @@ export class CalendarioComponent implements OnInit {
    cambiaMes(numero:number){
     if(numero<0){this.mesActual-=1;}     else{this.mesActual+=1;}
     this.getMes(this.mesActual+this.hoy.getMonth());
-    this.mesAct=this.mes[this.mesActual+this.hoy.getMonth()];
+    let mesNum=this.mesActual+this.hoy.getMonth();
+    if(mesNum>11)(mesNum-=12)
+    this.mesAct=this.mes[mesNum];
    }
   
 
@@ -196,7 +201,7 @@ export class CalendarioComponent implements OnInit {
     this.cita.fecha=objectDate.toDate();
   }
 
-  //Tacha las horas ocupadas del dia seleccionado
+  //Elimina las horas ocupadas del dia seleccionado
   tachaHoras(day:any){
     
     const mes = this.meses[this.mesActual+this.hoy.getMonth()]
@@ -215,13 +220,13 @@ export class CalendarioComponent implements OnInit {
     }
     
   }
-  //abre el modal para realizar la cita (si no es antes de hoy)
+  //Abre el modal para realizar la cita (si no es antes de hoy)
   open(content: any) {
     if(this.cita.fecha<new Date()) {
       Swal.fire({
         title:'Algo ha ido mal',
         icon: 'error',
-        text:'No se puede pedir una cita para un dia anterior al dia de hoy',
+        text:'No se puede pedir una cita para un dia anterior a mañana',
         confirmButtonText:'ok'
       }
     );
@@ -337,31 +342,31 @@ export class CalendarioComponent implements OnInit {
     );
     }
   }
-
+  //Si hay errores en el formulario se indican cuales en el modal
   sacaErrores(){
     let resp="*Errores*<br>";
     if(!this.nombreValido()){
-      resp+="<br>-Nombre";
+      resp+="<br>- Nombre";
     }
     if(!this.apellidosValido()){
-      resp+="<br>-Apellidos";
+      resp+="<br>- Apellidos";
     }
     if(!this.telefonoValido()){
-      resp+="<br>-Telefono";
+      resp+="<br>- Telefono";
     }
     if(!this.correoValido()){
-      resp+="<br>-Correo";
+      resp+="<br>- Correo";
     }
     if(!this.motivoValido()){
-      resp+="<br>-Motivo";
+      resp+="<br>- Motivo";
     }
     if(!this.horaValida()){
-      resp+="<br>-Hora";
+      resp+="<br>- Falta Hora";
     }
     return  resp.length<=14 ? null : resp;
   }
 
-
+  //Deja el formulario vacio
   reseteaFormulario(){
     this.cita={
       persona:{
@@ -376,48 +381,54 @@ export class CalendarioComponent implements OnInit {
       hora:0
     }
   }
+
   nombreValido():boolean{
     var regex = new RegExp('^[a-zA-Z]{3,}$')
     var resultado=regex.test(this.cita.persona.nombre);
     if(resultado==true) return true;
-    else return false
-
-  
+    else return false  
   }
+
   apellidosValido():boolean{
     var regex = new RegExp('^(([a-zA-Z]{3,})|\\s){3,7}$')
     var resultado=regex.test(this.cita.persona.apellidos);
     if(resultado==true ) return true;
     else return false
   }
+
   telefonoValido():boolean{
     var regex = new RegExp('^(\\+[0-9]{2})?(\\s{0,1})?([6][0-9]{8})$')
     var resultado=regex.test(this.cita.persona.tlfn);
     if(resultado==true ) return true;
     else return false
   }
+
   motivoValido():boolean{
     var regex = new RegExp('^[a-zA-Z\\s]{5,}$')
     var resultado=regex.test(this.cita.motivo);
     if(resultado==true ) return true;
     else return false
   }
+
   correoValido():boolean{
     var regex = new RegExp('^[a-zA-Z0-9_\-\_\.]{3,}@[a-zA-Z0-9_\-\_]{3,}(\\.[a-zA-Z\.]{2,12})$')
     var resultado=regex.test(this.cita.persona.email);
     if(resultado==true ) return true;
     else return false
   }
+
   horaValida():boolean{
     return this.cita.hora!=0 ?  true : false;
   }
   
 //----------------------------------- ADMIN Y PROFESIONALES ----------------------------------------//
+
   //Cambio de profesional desde la vista de admin
   cambiaProfesional(prof:any){
     this.profActual=this.profesionales[prof.value].id;
     this.recargarMes();
   }
+
   //Funcion que marca el dia como ocupado
   diaOcupado(){
     const mes=(this.mesActual+this.hoy.getMonth())
@@ -497,7 +508,7 @@ export class CalendarioComponent implements OnInit {
 
   //Funcion que recupera todos los profesionales para la vista de admin
   getProfesionales(){
-    this.staffService.getAllProfesionales().subscribe({
+    this.staffService.getProfesionalesVerificados().subscribe({
       next:resp=>{
         this.profesionales=resp;
       },

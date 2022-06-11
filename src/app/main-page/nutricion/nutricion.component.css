@@ -7,14 +7,7 @@
         padding:0;
     }
 }
-.titulo{
-    text-align: left;
-    font-family: "Prata",Arial,Helvetica,sans-serif;
-    font-weight: 600;
-    font-size: 3em;
-    color: #424242;
-    margin-top: 2em;
-}
+
 p{
     margin-bottom: 0;
 }
@@ -22,19 +15,6 @@ hr{
     margin-top:0;
     min-width: 20%;
     max-width: 80%;
-}
-.subtitulo{
-    font-size: 20px;
-    margin-top: 2em;
-    text-align: left;
-    color: #df824c;
-}
-.contenido{
-    margin-top: 2em;
-    text-align: justify;
-    color: #3f3f3f;
-    font-size: 17px;
-    font-weight: 200!important;
 }
 span{
     font-family: fantasy;
@@ -95,4 +75,9 @@ span{
     width: 100%;
     height: auto;
     margin-left: 4%;
+}
+.naranja{
+    color: chocolate;
+    font-size: 22px;
+    font-weight: 600;
 }

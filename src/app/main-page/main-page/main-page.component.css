@@ -20,12 +20,12 @@
     width: auto!important;
 }
 .nutricion{
-	background-color: #656176b2;
+	background-color: #ffffff;
 	z-index: 1;
 	
 }
 .servicios{
-    background-color: #B0DACC;
+    background-color: #c3dff0b4;
 	z-index: 1;
 }
 .comentarios{
@@ -37,7 +37,7 @@
 	z-index: 1;
 }
 .blog{
-    background-color: #ff924f9a;
+    background-color: #ffbf98d7;
 	z-index: 1;
 }
 .btn-flotante {
@@ -60,6 +60,7 @@
 
 
 .btn-flotante:hover {
+
 	background-color: #2c2fa5; /* Color de fondo al pasar el cursor */
 	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.5);
 	transform: translateY(-6px);

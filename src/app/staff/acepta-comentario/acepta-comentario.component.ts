@@ -37,6 +37,7 @@ export class AceptaComentarioComponent implements OnInit {
     this.comentService.getComentariosSinVerificar().subscribe({
       next:resp=>{
         this.comentarios=resp;
+        this.comentarios.reverse();
       },
       error:error=>{
         this.comentarios=[];
@@ -47,8 +48,8 @@ export class AceptaComentarioComponent implements OnInit {
   getComentariosPublicos(){
     this.comentService.getComentariosVerificados().subscribe({
       next:resp=>{
-        console.log(resp);
         this.comentarios=resp;
+        this.comentarios.reverse();
       },
       error:error=>{
         this.comentarios=[];
@@ -70,7 +71,6 @@ export class AceptaComentarioComponent implements OnInit {
         })
       },
       error:error=>{
-        console.log(error);
         Swal.fire({
           title:'Error al aceptar el comentario',
           text:'Recargue la página e intentelo de nuevo',
@@ -108,9 +108,8 @@ export class AceptaComentarioComponent implements OnInit {
   }
 
   borraComentario(evento:any){
-    this.comentService.borraComentario(evento.id).subscribe({
+    this.comentService.rechazaComentario(evento.id).subscribe({
       next:resp=>{
-        console.log(resp)
         Swal.fire({
           title:'Comentario borrado con éxito',
           icon: 'success',
@@ -120,7 +119,6 @@ export class AceptaComentarioComponent implements OnInit {
         })
       },
       error:error=>{
-        console.log(error)
         Swal.fire({
           title:'Error al borrar el comentario',
           icon: 'error',

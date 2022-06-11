@@ -1,24 +1,4 @@
-.titulo{
-    text-align: left;
-    font-family: "Prata",Arial,Helvetica,sans-serif;
-    font-weight: 600;
-    font-size: 3em;
-    color: #424242;
-    margin-top: 2em;
-}
-.subtitulo{
-    font-size: 20px;
-    margin-top: 2em;
-    text-align: left;
-    color: #df824c;
-}
-.contenido{
-    margin-top: 2em;
-    text-align: left;
-    color: #3f3f3f;
-    font-size: 17px;
-    font-weight: 200!important;
-}
+
 hr{
     margin-top:0;
     min-width: 20%;

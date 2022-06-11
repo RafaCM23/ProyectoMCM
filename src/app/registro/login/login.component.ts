@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { Profesional } from '../../interfaces/calendario.interface';
 import Swal from 'sweetalert2';
-import { RegistroService } from '../registro.service';
+import { RegistroService } from 'src/app/services/registro.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   campoEsValido(campo:string){
     return this.loginForm.controls[campo].errors && this.loginForm.controls[campo].touched;
   }
-
+  //Si los campos son validos comprueba el usuario
   enviar(){
     if ( this.loginForm.invalid)  {
       this.loginForm.markAllAsTouched();

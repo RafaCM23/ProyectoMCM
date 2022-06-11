@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Profesional } from '../../interfaces/calendario.interface';
 import Swal from 'sweetalert2';
-import { RegistroService } from '../registro.service';
-import { EmailOcupadoService } from '../email-ocupado.service';
+import { RegistroService } from 'src/app/services/registro.service';
+import { EmailOcupadoService } from 'src/app/services/email-ocupado.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
       mayorEdad:false
     })
   }
-  //formulario -> Faltan validadores externos
+  //formulario 
   registroForm: FormGroup = this.fb.group({
     nombre: ['',[Validators.required, Validators.minLength(3)]],                  
     apellidos: ['',[Validators.required, Validators.minLength(7),this.apellidosValido]],      

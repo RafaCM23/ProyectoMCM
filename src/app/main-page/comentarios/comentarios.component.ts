@@ -73,6 +73,7 @@ export class ComentariosComponent implements OnInit {
     }
   }
 
+  //Abre modal para nuevo comentario
   open(content: any) {
     this.modalService.open(content,
        {ariaLabelledBy: 'modal-basic-title',windowClass:'modal'}).result.then((result) => {
@@ -82,6 +83,7 @@ export class ComentariosComponent implements OnInit {
     });
   }
   
+  //Cierra modal
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

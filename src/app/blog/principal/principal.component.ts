@@ -17,14 +17,16 @@ export class PrincipalComponent implements OnInit {
     this.getNextPost();
     this.recuperaCategorias();
   }
+
   botonflotante:boolean=false;
-  cuantos=0;
-  todos:Post[]=[];
+  cuantos=0; //Control sobre la página
+  todos:Post[]=[]; //Todos los post cargados actualmente
 
   categorias:Categoria[]=[];
   idCat=-1;
   fecha=1;
   busqueda='';
+
   recuperaCategorias(){
     this.blogService.recuperaCategorias().subscribe({
       next:resp=>{
@@ -64,6 +66,7 @@ export class PrincipalComponent implements OnInit {
       }
     })
   }
+
   buscaCategoria(){
     const id = this.idCat;
     if(id==-1){this.getPrimeros8SinCat();return}
@@ -97,7 +100,6 @@ export class PrincipalComponent implements OnInit {
     })
   }
   getNextPost(){
-    console.log(this.fecha)
     this.blogService.loadNextPosts(this.cuantos).subscribe({
       next:resp=>{
         for (const p of resp) {
@@ -128,7 +130,7 @@ export class PrincipalComponent implements OnInit {
 
 
   //Para mostrar el boton de scroll-up cuando baje un poco
-  @HostListener('window:scroll', ['$event']) onScroll(event: { path: any[]; }) {
+  @HostListener('window:scroll', ['$event']) private onScroll(event: { path: any[]; }) {
     const window = event.path[1];
     const currentScrollHeight = window.scrollY;
 
