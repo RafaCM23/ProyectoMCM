@@ -19,11 +19,7 @@
 
   /* Chrome, Edge, y Safari */
   *::-webkit-scrollbar {
-<<<<<<< HEAD
-    width: 18px;
-=======
     width: 15px;
->>>>>>> master
   }
 
   *::-webkit-scrollbar-track {
