@@ -168,7 +168,6 @@ export class NuevoPostComponent implements OnInit {
       this.post.nombre=this.postForm.get('nombre')?.value;
       this.post.categoria.id=this.postForm.get('categoria')?.value;
       this.post.contenido=this.postForm.get('contenido')?.value;
-      console.log(this.post);
       this.blogService.nuevoPost(this.post).subscribe({
         next:resp=>{
           Swal.fire({
