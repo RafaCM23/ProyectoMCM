@@ -46,9 +46,10 @@ export class CancelarCitaComponent implements OnInit {
           this.router.navigateByUrl("/");
         })},
         error:error=>{
+          console.log(error)
           Swal.fire({
             title: "Error al cancelar la cita",
-            text: "Puede que esa cita ya no exista, compruebe sus correos",
+            text: "Puede que esa cita ya no exista, aun así compruebe sus correos",
             icon: 'error',
             confirmButtonText: "Ok",
         }).then(()=>{

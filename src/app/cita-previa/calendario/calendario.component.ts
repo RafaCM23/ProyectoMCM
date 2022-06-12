@@ -115,12 +115,13 @@ export class CalendarioComponent implements OnInit {
       if(dia.vacaciones==true ){
         diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","vacaciones")
       }
-      else if( citasTotales>0 &&  citasTotales<4){
-        diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","sinConfirmar")
-      }
       else if( citasTotales>3 || dia.ocupado==true){
         diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","ocupado")
       }
+      else if( citasTotales>0 &&  citasTotales<4){
+        diasCalendario[parseInt(dia.numero.toString())-1].classList.replace("libre","sinConfirmar")
+      }
+      
     }
     
   }
