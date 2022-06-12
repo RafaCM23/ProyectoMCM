@@ -68,7 +68,6 @@ export class ProximasCitasComponent implements OnInit {
         });
       },
       error:error=>{
-        console.log(error);
         Swal.fire({
           title:'Error al confirmar la cita',
           text:'Intentelo de nuevo más tarde',
