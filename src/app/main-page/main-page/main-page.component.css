@@ -25,6 +25,7 @@
     padding-right: 0!important;
     padding-left: 0!important;
     width: auto!important;
+	max-height: 500px;
 }
 .nutricion{
 	background-color: #ffffff;

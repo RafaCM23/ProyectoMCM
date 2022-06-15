@@ -82,7 +82,7 @@ h1{
 	animation: scale-in .2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 .portada{
-    height: 80%;
+    max-height: 500px;
 }
 .contenido{
     text-align: center;
