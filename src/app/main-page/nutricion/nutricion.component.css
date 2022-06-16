@@ -37,6 +37,7 @@ span{
 .container{
     margin-bottom: 3em;
     margin-left: 0;
+    max-width: 100%;
     
 }
 .slide i {

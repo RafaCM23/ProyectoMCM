@@ -30,6 +30,7 @@ export class AuthService {
   }
   //guarda el token en las cookies
   setToken(token: string) {
+    this.delToken();
     this.cookies.set("_mcm", token);
     this.token = token;
   }
