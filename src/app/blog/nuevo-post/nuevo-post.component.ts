@@ -184,7 +184,7 @@ export class NuevoPostComponent implements OnInit {
           Swal.fire({
             title:'Error al publicar el Post',
             icon: 'error',
-            text:error.error,
+            text:'Compruebe los campos, y si aun asi no se guarda recargue la página e intentelo de nuevo',
             confirmButtonText:'ok'
           })
         }
@@ -296,7 +296,7 @@ export class NuevoPostComponent implements OnInit {
     if(this.archivoImagen!=null){
       Swal.fire({
         title:'Imagen guardada',
-        text:'RECUERDA, la imagen no quedara guardada si no guarda el post',
+        text:'RECUERDA, la imagen no quedara guardada si no guarda el post o si supera los 10MB o no tiene el formato correcto (.png y .jpg)',
         icon: 'success',
         confirmButtonText:'Ok'
       });
@@ -335,7 +335,7 @@ export class NuevoPostComponent implements OnInit {
       error:error=>{
         Swal.fire({
           title:'Error al subir la imagen',
-          text:error.error,
+          text:'Recuerde que el máximo es de 10MB , y formatos .jpg o .png',
           icon: 'error',
           confirmButtonText:'Ok'
         });
