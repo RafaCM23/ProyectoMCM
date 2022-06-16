@@ -24,7 +24,6 @@
     margin-bottom: 2em;
 }
 .container{
-    background-color: rgb(255, 198, 198);
     width: 100%;
     padding-left: 8%;
     max-width: none;
@@ -54,7 +53,7 @@
     margin-top: 4em;
     padding-bottom: 2em;
     /* Filtro Cristal */
-    background: rgba(255, 255, 255, 0.4);
+    background-color: rgb(255, 198, 198);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(7.2px);

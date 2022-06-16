@@ -296,7 +296,7 @@ export class NuevoPostComponent implements OnInit {
     if(this.archivoImagen!=null){
       Swal.fire({
         title:'Imagen guardada',
-        text:'RECUERDA, la imagen no quedara guardada si no guarda el post',
+        text:'RECUERDA, la imagen no quedara guardada si no guarda el post o si supera los 10MB, y termine en .jpg o .png',
         icon: 'success',
         confirmButtonText:'Ok'
       });
@@ -322,6 +322,7 @@ export class NuevoPostComponent implements OnInit {
   //Si hay una imagen seleccionada, se genera un nombre y se guarda en el Back
   guardaImagen(id:number){
     let nombreImagen=this.generaIdImagen(id);
+
     this.imagenService.subeImagenPost(id,this.archivoImagen,nombreImagen).subscribe({
       next:resp=>{
         this.archivoImagen=null;
@@ -335,7 +336,7 @@ export class NuevoPostComponent implements OnInit {
       error:error=>{
         Swal.fire({
           title:'Error al subir la imagen',
-          text:error.error,
+          text:'Recuerde que el máximo es de 10MB , y formatos .jpg o .png',
           icon: 'error',
           confirmButtonText:'Ok'
         });
