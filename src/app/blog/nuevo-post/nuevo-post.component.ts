@@ -321,8 +321,7 @@ export class NuevoPostComponent implements OnInit {
   }
   //Si hay una imagen seleccionada, se genera un nombre y se guarda en el Back
   guardaImagen(id:number){
-    let nombreImagen=this.generaIdImagen(id);
-
+    let nombreImagen=this.generaIdImagen(id); 
     this.imagenService.subeImagenPost(id,this.archivoImagen,nombreImagen).subscribe({
       next:resp=>{
         this.archivoImagen=null;
