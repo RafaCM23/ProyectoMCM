@@ -207,8 +207,8 @@ export class MisDatosComponent implements OnInit {
         else{this.formateaBlob(resp);}
       },
       error:error=>{
-
-        this.prof.img="./assets/imagenes/usuario.png"
+        this.imagenNueva="./assets/imagenes/usuario.png"
+        this.prof.img=this.imagenNueva;
       }
     })
 
