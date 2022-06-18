@@ -91,7 +91,7 @@
       <input type="file" id="subirImg" style="margin-top: 1em; display: none;" (change)="capturaImg($event)">
       
       <div class="mt-3">
-        <button class="btn btn-danger boton">Cancelar</button>
+      <button class="btn btn-danger boton" (click)="cierraImagen()">Cancelar</button>
       <button class="btn btn-success boton" (click)="guardaImagen()">Guardar</button>
       </div>
       

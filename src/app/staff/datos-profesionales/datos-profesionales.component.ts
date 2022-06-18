@@ -197,6 +197,12 @@ export class DatosProfesionalesComponent implements OnInit {
     respuesta=cabeza+prof+fecha;
     return respuesta;
   }
+  cierraImagen(){
+    this.imagenNueva='./assets/imagenes/ocupado.png';
+    this.archivoImagen=null;
+    this.modalService.dismissAll();
+  }
+  
   //Si hay una imagen seleccionada, se genera un nombre y se guarda en el Back
   guardaImagen(){
     if(this.archivoImagen==null){
