@@ -43,6 +43,16 @@ export class NuevoPostComponent implements OnInit {
   cerrarModal:string='';
   archivoImagen:any=null;
 
+  img='./assets/imagenes/ocupado.png';
+
+  postForm: FormGroup = this.fb.group({
+    nombre: ['',[Validators.required, Validators.minLength(5)]],  
+    categoria: ['0',[]],
+    contenido:['',[Validators.required, Validators.minLength(150)]],
+    nuevaCategoria:['',[Validators.minLength(5)]],
+    imagen:['',[]]
+  })
+
   ngOnInit(): void {
     this.iniciaEditar()
     this.recuperaCategorias();
@@ -58,15 +68,9 @@ export class NuevoPostComponent implements OnInit {
   }
 
 
-  postForm: FormGroup = this.fb.group({
-    nombre: ['',[Validators.required, Validators.minLength(5)]],  
-    categoria: ['0',[]],
-    contenido:['',[Validators.required, Validators.minLength(150)]],
-    nuevaCategoria:['',[Validators.minLength(5)]],
-    imagen:['./assets/imagenes/ocupado.png',[]]
-  })
+  
 
-  img='./assets/imagenes/ocupado.png';
+  
   recuperaCategorias(){
     this.blogService.recuperaCategorias().subscribe({
       next:resp=>{
