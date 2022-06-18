@@ -54,8 +54,7 @@ export class NuevoPostComponent implements OnInit {
     const id = new URLSearchParams(queryString).get("id");
     const idProf= this.authService.whoIs().subscribe({
       next:resp=>{
-        console.log(resp);
-        if(id!=null && resp==0){
+        if(id!=null && resp==2){
           this.edicion=true;
           this.recuperaPost(Number.parseInt(id));
         }
