@@ -5,6 +5,7 @@ import { ImagenService } from '../../services/imagen.service';
 import Swal from 'sweetalert2';
 import { Categoria, Post } from '../../interfaces/blog.interface';
 import { BlogService } from '../../services/blog.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-nuevo-post',
@@ -14,7 +15,7 @@ import { BlogService } from '../../services/blog.service';
 export class NuevoPostComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private blogService: BlogService,private modalService:NgbModal,
-    private imagenService:ImagenService) { }
+    private imagenService:ImagenService, private authService:AuthService) { }
 
   nuevaCat=false;
   categorias:Categoria[]=[];
@@ -51,10 +52,16 @@ export class NuevoPostComponent implements OnInit {
   iniciaEditar(){
     const queryString = window.location.search;
     const id = new URLSearchParams(queryString).get("id");
-    if(id!=null){
-      this.edicion=true;
-      this.recuperaPost(Number.parseInt(id));
-    }
+    const idProf= this.authService.whoIs().subscribe({
+      next:resp=>{
+        console.log(resp);
+        if(id!=null && resp==0){
+          this.edicion=true;
+          this.recuperaPost(Number.parseInt(id));
+        }
+      },error:error=>{}
+    })
+   
   }
 
 
