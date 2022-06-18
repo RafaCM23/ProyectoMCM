@@ -63,7 +63,7 @@ export class NuevoPostComponent implements OnInit {
     categoria: ['0',[]],
     contenido:['',[Validators.required, Validators.minLength(150)]],
     nuevaCategoria:['',[Validators.minLength(5)]],
-    imagen:['./assets/imagenes/ocupado.png',[]]
+    imagen:['',[]]
   })
 
   img='./assets/imagenes/ocupado.png';
