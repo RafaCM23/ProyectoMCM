@@ -132,7 +132,7 @@ export class PostComponent implements OnInit {
          },
          error:error=>{
           Swal.fire({
-            title:'Crecenciales Invalidas',
+            title:'Error al crear el comentario',
             text: error.error,
             icon: 'error',
             confirmButtonText:'Ok'
