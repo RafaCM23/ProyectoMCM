@@ -287,7 +287,6 @@ export class NuevoPostComponent implements OnInit {
       reader.readAsDataURL(imagen);
       reader.onload=(event:any)=>{
         this.img=event.target.result;
-        this.postForm.controls['imagen'].setValue(this.img);
       }
     }
     
@@ -356,7 +355,6 @@ export class NuevoPostComponent implements OnInit {
       reader.onload=(event:any)=>{
         let imagen:string=event.target.result
         let imagenMod=imagen.replace("data:application/octet-stream","data:image/png");
-        this.postForm.controls['imagen'].setValue(imagenMod)
         this.img=imagenMod;
       }
   }
